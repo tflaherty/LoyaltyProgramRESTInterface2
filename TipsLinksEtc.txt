@@ -1,0 +1,15 @@
+-- how to use a "foreign key" in a rest POST
+http://stackoverflow.com/questions/37902946/add-item-to-the-collection-with-foreign-key-via-rest-call
+
+example:
+POST using this body:
+{
+"pointTransactionType":"http://localhost:8080/pointTransactionType/1",
+"loyalty":"http://localhost:8080/loyalty/1",
+"numberOfPoints":"13",
+"creationDate":"2016-06-23"
+}
+-------------------------------------------------------------------------------------------------------
+
+-- how to make a search method call
+http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyalties/search/findByLoyaltyCode?code=314
