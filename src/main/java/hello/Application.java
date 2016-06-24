@@ -7,6 +7,7 @@ import org.springframework.boot.context.web.SpringBootServletInitializer;
 
 @SpringBootApplication
 public class Application extends SpringBootServletInitializer {
+//public class Application  {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
