@@ -19,8 +19,8 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="complete_main" target="1.8" />
-      <module name="complete_test" target="1.8" />
+      <module name="LoyaltyProgramRESTInterface2_main" target="1.8" />
+      <module name="LoyaltyProgramRESTInterface2_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

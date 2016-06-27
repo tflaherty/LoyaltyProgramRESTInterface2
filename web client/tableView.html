@@ -1,0 +1,33 @@
+<div class="panel-body">
+    <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th>Code</th>
+            <th>Customer</th>
+            <!-- <th class="text-right">Price</th> -->
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="loyalty in loyalties">
+            <td>{{loyalty.loyaltyCode}}</td>
+            <td>{{loyalty.customerCode}}</td>
+            <!-- <td class="text-right">{{loyalty.price | currency}}</td> -->
+            <td class="text-center">
+                <button class="btn btn-xs btn-primary"
+                        ng-click="deleteLoyalty(item)">
+                    Delete
+                </button>
+                <button class="btn btn-xs btn-primary"
+                        ng-click="editOrCreateLoyalty(item)">
+                    Edit
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <button class="btn btn-primary" ng-click="listLoyalties()">Refresh</button>
+        <button class="btn btn-primary" ng-click="editOrCreateLoyalty()">New</button>
+    </div>
+</div>

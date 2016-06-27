@@ -13,3 +13,7 @@ POST using this body:
 
 -- how to make a search method call
 http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyalties/search/findByLoyaltyCode?code=314
+-------------------------------------------------------------------------------------------------------
+
+-- CORS problem
+http://stackoverflow.com/questions/31724994/spring-data-rest-and-cors
