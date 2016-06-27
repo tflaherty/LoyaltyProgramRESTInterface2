@@ -1,3 +1,6 @@
+-- Spring Data REST Reference Documentation
+http://docs.spring.io/spring-data/rest/docs/current/reference/html/
+
 -- how to use a "foreign key" in a rest POST
 http://stackoverflow.com/questions/37902946/add-item-to-the-collection-with-foreign-key-via-rest-call
 
@@ -17,3 +20,11 @@ http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/lo
 
 -- CORS problem
 http://stackoverflow.com/questions/31724994/spring-data-rest-and-cors
+
+-- Spring Data REST and Projections
+- This one is fantastic!
+http://docs.spring.io/spring-data/rest/docs/current/reference/html/#projections-excerpts
+https://blog.shinetech.com/2015/04/15/spring-data-rest-and-projections/
+-- using entity to/from DTO
+http://www.baeldung.com/entity-to-and-from-dto-for-a-java-spring-application
+

@@ -1,0 +1,98 @@
+{
+  "log": {
+    "version": "1.2",
+    "creator": "RESTED REST Client",
+    "Comment": "An exported collection from RESTED",
+    "entries": [
+      {
+        "request": {
+          "method": "POST",
+          "url": "http://localhost:8080/companies",
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "postData": {
+            "mimeType": "",
+            "params": [],
+            "text": "{\n    \"name\":\"DAI\"\n}"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "POST",
+          "url": "http://localhost:8080/divisions",
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "postData": {
+            "mimeType": "",
+            "params": [],
+            "text": "{\n    \"name\":\"Chadwicks\",\n    \"company\": \"http://localhost/companies/1\"\n}"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "POST",
+          "url": "http://localhost:8080/divisions",
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "postData": {
+            "mimeType": "",
+            "params": [],
+            "text": "{\n    \"name\":\"MetroStyle\",\n    \"company\": \"http://localhost/companies/1\"\n}"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "POST",
+          "url": "http://localhost:8080/divisions",
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "postData": {
+            "mimeType": "",
+            "params": [],
+            "text": "{\n    \"name\":\"TerritoryAhead\",\n    \"company\": \"http://localhost/companies/1\"\n}"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "POST",
+          "url": "http://localhost:8080/loyalties",
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "",
+              "value": ""
+            }
+          ],
+          "postData": {
+            "mimeType": "",
+            "params": [],
+            "text": "{\n    \"loyaltyCode\":\"314\",\n    \"division\":\"http://localhost/divisions/3\",\n    \"dateCreated\":\"2016-06-24T17:17:15\"\n}"
+          }
+        }
+      }
+    ]
+  }
+}

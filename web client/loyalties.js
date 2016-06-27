@@ -4,6 +4,7 @@
 /** angular.module("exampleApp", ["increment", "ngResource"]) */
 angular.module("exampleApp", ["ngResource"])
     .constant("baseUrl", "http://localhost\\:8080/loyalties/")
+    //.constant("baseUrl", "http://www.loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyalties/")
     .config(function($httpProvider) {
         $httpProvider.defaults.withCredentials = true;
     })
@@ -12,24 +13,17 @@ angular.module("exampleApp", ["ngResource"])
         $scope.displayMode = "list";
         $scope.currentLoyalty = null;
 
-        $scope.loyaltiesResource = $resource(baseUrl + ":id", { id: "@id" });
+        $scope.loyaltiesResource = $resource(baseUrl + ":id?projection=full", { id: "@id" });
 
         $scope.listLoyalties = function () {
             $scope.foo = $scope.loyaltiesResource.get();
             //$scope.loyalties = $scope.loyaltiesResource.get();
             //$scope.loyalties.$promise.then(function (data) {
             $scope.foo.$promise.then(function (data) {
-                alert(JSON.stringify($scope.foo._embedded.loyalties));
+                //alert(JSON.stringify($scope.foo._embedded.loyalties));
                 $scope.loyalties = [];
-                /*
-                for (var loyalty in $scope.foo._embedded.loyalties) {
-                    //alert();
-                    $scope.loyalties.push(loyalty);
-                }
-                */
                 for(var i = 0; i < $scope.foo._embedded.loyalties.length; i++) {
                     var obj = $scope.foo._embedded.loyalties[i];
-
                     $scope.loyalties.push(obj);
                 }
             });

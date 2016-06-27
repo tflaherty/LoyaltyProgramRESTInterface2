@@ -1,6 +1,7 @@
 package hello;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -13,10 +14,13 @@ public class Loyalty {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @NotNull
     private String loyaltyCode;
-    private String customerCode;
-    private String companyCode;
-    private String divisionCode;
+
+    @NotNull
+    @ManyToOne
+    private Division division;
+
     private Date dateCreated;
 
     @Transient
@@ -24,30 +28,6 @@ public class Loyalty {
     @Transient
     public int getPoints() {
         return 7;
-    }
-
-    public String getCustomerCode() {
-        return customerCode;
-    }
-
-    public void setCustomerCode(String customerCode) {
-        this.customerCode = customerCode;
-    }
-
-    public String getCompanyCode() {
-        return companyCode;
-    }
-
-    public void setCompanyCode(String companyCode) {
-        this.companyCode = companyCode;
-    }
-
-    public String getDivisionCode() {
-        return divisionCode;
-    }
-
-    public void setDivisionCode(String divisionCode) {
-        this.divisionCode = divisionCode;
     }
 
     public String getLoyaltyCode() {
@@ -58,6 +38,14 @@ public class Loyalty {
         this.loyaltyCode = loyaltyCode;
     }
 
+    public Division getDivision() {
+        return division;
+    }
+
+    public void setDivision(Division division) {
+        this.division = division;
+    }
+
     public Date getDateCreated() {
         return dateCreated;
     }
@@ -65,4 +53,5 @@ public class Loyalty {
     public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
     }
+
 }

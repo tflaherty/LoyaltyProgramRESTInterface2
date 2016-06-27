@@ -17,14 +17,13 @@ apply plugin: 'war'
 
 war {
     baseName = 'LoyaltyProgramRESTInterface'
-    version = '1.10.0'
+    version = '1.14.0'
 }
 
 configurations {
     providedRuntime
 }
 */
-
 
 jar {
     baseName = 'gs-accessing-data-rest'

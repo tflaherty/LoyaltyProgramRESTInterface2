@@ -1,10 +1,35 @@
+for /companies
+{
+    "name":"DAI"
+}
+
+for /divisions
+{
+    "name":"Chadwicks",
+    "company": "http://localhost/companies/1"
+}
+
+{
+    "name":"MetroStyle",
+    "company": "http://localhost/companies/1"
+}
+
+{
+    "name":"TerritoryAhead",
+    "company": "http://localhost/companies/1"
+}
+
 for /loyalties
 {
     "loyaltyCode":"314",
-    "customerCode":"15",
-    "companyCode":"2",
-    "divisionCode":"3",
+    "division":"http://localhost/divisions/3",
     "dateCreated":"2016-06-23T17:16:15"
+}
+
+{
+    "loyaltyCode":"315",
+    "division":"http://localhost/divisions/1",
+    "dateCreated":"2016-06-25T17:17:15"
 }
 
 for /pointTransactionTypes
@@ -25,15 +50,15 @@ for /pointTransactionTypes
 
 for /pointTransactions
 {
-"pointTransactionType":"http://localhost:8080/pointTransactionType/1",
+"pointTransactionType":"http://localhost/pointTransactionType/1",
 "loyalty":"http://localhost:8080/loyalty/1",
 "numberOfPoints":"14",
-"creationDate":"2016-06-23T17:18:00"
+"creationDate":"2016-06-27T14:17:00"
 }
 
 {
 "pointTransactionType":"http://localhost:8080/pointTransactionType/2",
 "loyalty":"http://localhost:8080/loyalty/1",
 "numberOfPoints":"6",
-"creationDate":"2016-06-23T17:19:00"
+"creationDate":"2016-06-27T14:17:00"
 }
