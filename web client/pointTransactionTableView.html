@@ -23,11 +23,11 @@
             <!-- <td class="text-right">{{pointTransaction.price | currency}}</td> -->
             <td class="text-center">
                 <button class="btn btn-xs btn-primary"
-                        ng-click="deletePointTransaction(item)">
+                        ng-click="deletePointTransaction(pointTransaction)">
                     Delete
                 </button>
                 <button class="btn btn-xs btn-primary"
-                        ng-click="editOrCreatePointTransaction(item)">
+                        ng-click="editOrCreatePointTransaction(pointTransaction)">
                     Edit
                 </button>
             </td>
@@ -35,7 +35,7 @@
         </tbody>
     </table>
     <div>
-        <button class="btn btn-primary" ng-click="listLoyalties()">Refresh</button>
-        <button class="btn btn-primary" ng-click="editOrCreateLoyalty()">New</button>
+        <button class="btn btn-primary" ng-click="listPointTransactions()">Refresh</button>
+        <button class="btn btn-primary" ng-click="editOrCreatePointTransactions()">New</button>
     </div>
 </div>

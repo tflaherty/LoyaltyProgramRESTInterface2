@@ -3,8 +3,8 @@
  */
 /** angular.module("exampleApp", ["increment", "ngResource"]) */
 angular.module("exampleApp", ["ngResource"])
-    .constant("baseUrl", "http://localhost:8080/loyalties/")
-    //.constant("baseUrl", "http://www.loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyalties/")
+    //.constant("baseUrl", "http://localhost:8080/loyalties/")
+    .constant("baseUrl", "http://www.loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyalties/")
     .config(function($httpProvider) {
         $httpProvider.defaults.withCredentials = true;
     })

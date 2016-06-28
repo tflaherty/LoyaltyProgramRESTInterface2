@@ -1,0 +1,29 @@
+<div class="panel-body">
+    <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="company in companies">
+            <td>{{company.name}}</td>
+            <td class="text-center">
+                <button class="btn btn-xs btn-primary"
+                        ng-click="deleteCompany(company)">
+                    Delete
+                </button>
+                <button class="btn btn-xs btn-primary"
+                        ng-click="editOrCreateCompany(company)">
+                    Edit
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <button class="btn btn-primary" ng-click="listCompanies()">Refresh</button>
+        <button class="btn btn-primary" ng-click="editOrCreateCompany()">New</button>
+    </div>
+</div>

@@ -4,3 +4,4 @@
     - i.e. do we use standard strings like "add", "delete", etc. or do it through the URL
 - implement a Postrgres back end
 - figure out how to return a transaction id to the caller
+- added a new $scope variable for the mode (list, edit, etc.) for each type!

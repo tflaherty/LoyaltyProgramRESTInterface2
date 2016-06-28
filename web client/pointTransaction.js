@@ -2,14 +2,15 @@
  * Created by Tom on 6/27/2016.
  */
 angular.module("exampleApp", ["ngResource"])
-    .constant("baseUrl", "http://localhost\\:8080/pointTransactions/")
-    //.constant("baseUrl", "http://www.loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/pointTransactions/")
+    //.constant("baseUrl", "http://localhost\\:8080/pointTransactions/")
+    .constant("baseUrl", "http://www.loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/pointTransactions/")
     .config(function($httpProvider) {
         $httpProvider.defaults.withCredentials = true;
     })
     .controller("defaultCtrl", function ($scope, $http, $resource, baseUrl) {
 
-        $scope.loyaltiesBaseUrl = "http://localhost:8080/loyalties/";        
+        //$scope.loyaltiesBaseUrl = "http://localhost:8080/loyalties/";
+        $scope.loyaltiesBaseUrl = "http://www.loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyalties/";
         $scope.displayMode = "list";
         $scope.currentPointTransaction = null;
 
