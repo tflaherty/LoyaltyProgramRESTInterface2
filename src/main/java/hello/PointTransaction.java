@@ -18,7 +18,7 @@ public class PointTransaction {
     private Date dateCreated;
 
     @NotNull
-    private String points;
+    private int points;
 
     @NotNull
     @ManyToOne
@@ -55,11 +55,11 @@ public class PointTransaction {
         this.customer_to_loyalty = customer_to_loyalty;
     }
 
-    public String getPoints() {
+    public int getPoints() {
         return points;
     }
 
-    public void setPoints(String points) {
+    public void setPoints(int points) {
         this.points = points;
     }
 

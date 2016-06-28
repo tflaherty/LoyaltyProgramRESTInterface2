@@ -2,6 +2,7 @@ package hello;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.geo.Point;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -38,11 +39,15 @@ public class Loyalty {
     private int points;
     @Transient
     public int getPoints() {
+        int pointCount = 0;
         if (getPointTransactions() != null)
         {
-            int x = getPointTransactions().size();
+            for (PointTransaction pointTransaction : getPointTransactions())
+            {
+                pointCount += pointTransaction.getPoints();
+            }
         }
-        return 7;
+        return pointCount;
     }
 
     public String getLoyaltyCode() {
