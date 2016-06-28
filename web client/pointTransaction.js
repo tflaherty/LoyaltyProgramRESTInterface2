@@ -9,6 +9,7 @@ angular.module("exampleApp", ["ngResource"])
     })
     .controller("defaultCtrl", function ($scope, $http, $resource, baseUrl) {
 
+        $scope.loyaltiesBaseUrl = "http://localhost:8080/loyalties/";        
         $scope.displayMode = "list";
         $scope.currentPointTransaction = null;
 

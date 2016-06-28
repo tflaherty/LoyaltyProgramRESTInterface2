@@ -256,6 +256,27 @@
             "text": "{\n\"dateCreated\":\"2016-06-25T20:18:19\",\n\"points\":\"5\",\n\"loyalty\":\"http://localhost/loyalties/1\",\n\"pointTransactionType\":\"http://localhost/pointTransactionTypes/3\"\n}"
           }
         }
+      },
+      {
+        "request": {
+          "method": "POST",
+          "url": "http://localhost:8080/pointTransactions",
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "",
+              "value": ""
+            }
+          ],
+          "postData": {
+            "mimeType": "",
+            "params": [],
+            "text": "{\n\"dateCreated\":\"2016-06-25T21:18:19\",\n\"points\":\"7\",\n\"loyalty\":\"http://localhost/loyalties/1\",\n\"pointTransactionType\":\"http://localhost/pointTransactionTypes/4\"\n}"
+          }
+        }
       }
     ]
   }

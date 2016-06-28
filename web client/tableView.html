@@ -3,7 +3,8 @@
         <thead>
         <tr>
             <th>Loyalty Code</th>
-            <th>Points</th>
+            <th>Available Points</th>
+            <th>Held Points</th>
             <th>Company</th>
             <th>Division</th>
             <th>Date Created</th>
@@ -14,7 +15,8 @@
         <tbody>
         <tr ng-repeat="loyalty in loyalties">
             <td>{{loyalty.loyaltyCode}}</td>
-            <td>{{loyalty.points}}</td>
+            <td>{{loyalty.availablePoints}}</td>
+            <td>{{loyalty.heldPoints}}</td>
             <td>{{loyalty.companyName}}</td>
             <td>{{loyalty.divisionName}}</td>
             <td>{{loyalty.dateCreated}}</td>

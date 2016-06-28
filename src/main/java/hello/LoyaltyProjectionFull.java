@@ -11,8 +11,11 @@ public interface LoyaltyProjectionFull {
     @Value("#{target.getLoyaltyCode()}")
     public String getLoyaltyCode();
 
-    @Value("#{target.getPoints()}")
-    public String getPoints();
+    @Value("#{target.getAvailablePoints()}")
+    public String getAvailablePoints();
+
+    @Value("#{target.getHeldPoints()}")
+    public String getHeldPoints();
 
     @Value("#{target.getDivision().getCompany().getName()}")
     public String getCompanyName();

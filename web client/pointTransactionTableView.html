@@ -15,7 +15,7 @@
         <tbody>
         <tr ng-repeat="pointTransaction in pointTransactions">
             <td>{{pointTransaction.dateCreated}}</td>
-            <td>{{pointTransaction.loyaltyCode}}</td>
+            <td><a ng-href = "{{loyaltiesBaseUrl}}/search/findByLoyaltyCode?code={{pointTransaction.loyaltyCode}}">{{pointTransaction.loyaltyCode}}</a></td>
             <td>{{pointTransaction.points}}</td>
             <td>{{pointTransaction.pointTransactionType}}</td>
             <td>{{pointTransaction.companyName}}</td>
