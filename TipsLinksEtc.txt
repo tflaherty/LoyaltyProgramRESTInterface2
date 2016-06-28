@@ -9,8 +9,8 @@ POST using this body:
 {
 "pointTransactionType":"http://localhost:8080/pointTransactionType/1",
 "loyalty":"http://localhost:8080/loyalty/1",
-"numberOfPoints":"13",
-"creationDate":"2016-06-23"
+"points":"13",
+"dateCreated":"2016-06-23"
 }
 -------------------------------------------------------------------------------------------------------
 

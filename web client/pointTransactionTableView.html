@@ -1,0 +1,41 @@
+<div class="panel-body">
+    <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th>Date Created</th>
+            <th>Loyalty Code</th>
+            <th>Points</th>
+            <th>Transaction Type</th>
+            <th>Company</th>
+            <th>Division</th>
+            <!-- <th class="text-right">Price</th> -->
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="pointTransaction in pointTransactions">
+            <td>{{pointTransaction.dateCreated}}</td>
+            <td>{{pointTransaction.loyaltyCode}}</td>
+            <td>{{pointTransaction.points}}</td>
+            <td>{{pointTransaction.pointTransactionType}}</td>
+            <td>{{pointTransaction.companyName}}</td>
+            <td>{{pointTransaction.divisionName}}</td>
+            <!-- <td class="text-right">{{pointTransaction.price | currency}}</td> -->
+            <td class="text-center">
+                <button class="btn btn-xs btn-primary"
+                        ng-click="deletePointTransaction(item)">
+                    Delete
+                </button>
+                <button class="btn btn-xs btn-primary"
+                        ng-click="editOrCreatePointTransaction(item)">
+                    Edit
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <button class="btn btn-primary" ng-click="listLoyalties()">Refresh</button>
+        <button class="btn btn-primary" ng-click="editOrCreateLoyalty()">New</button>
+    </div>
+</div>

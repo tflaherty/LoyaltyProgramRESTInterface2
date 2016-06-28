@@ -1,5 +1,4 @@
 - change things so we return the number of points with each kind of status (available, held, etc.)
-- change schema so we can have more than one customer/division/company for a loyalty number
 - see if I can write initialization code to initialize database when it's started
 - figure out how to handle the action of adding a point transaction and figuring out how to handle point transaction type
     - i.e. do we use standard strings like "add", "delete", etc. or do it through the URL

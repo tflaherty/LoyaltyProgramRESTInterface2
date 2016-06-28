@@ -75,6 +75,86 @@
       {
         "request": {
           "method": "POST",
+          "url": "http://localhost:8080/pointTransactionTypes",
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "postData": {
+            "mimeType": "",
+            "params": [],
+            "text": "{\n\"name\":\"added\",\n\"description\":\"points were added\"\n}"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "POST",
+          "url": "http://localhost:8080/pointTransactionTypes",
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "",
+              "value": ""
+            }
+          ],
+          "postData": {
+            "mimeType": "",
+            "params": [],
+            "text": "{\n\"name\":\"redeemed\",\n\"description\":\"held points were redeemed\"\n}"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "POST",
+          "url": "http://localhost:8080/pointTransactionTypes",
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "",
+              "value": ""
+            }
+          ],
+          "postData": {
+            "mimeType": "",
+            "params": [],
+            "text": "{\n\"name\":\"deleted\",\n\"description\":\"points were deleted\"\n}"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "POST",
+          "url": "http://localhost:8080/pointTransactionTypes",
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "",
+              "value": ""
+            }
+          ],
+          "postData": {
+            "mimeType": "",
+            "params": [],
+            "text": "{\n\"name\":\"held\",\n\"description\":\"points were held\"\n}"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "POST",
           "url": "http://localhost:8080/loyalties",
           "headers": [
             {
@@ -90,6 +170,90 @@
             "mimeType": "",
             "params": [],
             "text": "{\n    \"loyaltyCode\":\"314\",\n    \"division\":\"http://localhost/divisions/3\",\n    \"dateCreated\":\"2016-06-24T17:17:15\"\n}"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "POST",
+          "url": "http://localhost:8080/loyalties",
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "",
+              "value": ""
+            }
+          ],
+          "postData": {
+            "mimeType": "",
+            "params": [],
+            "text": "{\n    \"loyaltyCode\":\"319\",\n    \"division\":\"http://localhost/divisions/1\",\n    \"dateCreated\":\"2016-06-27T17:17:15\"\n}"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "POST",
+          "url": "http://localhost:8080/pointTransactions",
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "",
+              "value": ""
+            }
+          ],
+          "postData": {
+            "mimeType": "",
+            "params": [],
+            "text": "{\n\"dateCreated\":\"2016-06-24T17:18:19\",\n\"points\":\"12\",\n\"loyalty\":\"http://localhost/loyalties/1\",\n\"pointTransactionType\":\"http://localhost/pointTransactionTypes/1\"\n}"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "POST",
+          "url": "http://localhost:8080/pointTransactions",
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "",
+              "value": ""
+            }
+          ],
+          "postData": {
+            "mimeType": "",
+            "params": [],
+            "text": "{\n\"dateCreated\":\"2016-06-25T19:18:19\",\n\"points\":\"13\",\n\"loyalty\":\"http://localhost/loyalties/1\",\n\"pointTransactionType\":\"http://localhost/pointTransactionTypes/1\"\n}"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "POST",
+          "url": "http://localhost:8080/pointTransactions",
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "",
+              "value": ""
+            }
+          ],
+          "postData": {
+            "mimeType": "",
+            "params": [],
+            "text": "{\n\"dateCreated\":\"2016-06-25T20:18:19\",\n\"points\":\"5\",\n\"loyalty\":\"http://localhost/loyalties/1\",\n\"pointTransactionType\":\"http://localhost/pointTransactionTypes/3\"\n}"
           }
         }
       }

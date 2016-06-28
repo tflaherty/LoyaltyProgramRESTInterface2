@@ -1,8 +1,13 @@
 package hello;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Tom on 6/23/2016.
@@ -21,12 +26,22 @@ public class Loyalty {
     @ManyToOne
     private Division division;
 
+    @OneToMany(mappedBy="loyalty")
+    private List<PointTransaction> pointTransactions;
+    public List<PointTransaction> getPointTransactions() {
+        return pointTransactions;
+    }
+
     private Date dateCreated;
 
     @Transient
     private int points;
     @Transient
     public int getPoints() {
+        if (getPointTransactions() != null)
+        {
+            int x = getPointTransactions().size();
+        }
         return 7;
     }
 

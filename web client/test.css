@@ -1,0 +1,11 @@
+/* Adjust Menu (red) text color, (Garamond) font-family, (1.5em) font-size  */
+.navbar .nav > li > a, .navbar .nav > li > a:first-letter,
+.navbar .nav > li.current-menu-item > a,
+.navbar .nav > li.current-menu-ancestor > a {
+    display:        inline;
+    color:          blue;
+    /* font-family:    Garamond; */
+    font-size:      10pt;
+    /* padding:        20px 20px; */
+    text-decoration: underline;
+}

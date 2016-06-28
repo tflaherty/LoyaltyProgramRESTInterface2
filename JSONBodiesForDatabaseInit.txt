@@ -52,13 +52,13 @@ for /pointTransactions
 {
 "pointTransactionType":"http://localhost/pointTransactionType/1",
 "loyalty":"http://localhost:8080/loyalty/1",
-"numberOfPoints":"14",
-"creationDate":"2016-06-27T14:17:00"
+"points":"14",
+"dateCreated":"2016-06-27T14:17:00"
 }
 
 {
 "pointTransactionType":"http://localhost:8080/pointTransactionType/2",
 "loyalty":"http://localhost:8080/loyalty/1",
-"numberOfPoints":"6",
-"creationDate":"2016-06-27T14:17:00"
+"points":"6",
+"dateCreated":"2016-06-27T14:17:00"
 }

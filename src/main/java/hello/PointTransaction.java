@@ -1,6 +1,7 @@
 package hello;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -13,22 +14,29 @@ public class PointTransaction {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private Date creationDate;
-    private String numberOfPoints;
+    @NotNull
+    private Date dateCreated;
 
+    @NotNull
+    private String points;
+
+    @NotNull
     @ManyToOne
     private Loyalty loyalty;
+
     @ManyToOne
     private Customer_To_Loyalty customer_to_loyalty;
+
+    @NotNull
     @ManyToOne
     private PointTransactionType pointTransactionType;
 
-    public Date getCreationDate() {
-        return creationDate;
+    public Date getDateCreated() {
+        return dateCreated;
     }
 
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
     public Loyalty getLoyalty() {
@@ -47,12 +55,12 @@ public class PointTransaction {
         this.customer_to_loyalty = customer_to_loyalty;
     }
 
-    public String getNumberOfPoints() {
-        return numberOfPoints;
+    public String getPoints() {
+        return points;
     }
 
-    public void setNumberOfPoints(String numberOfPoints) {
-        this.numberOfPoints = numberOfPoints;
+    public void setPoints(String points) {
+        this.points = points;
     }
 
     public PointTransactionType getPointTransactionType() {

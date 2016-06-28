@@ -2,14 +2,14 @@
 <html ng-app="exampleApp">
 <head>
     <meta charset="UTF-8">
-    <title>Loyalties</title>
+    <title>Point Transactions</title>
     <script src="angularjs/angular.js"></script>
     <script src="angularjs/angular-resource.js"></script>
     <script src="http://www.w3schools.com/lib/w3data.js"></script>
     <link href="bootstrap/css/bootstrap.css" rel="stylesheet"/>
     <link href="bootstrap/css/bootstrap-theme.css" rel="stylesheet"/>
     <link href="test.css" rel="stylesheet"/>
-    <script src="loyalties.js"></script>
+    <script src="pointTransaction.js"></script>
 </head>
 <body ng-controller="defaultCtrl">
     <div w3-include-html="navbar.html"></div>
@@ -17,8 +17,8 @@
         w3IncludeHTML();
     </script>
     <div class="panel-primary">
-        <h3 class="panel-heading">Loyalties</h3>
-        <ng-include src="'tableView.html'" ng-show="displayMode == 'list'"></ng-include>
+        <h3 class="panel-heading">Point Transactions</h3>
+        <ng-include src="'pointTransactionTableView.html'" ng-show="displayMode == 'list'"></ng-include>
         <ng-include src="'editorView.html'" ng-show="displayMode == 'edit'"></ng-include>
     </div>
 </body>
