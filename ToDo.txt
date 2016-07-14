@@ -5,3 +5,48 @@
 - implement a Postrgres back end
 - figure out how to return a transaction id to the caller
 - added a new $scope variable for the mode (list, edit, etc.) for each type!
+
+-- meeting
+- business logic for calculating points earned will be in Loyalty Program(LP)
+- gift card, merch credit complexities when calculating earned points
+- no proportional assignment of points to line items, allotment is priority based
+  (i.e. points first)
+- assign unique key to points so that they can be redeemed by the expiration date
+- introduce concept of 'bonus' points given when you make a purchase or when you redeem
+-- email interfaces
+-- event interfaces (like double point value for a weekend, etc.)
+-- screen and functionality for adding points earned when she places an order without logging in
+-- add order/lineitem info to Loyalty Program to make it easier to tie temporary
+   customer numbers or guest accounts to a newly created 'real' account.
+-- modify interfaces to accept structured and non-structured demographic information for a Loyalty Account
+   - birthday
+   - category preference
+   - size preference
+   - favorite season
+-- add messages and messaging
+-- add email to customer records
+-- make sure points are assigned by brand
+-- add number of new/existing messages to loyalty REST interface return
+-- look at Nordstrom's point program
+-- look at Petco loyalty portal in David's ppt
+-- see if I can easily generate a SOAP interface (or implement a SOAP shim to REST)
+-- get AWS pricing info
+-- return transaction (i.e. payment id) # when points are held, etc.
+-- add order shipment level (CIrcle has payment record for each shipment level)
+-- add order info to point transactions
+-- figure out how to deal with having a temporary ML customer number until a first order is placed
+-- add reason why point transactions happened (shipment, gift, etc., hold shipment number and date)
+-- add REST interface to allow adding a customer to a loyalty code that was assigned a temporary ML customer code
+-- add REST interface to associate an order with a payment id
+-- add REST interface to hold points with Order#, TmpCustNo (if there is one), CustNo, Payment Id#
+-- all shipment records will be sent, how about other records?
+-- records what points are worth when a order is made so they can be redeemed properly because we'll
+only get the cash amount when items are shipped
+-- only record point redemption on shipment!
+-- figure out to handle partial shipments, cancellations, returns, etc.
+-- from CIrce how to we inform loyalty program about held points that should be released (not redeemed)
+
+
+
+
+
