@@ -29,5 +29,11 @@ https://blog.shinetech.com/2015/04/15/spring-data-rest-and-projections/
 http://www.baeldung.com/entity-to-and-from-dto-for-a-java-spring-application
 
 
+-- Using RDS with Elastic Beanstalk
+http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.RDS.html
+
+-- Adding RDS to my AWS Environment
+https://docs.aws.amazon.com/quickstarts/latest/webapp/expanding-environments.html?icmpid=docs_eb_console_new#expanding-environments-rds
+
 -- AWS RDS Security Groups
 http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.RDSSecurityGroups.html
