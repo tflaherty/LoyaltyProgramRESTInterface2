@@ -9,9 +9,12 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Company {
 
+    //@SequenceGenerator(name = "companyGen", sequenceName = "COMPANY_SEQ")
+    //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "companyGen")
+
     @Id
-    @SequenceGenerator(name = "companyGen", sequenceName = "COMPANY_SEQ")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "companyGen")
+    @Column(name = "id", columnDefinition = "serial")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NotNull
