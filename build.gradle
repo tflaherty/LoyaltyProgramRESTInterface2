@@ -12,14 +12,14 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
 
-/*
+
 apply plugin: 'war'
 
 war {
     baseName = 'LoyaltyProgramRESTInterface'
-    version = '1.15.0'
+    version = '1.17.0'
 }
-*/
+
 
 configurations {
     providedRuntime
@@ -42,8 +42,8 @@ targetCompatibility = 1.8
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-data-rest")
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
-    /* compile('postgresql:postgresql:9.1-901.jdbc4') */
-    compile("com.h2database:h2")
+    compile('postgresql:postgresql:9.1-901.jdbc4')
+    /* compile("com.h2database:h2") */
 }
 
 task wrapper(type: Wrapper) {
