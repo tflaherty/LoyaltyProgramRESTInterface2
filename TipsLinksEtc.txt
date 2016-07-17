@@ -20,6 +20,13 @@ http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/lo
 
 -- CORS problem
 http://stackoverflow.com/questions/31724994/spring-data-rest-and-cors
+- AWS and CORS
+http://docs.aws.amazon.com/AmazonS3/latest/dev/cors.htmls
+http://docs.aws.amazon.com/AmazonS3/latest/UG/EditingBucketPermissions.html
+- tutorial
+http://www.html5rocks.com/en/tutorials/cors/
+- Good description of HTTP headers
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
 
 -- Spring Data REST and Projections
 - This one is fantastic!
@@ -31,7 +38,7 @@ http://www.baeldung.com/entity-to-and-from-dto-for-a-java-spring-application
 
 -- Using RDS with Elastic Beanstalk
 http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.RDS.html
----- specific info for Java
+- specific info for Java
 http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/java-rds.html
 
 -- Using system environment variables in application.properties

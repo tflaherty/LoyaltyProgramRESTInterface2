@@ -7,6 +7,8 @@ angular.module("exampleApp", ["ngResource"])
     .constant("baseUrl", "http://www.loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/companies/")
     .config(function($httpProvider) {
         $httpProvider.defaults.withCredentials = true;
+        $httpProvider.defaults.useXDomain = true;
+        delete $httpProvider.defaults.headers.common['X-Requested-With'];
     })
     .controller("defaultCtrl", function ($scope, $http, $resource, baseUrl) {
 
