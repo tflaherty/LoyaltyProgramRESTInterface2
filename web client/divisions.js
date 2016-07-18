@@ -2,7 +2,7 @@
  * Created by Tom on 7/18/2016.
  */
 /** angular.module("exampleApp", ["increment", "ngResource"]) */
-angular.module("exampleApp", ["ngResource"])
+angular.module("divisions", ["ngResource"])
 //.constant("baseUrl", "http://localhost:8080/divisions/")
     .constant("baseUrl", "http://www.loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/divisions/")
     .config(function($httpProvider) {
@@ -10,7 +10,7 @@ angular.module("exampleApp", ["ngResource"])
         $httpProvider.defaults.useXDomain = true;
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
     })
-    .controller("defaultCtrl", function ($scope, $http, $resource, baseUrl) {
+    .controller("divisionsCtrl", function ($scope, $http, $resource, baseUrl) {
 
         $scope.displayMode = "list";
         $scope.currentDivision = null;

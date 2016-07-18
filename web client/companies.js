@@ -2,7 +2,7 @@
  * Created by Tom on 6/28/2016.
  */
 /** angular.module("exampleApp", ["increment", "ngResource"]) */
-angular.module("exampleApp", ["ngResource"])
+angular.module("loyaltyProgram.companies", ["ngResource"])
 //.constant("baseUrl", "http://localhost:8080/companies/")
     .constant("baseUrl", "http://www.loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/companies/")
     .config(function($httpProvider) {
@@ -10,7 +10,7 @@ angular.module("exampleApp", ["ngResource"])
         $httpProvider.defaults.useXDomain = true;
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
     })
-    .controller("defaultCtrl", function ($scope, $http, $resource, baseUrl) {
+    .controller("companiesCtrl", function ($scope, $http, $resource, baseUrl) {
 
         $scope.displayMode = "list";
         $scope.currentCompany = null;
