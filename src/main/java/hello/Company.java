@@ -11,7 +11,6 @@ public class Company {
 
     //@SequenceGenerator(name = "companyGen", sequenceName = "COMPANY_SEQ")
     //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "companyGen")
-
     @Id
     @Column(name = "id", columnDefinition = "serial")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +18,11 @@ public class Company {
 
     @NotNull
     private String name;
+
+    public long getId() {
+        return id;
+    }
+
 
     public String getName() {
         return name;

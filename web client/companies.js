@@ -25,7 +25,8 @@ angular.module("exampleApp", ["ngResource"])
                 //alert(JSON.stringify($scope.foo._embedded.companies));
                 $scope.companies = [];
                 for(var i = 0; i < $scope.foo._embedded.companies.length; i++) {
-                    var obj = $scope.foo._embedded.companies[i];
+                    //var obj = $scope.foo._embedded.companies[i];
+                    var obj = new $scope.companiesResource($scope.foo._embedded.companies[i]);
                     $scope.companies.push(obj);
                 }
             });
