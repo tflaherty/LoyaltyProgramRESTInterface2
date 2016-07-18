@@ -2,7 +2,6 @@
 - see if I can write initialization code to initialize database when it's started
 - figure out how to handle the action of adding a point transaction and figuring out how to handle point transaction type
     - i.e. do we use standard strings like "add", "delete", etc. or do it through the URL
-- implement a Postrgres back end
 - figure out how to return a transaction id to the caller
 - added a new $scope variable for the mode (list, edit, etc.) for each type!
 

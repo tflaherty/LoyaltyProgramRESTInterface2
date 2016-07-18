@@ -9,7 +9,8 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Division {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", columnDefinition = "serial")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NotNull
@@ -18,6 +19,10 @@ public class Division {
     @NotNull
     @ManyToOne
     private Company company;
+
+    public long getId() {
+        return id;
+    }
 
     public String getName() {
         return name;

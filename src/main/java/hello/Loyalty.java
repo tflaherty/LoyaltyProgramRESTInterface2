@@ -15,7 +15,6 @@ import java.util.Set;
  */
 @Entity
 public class Loyalty {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -79,6 +78,10 @@ public class Loyalty {
             }
         }
         return pointCount;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getLoyaltyCode() {
