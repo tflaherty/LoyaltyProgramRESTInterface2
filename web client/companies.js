@@ -56,7 +56,7 @@ angular.module("exampleApp", ["ngResource"])
             $scope.displayMode = "edit";
         }
 
-        $scope.saveEdit = function (company) {
+        $scope.saveEditCompany = function (company) {
             if (angular.isDefined(company.id)) {
                 $scope.updateCompany(company);
             } else {
@@ -64,7 +64,7 @@ angular.module("exampleApp", ["ngResource"])
             }
         }
 
-        $scope.cancelEdit = function () {
+        $scope.cancelEditCompany = function () {
             if ($scope.currentCompany && $scope.currentCompany.$get) {
                 $scope.currentCompany.$get();
             }
