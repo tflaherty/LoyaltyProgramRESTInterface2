@@ -15,7 +15,9 @@ angular.module("exampleApp", ["ngResource"])
         $scope.displayMode = "list";
         $scope.currentCompany = null;
 
-        $scope.companiesResource = $resource(baseUrl + ":id", { id: "@id" });
+        $scope.companiesResource = $resource(baseUrl + ":id", { id: "@id" },
+            {'update': {method: 'PUT'}}
+            );
 
         $scope.listCompanies = function () {
             $scope.foo = $scope.companiesResource.get();
@@ -47,7 +49,7 @@ angular.module("exampleApp", ["ngResource"])
         }
 
         $scope.updateCompany = function (company) {
-            company.$save();
+            company.$update();
             $scope.displayMode = "list";
         }
 
