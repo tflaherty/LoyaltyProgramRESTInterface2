@@ -25,6 +25,7 @@ http://docs.aws.amazon.com/AmazonS3/latest/dev/cors.htmls
 http://docs.aws.amazon.com/AmazonS3/latest/UG/EditingBucketPermissions.html
 - tutorial
 http://www.html5rocks.com/en/tutorials/cors/
+https://spring.io/understanding/CORS
 - Good description of HTTP headers
 https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
 
