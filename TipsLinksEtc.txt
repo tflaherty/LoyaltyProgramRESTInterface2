@@ -21,6 +21,9 @@ http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/lo
 -- modularizing angularjs
 https://www.safaribooksonline.com/blog/2014/03/27/13-step-guide-angularjs-modularization/
 -------------------------------------------------------------------------------------------------------
+-- problem with JPA @Column annotation not working
+http://stackoverflow.com/questions/25283198/spring-boot-jpa-column-name-annotation-ignored
+-------------------------------------------------------------------------------------------------------
 -- CORS problem
 http://stackoverflow.com/questions/31724994/spring-data-rest-and-cors
 - AWS and CORS
