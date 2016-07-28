@@ -24,6 +24,18 @@ https://www.safaribooksonline.com/blog/2014/03/27/13-step-guide-angularjs-modula
 -- problem with JPA @Column annotation not working
 http://stackoverflow.com/questions/25283198/spring-boot-jpa-column-name-annotation-ignored
 -------------------------------------------------------------------------------------------------------
+-- JSON-RPC
+https://www.insaneprogramming.be/blog/2015/10/08/rpc-in-the-rest-age/
+
+http://thenextweb.com/dd/2013/12/17/future-api-design-orchestration-layer/
+http://www.programmableweb.com/news/rest-losing-its-flair-rest-api-alternatives/analysis/2013/12/19
+
+http://joost.vunderink.net/blog/2016/01/03/why-we-chose-json-rpc-over-rest/
+https://www.infoq.com/news/2012/02/websockets-rest
+http://mmikowski.github.io/json-pure/
+
+
+-------------------------------------------------------------------------------------------------------
 -- CORS problem
 http://stackoverflow.com/questions/31724994/spring-data-rest-and-cors
 - AWS and CORS
