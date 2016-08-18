@@ -12,6 +12,12 @@ POST using this body:
 "points":"13",
 "dateCreated":"2016-06-23"
 }
+
+-------------------------------------------------------------------------------------------------------
+
+-- Common application properties
+http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+
 -------------------------------------------------------------------------------------------------------
 
 -- how to make a search method call
@@ -57,6 +63,13 @@ public IdPropertyIdentifierAccessor(PersistentEntity<?, ?> entity, Object target
 http://docs.oracle.com/javaee/6/api/javax/persistence/MapsId.html
 Could be very useful: http://docs.jboss.org/hibernate/annotations/3.5/reference/en/html_single/#entity-mapping-identifier
 Good MapsId example: http://www.thejavageek.com/2014/09/26/jpa-mapsid-example/
+
+-------------------------------------------------------------------------------------------------------
+
+-- securing a web application
+http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-security.html
+(Non-REST) https://spring.io/guides/gs/securing-web/
+https://raibledesigns.com/rd/entry/java_web_application_security_part3
 
 -------------------------------------------------------------------------------------------------------
 
