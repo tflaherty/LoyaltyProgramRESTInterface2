@@ -16,14 +16,24 @@ POST using this body:
 
 -- how to make a search method call
 http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyalties/search/findByLoyaltyCode?code=314
+
 -------------------------------------------------------------------------------------------------------
 
 -- modularizing angularjs
 https://www.safaribooksonline.com/blog/2014/03/27/13-step-guide-angularjs-modularization/
+
 -------------------------------------------------------------------------------------------------------
+
 -- problem with JPA @Column annotation not working
 http://stackoverflow.com/questions/25283198/spring-boot-jpa-column-name-annotation-ignored
+
 -------------------------------------------------------------------------------------------------------
+
+-- Jackson JSON library good examples
+http://proliferay.com/create-json-by-jackson-api/
+
+-------------------------------------------------------------------------------------------------------
+
 -- JSON-RPC
 https://www.insaneprogramming.be/blog/2015/10/08/rpc-in-the-rest-age/
 
@@ -34,6 +44,29 @@ http://joost.vunderink.net/blog/2016/01/03/why-we-chose-json-rpc-over-rest/
 https://www.infoq.com/news/2012/02/websockets-rest
 http://mmikowski.github.io/json-pure/
 
+- composite primary keys
+https://en.wikibooks.org/wiki/Java_Persistence/Identity_and_Sequencing
+http://www.thejavageek.com/2014/05/01/jpa-embeddedid-example/
+http://www.ibm.com/developerworks/library/os-hibernatejpa/
+-- debugging composite primary keys
+private Link getSingleResourceLinkTo(Object instance)
+   in C:\Users\Tom\.gradle\caches\moduless-2\files-2.1\org.springframework.data\spring-data-rest-webmvc\2.4.4.RELEASE\8f75d75b7d3e27d7d6966f64d29a1f63d3ecb30b\spring-data-rest-webmvc-2.4.4.RELEASE-sources.jar!\org\springframework\data\rest\webmvc\PersistentEntityResourceAssembler.java
+-- this is where it gets the id to use in the construction of the self link
+-- for CurveEntry it is returning 'position' as the idProperty of PersistentEntity<?, ?>
+public IdPropertyIdentifierAccessor(PersistentEntity<?, ?> entity, Object target)
+http://docs.oracle.com/javaee/6/api/javax/persistence/MapsId.html
+Could be very useful: http://docs.jboss.org/hibernate/annotations/3.5/reference/en/html_single/#entity-mapping-identifier
+Good MapsId example: http://www.thejavageek.com/2014/09/26/jpa-mapsid-example/
+
+-------------------------------------------------------------------------------------------------------
+
+-- Spring endpoint documentation (e.g. beans, health, mappings)
+http://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-endpoints.html
+
+-------------------------------------------------------------------------------------------------------
+
+-- Controller vs RestController
+https://www.genuitec.com/spring-frameworkrestcontroller-vs-controller/
 
 -------------------------------------------------------------------------------------------------------
 -- CORS problem
