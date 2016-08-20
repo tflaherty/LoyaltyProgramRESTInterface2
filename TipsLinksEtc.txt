@@ -67,6 +67,12 @@ Good MapsId example: http://www.thejavageek.com/2014/09/26/jpa-mapsid-example/
 -------------------------------------------------------------------------------------------------------
 
 -- securing a web application
+http://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html
+(not sure this is applicable but it was quoted somewhere
+http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html
+(very good) http://stackoverflow.com/questions/319530/restful-authentication
+-- show how to use basic authentication using Javascript
+http://code.tutsplus.com/tutorials/wp-rest-api-setting-up-and-using-basic-authentication--cms-24762
 http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-security.html
 (Non-REST) https://spring.io/guides/gs/securing-web/
 https://raibledesigns.com/rd/entry/java_web_application_security_part3
