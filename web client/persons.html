@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="loyaltyProgram">
+<head>
+    <meta charset="UTF-8">
+    <title>Persons</title>
+    <script src="angularjs/angular.js"></script>
+    <script src="angularjs/angular-resource.js"></script>
+    <script src="http://www.w3schools.com/lib/w3data.js"></script>
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet"/>
+    <link href="bootstrap/css/bootstrap-theme.css" rel="stylesheet"/>
+    <link href="test.css" rel="stylesheet"/>
+    <script src="loyaltyProgram.js"></script>
+    <script src="persons.js"></script>
+</head>
+<body ng-controller="companiesCtrl">
+<div w3-include-html="navbar.html"></div>
+<script>
+    w3IncludeHTML();
+</script>
+<div class="panel-primary">
+    <h3 class="panel-heading">Persons</h3>
+    <ng-include src="'personTableView.html'" ng-show="displayMode == 'list'"></ng-include>
+    <ng-include src="'personEditorView.html'" ng-show="displayMode == 'edit'"></ng-include>
+</div>
+</body>
+</html>

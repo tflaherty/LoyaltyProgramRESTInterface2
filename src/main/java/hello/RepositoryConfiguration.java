@@ -20,11 +20,13 @@ public class RepositoryConfiguration extends RepositoryRestConfigurerAdapter{
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config)
     {
-        //config.exposeIdsFor(Company.class);
-        //config.exposeIdsFor(Person.class);
-        //config.exposeIdsFor(Loyalty.class);
-        //config.exposeIdsFor(PointTransaction.class);
-        //config.exposeIdsFor(PointTransactionType.class);
+        config.exposeIdsFor(Company.class);
+        config.exposeIdsFor(Division.class);
+        config.exposeIdsFor(Person.class);
+        config.exposeIdsFor(Loyalty.class);
+        config.exposeIdsFor(PointTransaction.class);
+        config.exposeIdsFor(PointTransactionType.class);
+
         config.exposeIdsFor(Color.class);
         config.exposeIdsFor(CurveEntry.class);
         config.exposeIdsFor(CurveEntryPK.class);
