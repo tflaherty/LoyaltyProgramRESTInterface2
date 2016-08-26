@@ -1,0 +1,14 @@
+<div class="panel-body">
+    <div class="form-group">
+        <label>Date Received:</label>
+        <input class="form-control" ng-model="currentMessage.dateReceived" />
+        <label>Message:</label>
+        <input class="form-control" ng-model="currentMessage.message" />
+        <label>Metadata:</label>
+        <input class="form-control" ng-model="currentMessage.metadata" />
+        <label>Read:</label>
+        <input class="form-control" ng-model="currentMessage.read" />
+    </div>
+    <button class="btn btn-primary" ng-click="saveEditMessage(currentMessage)">Save</button>
+    <button class="btn btn-primary" ng-click="cancelEditMessage()">Cancel</button>
+</div>

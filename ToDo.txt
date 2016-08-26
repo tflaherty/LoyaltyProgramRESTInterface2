@@ -1,4 +1,7 @@
-
+- figure out how to may message JSON column using JPA  see this URL:
+  https://devlearnings.wordpress.com/2014/03/28/using-postgres-json/
+- figure out how to create 'findby' queries in repositories for related objects (like findbyLoyalty(...) in MessageRepository)
+- make sure I'm using the right datetime type (i.e. timestamp without time zone) in Postgres.  Should I use timezone?
 - figure out how to add lastmoduserid, lastmoddatetime, createduserid, createddatetime columsn to all tables
 - create a person name entity (look at https://developers.google.com/resources/api-libraries/documentation/plusDomains/v1/java/latest/com/google/api/services/plusDomains/model/Person.Name.html)
 - create an person address entity

@@ -1,0 +1,35 @@
+<div class="panel-body">
+    <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th>Date Received</th>
+            <th>Message</th>
+            <th>Metadata</th>
+            <th>Read</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="message in messages">
+            <td>{{message.dateReceived}}</td>
+            <td>{{message.message}}</td>
+            <td>{{message.metadata}}</td>
+            <td>{{message.read}}</td>
+            <td class="text-center">
+                <button class="btn btn-xs btn-primary"
+                        ng-click="deleteMessage(message)">
+                    Delete
+                </button>
+                <button class="btn btn-xs btn-primary"
+                        ng-click="editOrCreateMessage(message)">
+                    Edit
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <button class="btn btn-primary" ng-click="listMessages()">Refresh</button>
+        <button class="btn btn-primary" ng-click="editOrCreateMessages()">New</button>
+    </div>
+</div>

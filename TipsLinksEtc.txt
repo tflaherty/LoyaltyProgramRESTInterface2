@@ -20,6 +20,11 @@ http://docs.spring.io/spring-boot/docs/current/reference/html/common-application
 
 -------------------------------------------------------------------------------------------------------
 
+-- Mapping a Postgres JSON column using JPA
+https://devlearnings.wordpress.com/2014/03/28/using-postgres-json/
+
+-------------------------------------------------------------------------------------------------------
+
 -- JSON column in a relational database vs. table of name/value pairs
 http://stackoverflow.com/questions/15367696/storing-json-in-database-vs-having-a-new-column-for-each-key
 
