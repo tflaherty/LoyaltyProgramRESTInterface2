@@ -20,7 +20,7 @@ public interface MessageProjectionFull
     @Value("#{target.getDateReceived()}")
     public Date getDateReceived();
 
-    @Value("#{target.getRead()}")
+    @Value("#{target.isRead()}")
     public boolean isRead();
 
     @Value("#{target.getMetadata()}")
