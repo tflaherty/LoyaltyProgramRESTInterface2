@@ -31,4 +31,11 @@ public interface MessageProjectionFull
 
     @Value("#{target.getLoyalty().getId()}")
     public long getLoyaltyId();
+
+    @Value("#{target.getLoyalty().getDivision().getName()}")
+    public String getLoyaltyDivisionName();
+
+    @Value("#{target.getLoyalty().getDivision().getCompany().getName()}")
+    public String getLoyaltyCompanyName();
+
 }

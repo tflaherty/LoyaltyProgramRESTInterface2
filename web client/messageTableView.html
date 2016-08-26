@@ -6,6 +6,10 @@
             <th>Message</th>
             <th>Metadata</th>
             <th>Read</th>
+            <th>Loyalty Code</th>
+            <th>Loyalty Id</th>
+            <th>Company</th>
+            <th>Division</th>
             <th></th>
         </tr>
         </thead>
@@ -15,6 +19,10 @@
             <td>{{message.message}}</td>
             <td>{{message.metadata}}</td>
             <td>{{message.read}}</td>
+            <td>{{message.loyaltyCode}}</td>
+            <td>{{message.loyaltyId}}</td>
+            <td>{{message.loyaltyCompanyName}}</td>
+            <td>{{message.loyaltyDivisionName}}</td>
             <td class="text-center">
                 <button class="btn btn-xs btn-primary"
                         ng-click="deleteMessage(message)">

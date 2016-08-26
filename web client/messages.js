@@ -4,7 +4,7 @@
 /** angular.module("exampleApp", ["increment", "ngResource"]) */
 angular.module("loyaltyProgram.companies", ["ngResource"])
 //.constant("baseUrl", "http://localhost:8080/persons/")
-    .constant("baseUrl", "http://www.loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/messages/")
+    .constant("baseUrl", "http://www.loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/messages?projection=full/")
     .config(function($httpProvider) {
         $httpProvider.defaults.withCredentials = true;
         $httpProvider.defaults.useXDomain = true;
