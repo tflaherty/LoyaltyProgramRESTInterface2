@@ -20,6 +20,11 @@ http://docs.spring.io/spring-boot/docs/current/reference/html/common-application
 
 -------------------------------------------------------------------------------------------------------
 
+-- JSON column in a relational database vs. table of name/value pairs
+http://stackoverflow.com/questions/15367696/storing-json-in-database-vs-having-a-new-column-for-each-key
+
+-------------------------------------------------------------------------------------------------------
+
 -- how to make a search method call
 http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyalties/search/findByLoyaltyCode?code=314
 

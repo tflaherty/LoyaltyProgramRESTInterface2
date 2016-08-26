@@ -1,9 +1,15 @@
+
+- figure out how to add lastmoduserid, lastmoddatetime, createduserid, createddatetime columsn to all tables
+- create a person name entity (look at https://developers.google.com/resources/api-libraries/documentation/plusDomains/v1/java/latest/com/google/api/services/plusDomains/model/Person.Name.html)
+- create an person address entity
 - change things so we return the number of points with each kind of status (available, held, etc.)
 - see if I can write initialization code to initialize database when it's started
 - figure out how to handle the action of adding a point transaction and figuring out how to handle point transaction type
     - i.e. do we use standard strings like "add", "delete", etc. or do it through the URL
 - figure out how to return a transaction id to the caller
 - added a new $scope variable for the mode (list, edit, etc.) for each type!
+- change Entities to use property based annotation vs field based
+- figure out how to add URLs under /test to the /profiles output!
 
 -- meeting
 - business logic for calculating points earned will be in Loyalty Program(LP)
