@@ -45,6 +45,11 @@ http://stackoverflow.com/questions/25283198/spring-boot-jpa-column-name-annotati
 
 -------------------------------------------------------------------------------------------------------
 
+-- Java Persistence Query Language
+http://docs.oracle.com/javaee/6/tutorial/doc/bnbtl.html
+
+-------------------------------------------------------------------------------------------------------
+
 -- Jackson JSON library good examples
 http://proliferay.com/create-json-by-jackson-api/
 
