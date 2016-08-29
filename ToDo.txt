@@ -1,4 +1,5 @@
-- figure out how to may message JSON column using JPA  see this URL:
+- add point_transaction_comment table and entity and relationships
+- figure out how to map message JSON column using JPA  see this URL:
   https://devlearnings.wordpress.com/2014/03/28/using-postgres-json/
 - put unique constraints in the database and entity code/annotations (like unique loyalty code and division id in the loyalty table
 - figure out how to create 'findby' queries in repositories for related objects (like findbyLoyalty(...) in MessageRepository)

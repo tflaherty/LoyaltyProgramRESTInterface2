@@ -15,13 +15,17 @@ public class PointTransactionType {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    public long getId()
+    {
+        return id;
+    }
+
     private String name;
     private String description;
 
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -29,7 +33,6 @@ public class PointTransactionType {
     public String getDescription() {
         return description;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }

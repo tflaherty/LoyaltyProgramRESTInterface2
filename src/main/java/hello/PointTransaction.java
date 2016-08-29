@@ -24,17 +24,18 @@ public class PointTransaction {
     @ManyToOne
     private Loyalty loyalty;
 
-    @ManyToOne
-    private Customer_To_Loyalty customer_to_loyalty;
-
     @NotNull
     @ManyToOne
     private PointTransactionType pointTransactionType;
 
+    public long getId()
+    {
+        return id;
+    }
+
     public Date getDateCreated() {
         return dateCreated;
     }
-
     public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
     }
@@ -42,23 +43,13 @@ public class PointTransaction {
     public Loyalty getLoyalty() {
         return loyalty;
     }
-
     public void setLoyalty(Loyalty loyalty) {
         this.loyalty = loyalty;
-    }
-
-    public Customer_To_Loyalty getCustomer_to_loyalty() {
-        return customer_to_loyalty;
-    }
-
-    public void setCustomer_to_loyalty(Customer_To_Loyalty customer_to_loyalty) {
-        this.customer_to_loyalty = customer_to_loyalty;
     }
 
     public int getPoints() {
         return points;
     }
-
     public void setPoints(int points) {
         this.points = points;
     }
