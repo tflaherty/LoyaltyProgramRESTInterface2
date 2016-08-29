@@ -23,7 +23,7 @@ public interface MessageRepository extends PagingAndSortingRepository<Message, L
     @Query("select m from Message m INNER JOIN m.loyalty l where l.loyaltyCode = :loyaltyCode order by m.dateReceived")
     Collection<Message> findByLoyaltyCode(@Param("loyaltyCode") String loyaltyCode);
 
-    @Query("select m from Message m INNER JOIN m.loyalty l INNER JOIN l.division d INNER JOIN d.company c where l.loyaltyCode = :loyaltyCode and d.divisionName = :divisionName and c.companyName = :companyName order by m.dateReceived")
+    @Query("select m from Message m INNER JOIN m.loyalty l INNER JOIN l.division d INNER JOIN d.company c where l.loyaltyCode = :loyaltyCode and d.name = :divisionName and c.name = :companyName order by m.dateReceived")
     Collection<Message> findByLoyaltyCodeDivisionNameCompanyName(@Param("loyaltyCode") String loyaltyCode, @Param("divisionName") String divisionName, @Param("companyName") String companyName);
 
     /*

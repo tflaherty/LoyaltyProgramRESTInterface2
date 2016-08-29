@@ -3,6 +3,7 @@ package hello;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Collection;
 import java.util.Date;
 
 /**
@@ -20,7 +21,6 @@ public class Message {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "loyalty_id")
     private Loyalty loyalty;
 
     @NotNull
@@ -83,4 +83,5 @@ public class Message {
     {
         this.metadata = metadata;
     }
+
 }

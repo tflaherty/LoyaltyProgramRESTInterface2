@@ -32,6 +32,12 @@ public class Loyalty {
         return pointTransactions;
     }
 
+    @OneToMany(mappedBy="loyalty")
+    private List<Message> messages;
+    public List<Message> getMessages() {
+        return messages;
+    }
+
     private Date dateCreated;
 
     @Transient
