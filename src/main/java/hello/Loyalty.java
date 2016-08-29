@@ -41,6 +41,16 @@ public class Loyalty {
     private Date dateCreated;
 
     @Transient
+    private String companyName;
+    @Transient
+    public String getCompanyName() { return getDivision().getCompany().getName(); }
+
+    @Transient
+    private String divisionName;
+    @Transient
+    public String getDivisionName() { return getDivision().getName(); }
+
+    @Transient
     private int availablePoints;
     @Transient
     public int getAvailablePoints() {

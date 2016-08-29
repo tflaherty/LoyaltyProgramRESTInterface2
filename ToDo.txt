@@ -2,7 +2,6 @@
 - figure out how to map message JSON column using JPA  see this URL:
   https://devlearnings.wordpress.com/2014/03/28/using-postgres-json/
 - put unique constraints in the database and entity code/annotations (like unique loyalty code and division id in the loyalty table
-- figure out how to create 'findby' queries in repositories for related objects (like findbyLoyalty(...) in MessageRepository)
 - make sure I'm using the right datetime type (i.e. timestamp without time zone) in Postgres.  Should I use timezone?
 - figure out how to add lastmoduserid, lastmoddatetime, createduserid, createddatetime columsn to all tables
 - create a person name entity (look at https://developers.google.com/resources/api-libraries/documentation/plusDomains/v1/java/latest/com/google/api/services/plusDomains/model/Person.Name.html)
@@ -16,6 +15,7 @@
 - added a new $scope variable for the mode (list, edit, etc.) for each type!
 - change Entities to use property based annotation vs field based
 - figure out how to add URLs under /test to the /profiles output!
+- figure out security
 
 -- meeting
 - business logic for calculating points earned will be in Loyalty Program(LP)
