@@ -6,8 +6,9 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
-public class Person {
-
+//@EntityListeners({EmailAddressValidator.class})
+public class Person implements EntityWithEmailAddress
+{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
@@ -35,6 +36,10 @@ public class Person {
 
 	private Date birthdate;
 
+	@Column(name = "email_address")
+	@Size(max = 255)
+	private String emailAddress;
+
 	@ManyToOne
 	@JoinColumn(name = "division_id")
 	private Division division;
@@ -42,6 +47,11 @@ public class Person {
 	@Column(name = "customer_code")
 	@Size(max = 255)
 	private String customerCode;
+
+	// this is really JSON data
+	// figure out how to make this JSON by looking at:
+	//    https://devlearnings.wordpress.com/2014/03/28/using-postgres-json/
+	private String metadata;
 
 	public long getId()
 	{
@@ -118,5 +128,23 @@ public class Person {
 	public void setNameSuffix(String nameSuffix)
 	{
 		this.nameSuffix = nameSuffix;
+	}
+
+	public String getEmailAddress()
+	{
+		return emailAddress;
+	}
+	public void setEmailAddress(String emailAddress)
+	{
+		this.emailAddress = emailAddress;
+	}
+
+	public String getMetadata()
+	{
+		return metadata;
+	}
+	public void setMetadata(String metadata)
+	{
+		this.metadata = metadata;
 	}
 }

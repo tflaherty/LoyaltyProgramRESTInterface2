@@ -59,15 +59,7 @@ public class Loyalty {
         {
             for (PointTransaction pointTransaction : getPointTransactions())
             {
-                String transactionTypeName = pointTransaction.getPointTransactionType().getName();
-                if (transactionTypeName.equals("added"))
-                {
-                    pointCount += pointTransaction.getPoints();
-                }
-                else if (transactionTypeName.equals("deleted") || transactionTypeName.equals("held"))
-                {
-                    pointCount -= pointTransaction.getPoints();
-                }
+                pointCount += pointTransaction.getPoints();
             }
         }
         return pointCount;

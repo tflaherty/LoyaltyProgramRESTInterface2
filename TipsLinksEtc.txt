@@ -22,6 +22,12 @@ http://docs.spring.io/spring-boot/docs/current/reference/html/common-application
 
 -- Mapping a Postgres JSON column using JPA
 https://devlearnings.wordpress.com/2014/03/28/using-postgres-json/
+http://www.thoughts-on-java.org/persist-postgresqls-jsonb-data-type-hibernate/
+
+-------------------------------------------------------------------------------------------------------
+
+-- JPA Repository Reference
+http://docs.spring.io/spring-data/jpa/docs/1.4.3.RELEASE/reference/html/jpa.repositories.html
 
 -------------------------------------------------------------------------------------------------------
 
@@ -91,6 +97,8 @@ http://code.tutsplus.com/tutorials/wp-rest-api-setting-up-and-using-basic-authen
 http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-security.html
 (Non-REST) https://spring.io/guides/gs/securing-web/
 https://raibledesigns.com/rd/entry/java_web_application_security_part3
+-- REST security cheat sheet
+https://www.owasp.org/index.php/REST_Security_Cheat_Sheet#Whitelist_allowable_methods
 
 -------------------------------------------------------------------------------------------------------
 

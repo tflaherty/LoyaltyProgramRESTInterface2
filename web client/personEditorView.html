@@ -1,5 +1,7 @@
 <div class="panel-body">
     <div class="form-group">
+        <label>Customer Code:</label>
+        <input class="form-control" ng-model="currentPerson.customerCode" />
         <label>Last Name:</label>
         <input class="form-control" ng-model="currentPerson.lastName" />
         <label>First Name:</label>
@@ -10,6 +12,12 @@
         <input class="form-control" ng-model="currentPerson.namePrefix" />
         <label>Suffix:</label>
         <input class="form-control" ng-model="currentPerson.nameSuffix" />
+        <label>Email:</label>
+        <input class="form-control" ng-model="currentPerson.emailAddress" />
+        <label>Birthdate:</label>
+        <input class="form-control" ng-model="currentPerson.birthdate" />
+        <label>Metadata:</label>
+        <input class="form-control" ng-model="currentPerson.metadata" />
     </div>
     <button class="btn btn-primary" ng-click="saveEditPerson(currentPerson)">Save</button>
     <button class="btn btn-primary" ng-click="cancelEditPerson()">Cancel</button>
