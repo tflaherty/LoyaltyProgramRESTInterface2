@@ -17,7 +17,8 @@ apply plugin: 'war'
 
 war {
     baseName = 'LoyaltyProgramRESTInterface'
-    version = '1.43.38'
+    version = '1.43.54'
+    from 'cron.yaml'
 }
 /**/
 
@@ -28,7 +29,7 @@ configurations {
 /*
 jar {
     baseName = 'gs-accessing-data-rest'
-    version = '0.1.0'
+    version = '0.1.1'
 }
 */
 

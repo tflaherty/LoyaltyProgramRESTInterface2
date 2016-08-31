@@ -1,3 +1,4 @@
+- add expiration date to point transaction table, etnity and code
 - add point_transaction_comment table and entity and relationships
 - figure out how to map message JSON column using JPA  see this URL:
   https://devlearnings.wordpress.com/2014/03/28/using-postgres-json/
@@ -16,6 +17,7 @@
 - change Entities to use property based annotation vs field based
 - figure out how to add URLs under /test to the /profiles output!
 - figure out security
+- do error handling
 
 -- meeting
 - business logic for calculating points earned will be in Loyalty Program(LP)

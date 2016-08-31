@@ -1,3 +1,6 @@
+-- getting started with java on elastic beanstalk
+http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/java-getstarted.html
+
 -- Spring Data REST Reference Documentation
 http://docs.spring.io/spring-data/rest/docs/current/reference/html/
 
@@ -84,6 +87,13 @@ public IdPropertyIdentifierAccessor(PersistentEntity<?, ?> entity, Object target
 http://docs.oracle.com/javaee/6/api/javax/persistence/MapsId.html
 Could be very useful: http://docs.jboss.org/hibernate/annotations/3.5/reference/en/html_single/#entity-mapping-identifier
 Good MapsId example: http://www.thejavageek.com/2014/09/26/jpa-mapsid-example/
+
+-------------------------------------------------------------------------------------------------------
+
+-- scheduling on AWS
+https://medium.com/@joelennon/running-cron-jobs-on-amazon-web-services-aws-elastic-beanstalk-a41d91d1c571#.8xy0lvwk4
+http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features-managing-env-tiers.html#using-features-managing-env-tiers-worker-settings
+https://aws.amazon.com/blogs/aws/background-task-handling-for-aws-elastic-beanstalk/
 
 -------------------------------------------------------------------------------------------------------
 

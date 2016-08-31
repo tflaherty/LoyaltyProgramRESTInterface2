@@ -1,0 +1,8 @@
+version: 1
+cron: 
+  - name: "nightly-job"
+    url: "/workers/cron/nightly"
+    schedule: "1 0 * * *"
+  - name: "minute-job"
+    url: "/workers/cron/minute"
+    schedule: "*/1 * * * *"
