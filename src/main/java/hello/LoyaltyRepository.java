@@ -23,8 +23,10 @@ public interface LoyaltyRepository extends PagingAndSortingRepository<Loyalty, L
 
     // non-native query
     //@Query("select l from Loyalty l inner join l.division d inner join d.company c where l.loyaltyCode = :loyaltyCode and d.name = :divisionName and c.name = :companyName")
+    //List<Loyalty> findByLoyaltyCodeDivisionNameCompanyNameNonNative(@Param("loyaltyCode") String loyaltyCode, @Param("divisionName") String divisionName, @Param("companyName") String companyName);
+
     // native query
-    @Query(value = "select l from Loyalty l inner join Division d on d.id = l.division_id inner join Company c on c.id = d.company_id where l.loyalty_code = :loyaltyCode and d.name = :divisionName and c.name = :companyName", nativeQuery = true)
+    @Query(value = "select l.* from Loyalty l inner join Division d on d.id = l.division_id inner join Company c on c.id = d.company_id where l.loyalty_code = :loyaltyCode and d.name = :divisionName and c.name = :companyName", nativeQuery = true)
     List<Loyalty> findByLoyaltyCodeDivisionNameCompanyName(@Param("loyaltyCode") String loyaltyCode, @Param("divisionName") String divisionName, @Param("companyName") String companyName);
 
 }

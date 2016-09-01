@@ -17,8 +17,8 @@ apply plugin: 'war'
 
 war {
     baseName = 'LoyaltyProgramRESTInterface'
-    version = '1.43.54'
-    from 'cron.yaml'
+    version = '1.43.56'
+    /*from 'cron.yaml'*/
 }
 /**/
 

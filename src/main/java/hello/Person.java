@@ -3,6 +3,7 @@ package hello;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Collection;
 import java.util.Date;
 
 @Entity
@@ -47,6 +48,9 @@ public class Person implements EntityWithEmailAddress
 	@Column(name = "customer_code")
 	@Size(max = 255)
 	private String customerCode;
+
+	@ManyToMany(mappedBy = "persons")
+	private Collection<Loyalty> loyalties;
 
 	// this is really JSON data
 	// figure out how to make this JSON by looking at:
