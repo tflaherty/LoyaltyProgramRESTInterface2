@@ -8,6 +8,7 @@ http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/java-getstarted.html
 
 -- Spring Data REST Reference Documentation
 http://docs.spring.io/spring-data/rest/docs/current/reference/html/
+https://spring.io/understanding/REST
 
 -- how to use a "foreign key" in a rest POST
 http://stackoverflow.com/questions/37902946/add-item-to-the-collection-with-foreign-key-via-rest-call
@@ -161,3 +162,91 @@ https://docs.aws.amazon.com/quickstarts/latest/webapp/expanding-environments.htm
 
 -- AWS RDS Security Groups
 http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.RDSSecurityGroups.html
+
+
+---------------------------------------------------------------------------------------------
+------------------------------------ Usage Examples -----------------------------------------
+---------------------------------------------------------------------------------------------
+
+------ How to create a new division
+  POST to http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/divisions
+  Content-Type:  application/json
+  Request Body:
+  {
+      "name":"Test Division",
+      "company": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/companies/1"
+  }
+  Returns: 102 CREATED
+
+------ How to delete division with id 4
+  DELETE to http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/divisions/4
+  Returns: 204 NO CONTENT
+
+------ How to update division with id 4 (changes name to "Test DivisionMod"
+  (Technically this shouldn't work without the other required parameter "company"!)
+  PUT to http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/divisions/4
+  Content-Type:  application/json
+  Request Body:
+  {
+      "name":"Test DivisionMod"
+  }
+  Returns:  200 OK
+
+------ How to update division with id 4 (changes company to company with id 4)
+  PATCH to http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/divisions/4
+  Content-Type:  application/json
+  Request Body:
+  {
+      "company": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/companies/4"
+  }
+  Returns: 200 OK when succeeds, 500 INTERNAL SERVER ERROR when fails (because it threw a validation exception on Division because "name" was missing)
+  (We threw a validation exception on Division because "name" was missing BUT we can update just the "name"
+  with PUT (see above) and it doesn't complain about "company" missing!)
+
+  If we use PUT instead it will fail because PUT replaces an existing entity. If only a subset of data elements are provided, the rest will be replaced with empty or null.
+  PATCH updates only the specified fields of an entity at a URI. A PATCH request is idempotent.
+
+------ How to get a loyalty object by loyalty code, division name and company name
+  GET to http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyalties/search/findByLoyaltyCodeDivisionNameCompanyName?loyaltyCode=LOY0001&divisionName=Chadwicks&companyName=DAI
+  Returns: 200 OK
+  Response Body:
+  {
+      "_embedded": {
+          "loyalties": [{
+              "id": 1,
+              "loyaltyCode": "LOY0001",
+              "dateCreated": "2016-08-26T00:00:00.000+0000",
+              "companyName": "DAI",
+              "divisionName": "Chadwicks",
+              "availablePoints": 0,
+              "heldPoints": 0,
+              "_links": {
+                  "self": {
+                      "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyalties/1"
+                  },
+                  "loyalty": {
+                      "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyalties/1{?projection}",
+                      "templated": true
+                  },
+                  "division": {
+                      "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyalties/1/division"
+                  },
+                  "persons": {
+                      "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyalties/1/persons"
+                  },
+                  "pointTransactions": {
+                      "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyalties/1/pointTransactions"
+                  },
+                  "messages": {
+                      "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyalties/1/messages"
+                  }
+              }
+          }]
+      },
+      "_links": {
+          "self": {
+              "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyalties/search/findByLoyaltyCodeDivisionNameCompanyName?loyaltyCode=LOY0001&divisionName=Chadwicks&companyName=DAI"
+          }
+      }
+  }
+

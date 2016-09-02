@@ -15,6 +15,7 @@ public class PointTransaction {
     private long id;
 
     @NotNull
+    @Column(name = "date_created")
     private Date dateCreated;
 
     @NotNull
@@ -22,11 +23,16 @@ public class PointTransaction {
 
     @NotNull
     @ManyToOne
+    @JoinColumn(name="loyalty_id")
     private Loyalty loyalty;
 
     @NotNull
     @ManyToOne
+    @JoinColumn(name="point_transaction_type_id")
     private PointTransactionType pointTransactionType;
+
+    @Column(name = "expiration_date")
+    private Date expirationDate;
 
     public long getId()
     {
@@ -57,9 +63,18 @@ public class PointTransaction {
     public PointTransactionType getPointTransactionType() {
         return pointTransactionType;
     }
-
     public void setPointTransactionType(PointTransactionType pointTransactionType) {
         this.pointTransactionType = pointTransactionType;
     }
+
+    public Date getExpirationDate()
+    {
+        return expirationDate;
+    }
+    public void setExpirationDate(Date expirationDate)
+    {
+        this.expirationDate = expirationDate;
+    }
+
 
 }

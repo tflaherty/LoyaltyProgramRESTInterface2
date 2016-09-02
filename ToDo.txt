@@ -1,4 +1,8 @@
 - add expiration date to point transaction table, etnity and code
+- Modify held and available calulcations to exclude expired points (and make calculation fully correct)
+- return a better HTTP response than 204 to DELETE requests
+--  http://blog.ploeh.dk/2013/04/30/rest-lesson-learned-avoid-204-responses/
+- implement point to money REST interface
 - add point_transaction_comment table and entity and relationships
 - figure out how to map message JSON column using JPA  see this URL:
   https://devlearnings.wordpress.com/2014/03/28/using-postgres-json/
@@ -18,6 +22,7 @@
 - figure out how to add URLs under /test to the /profiles output!
 - figure out security
 - do error handling
+- figure out how to deploy a new version of the REST interface when in production without disrupting operations!
 
 -- meeting
 - business logic for calculating points earned will be in Loyalty Program(LP)

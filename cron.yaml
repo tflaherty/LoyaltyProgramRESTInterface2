@@ -5,4 +5,4 @@ cron:
     schedule: "1 0 * * *"
   - name: "minute-job"
     url: "/workers/cron/minute"
-    schedule: "*/1 * * * *"
+    schedule: "*/10 * * * *"
