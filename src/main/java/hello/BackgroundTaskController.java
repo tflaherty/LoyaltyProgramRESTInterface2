@@ -38,7 +38,7 @@ public class BackgroundTaskController
     public String nightly()
     {
         //System.out.print("nightly task executed\n");
-        Loyalty loyalty = entityManager.find(Loyalty.class, 1);
+        Loyalty loyalty = entityManager.find(Loyalty.class, (long)1);
         Message message = new Message();
         message.setLoyalty(loyalty);
         Date now = new Date();
