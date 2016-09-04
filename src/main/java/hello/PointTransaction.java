@@ -38,6 +38,10 @@ public class PointTransaction {
     {
         return id;
     }
+    public void setId(long id)
+    {
+        this.id = id;
+    }
 
     public Date getDateCreated() {
         return dateCreated;

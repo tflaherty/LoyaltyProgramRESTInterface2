@@ -19,6 +19,10 @@ public class PointTransactionType {
     {
         return id;
     }
+    public void setId(long id)
+    {
+        this.id = id;
+    }
 
     private String name;
     private String description;

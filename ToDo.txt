@@ -1,3 +1,5 @@
+- fix sequence based id gen!
+-- see http://stackoverflow.com/questions/4288740/hibernate-use-of-postgresql-sequence-does-not-affect-sequence-table
 - add expiration date to point transaction table, etnity and code
 - Modify held and available calulcations to exclude expired points (and make calculation fully correct)
 - return a better HTTP response than 204 to DELETE requests

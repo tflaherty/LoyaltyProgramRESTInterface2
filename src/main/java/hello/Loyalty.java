@@ -98,11 +98,14 @@ public class Loyalty {
     public long getId() {
         return id;
     }
+    public void setId(long id)
+    {
+        this.id = id;
+    }
 
     public String getLoyaltyCode() {
         return loyaltyCode;
     }
-
     public void setLoyaltyCode(String loyaltyCode) {
         this.loyaltyCode = loyaltyCode;
     }
@@ -110,7 +113,6 @@ public class Loyalty {
     public Division getDivision() {
         return division;
     }
-
     public void setDivision(Division division) {
         this.division = division;
     }
@@ -118,7 +120,6 @@ public class Loyalty {
     public Date getDateCreated() {
         return dateCreated;
     }
-
     public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
     }
