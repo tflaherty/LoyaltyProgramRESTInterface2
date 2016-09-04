@@ -1,30 +1,37 @@
 - fix sequence based id gen!
--- see http://stackoverflow.com/questions/4288740/hibernate-use-of-postgresql-sequence-does-not-affect-sequence-table
-- add expiration date to point transaction table, etnity and code
+    see http://stackoverflow.com/questions/4288740/hibernate-use-of-postgresql-sequence-does-not-affect-sequence-table
+    Company entity now works correctly so fix other entities to work like Company (and test them!)
+- assign unique key to points (or use another method) so that they can be redeemed in order by the expiration date
 - Modify held and available calulcations to exclude expired points (and make calculation fully correct)
 - return a better HTTP response than 204 to DELETE requests
---  http://blog.ploeh.dk/2013/04/30/rest-lesson-learned-avoid-204-responses/
-- implement point to money REST interface
-- add point_transaction_comment table and entity and relationships
+    http://blog.ploeh.dk/2013/04/30/rest-lesson-learned-avoid-204-responses/
+- implement point to money REST interface or return it as part of Loyalty REST interface (like held and available)
+- add point_transaction_comment table (and perhaps a person or loyalty one too) and entity and relationships
 - figure out how to map message JSON column using JPA  see this URL:
-  https://devlearnings.wordpress.com/2014/03/28/using-postgres-json/
-- put unique constraints in the database and entity code/annotations (like unique loyalty code and division id in the loyalty table
+    https://devlearnings.wordpress.com/2014/03/28/using-postgres-json/
+- put unique constraints in the database and entity code/annotations (like unique loyalty code and division id in the loyalty table, name in company table, etc.)
 - make sure I'm using the right datetime type (i.e. timestamp without time zone) in Postgres.  Should I use timezone?
 - figure out how to add lastmoduserid, lastmoddatetime, createduserid, createddatetime columsn to all tables
 - create a person name entity (look at https://developers.google.com/resources/api-libraries/documentation/plusDomains/v1/java/latest/com/google/api/services/plusDomains/model/Person.Name.html)
 - create an person address entity
-- figure out how to use more than one module in my master angular module (like for companies and persons)
 - change things so we return the number of points with each kind of status (available, held, etc.)
 - see if I can write initialization code to initialize database when it's started
 - figure out how to handle the action of adding a point transaction and figuring out how to handle point transaction type
-    - i.e. do we use standard strings like "add", "delete", etc. or do it through the URL
+    i.e. do we use standard strings like "add", "delete", etc. or do it through the URL
 - figure out how to return a transaction id to the caller
-- added a new $scope variable for the mode (list, edit, etc.) for each type!
-- change Entities to use property based annotation vs field based
+  INSERT requests via REST seem to always return the created object (with its id) so that might be sufficient
+- (is this necessary and/or desired?) change Entities to use property based annotation vs field based
 - figure out how to add URLs under /test to the /profiles output!
 - figure out security
+  Jon is looking into whitelisting as our first approach
 - do error handling
 - figure out how to deploy a new version of the REST interface when in production without disrupting operations!
+- Make sure that cron.yaml is the best way (and will work at all!) to run nightly job reliably in scaled AWS environment
+
+------ client code
+- figure out how to use more than one module in my master angular module (like for companies and persons)
+- added a new $scope variable for the mode (list, edit, etc.) for each type!
+
 
 -- meeting
 - business logic for calculating points earned will be in Loyalty Program(LP)

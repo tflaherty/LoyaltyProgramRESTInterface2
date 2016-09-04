@@ -26,5 +26,8 @@ public interface PointTransactionProjectionFull {
     @Value("#{target.getLoyalty().getDivision().getName()}")
     public String getDivisionName();
 
+    @Value("#{target.getExpirationDate()}")
+    public String getExpirationDate();
+
 
 }
