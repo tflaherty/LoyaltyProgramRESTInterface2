@@ -1,4 +1,3 @@
-- figure out how to deal with the fact that Circle and Kibo doesn't know division codes
 - layout of flow in detail
 -- account creation
 -- account retrieval
