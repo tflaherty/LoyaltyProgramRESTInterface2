@@ -5,6 +5,31 @@ I should probably use @Transient fields (like in Loyalty for DivisionName and Co
 -- PostgreSQL sequence based entity id problem
 see http://stackoverflow.com/questions/4288740/hibernate-use-of-postgresql-sequence-does-not-affect-sequence-table
 
+-- PostgreSQL namine conventions
+ http://stackoverflow.com/questions/4107915/postgresql-default-constraint-names
+
+The standard names for indexes in PostgreSQL are:
+
+{tablename}_{columnname(s)}_{suffix}
+
+where the suffix is one of the following:
+
+    pkey for a Primary Key constraint
+    key for a Unique constraint
+    excl for an Exclusion constraint
+    idx for any other kind of index
+    fkey for a Foreign key
+    check for a Check constraint
+
+Standard suffix for sequences is
+
+    seq for all sequences
+
+Proof of your UNIQUE-constraint:
+
+    NOTICE: CREATE TABLE / UNIQUE will create implicit index "example_a_b_key" for table "example"
+
+
 -- debugging RDS to environment problem
 http://stackoverflow.com/questions/34344579/change-which-rds-database-an-aws-eb-environment-uses
 http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/troubleshooting.html

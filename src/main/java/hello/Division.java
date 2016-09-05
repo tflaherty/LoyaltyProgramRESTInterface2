@@ -22,11 +22,13 @@ public class Division
     @JoinColumn(name = "company_id")
     private Company company;
 
+    @Column(name = "site_code", unique = true)
+    private String siteCode;
+
     public long getId()
     {
         return id;
     }
-
     public void setId(long id)
     {
         this.id = id;
@@ -36,7 +38,6 @@ public class Division
     {
         return name;
     }
-
     public void setName(String name)
     {
         this.name = name;
@@ -46,9 +47,17 @@ public class Division
     {
         return company;
     }
-
     public void setCompany(Company company)
     {
         this.company = company;
+    }
+
+    public String getSiteCode()
+    {
+        return siteCode;
+    }
+    public void setSiteCode(String siteCode)
+    {
+        this.siteCode = siteCode;
     }
 }

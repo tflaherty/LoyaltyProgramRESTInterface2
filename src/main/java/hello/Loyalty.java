@@ -72,6 +72,15 @@ public class Loyalty
     }
 
     @Transient
+    private String siteCode;
+
+    @Transient
+    public String getSiteCode()
+    {
+        return getDivision().getSiteCode();
+    }
+
+    @Transient
     private int availablePoints;
 
     @Transient

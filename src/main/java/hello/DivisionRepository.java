@@ -14,4 +14,5 @@ import java.util.List;
 public interface DivisionRepository extends PagingAndSortingRepository<Division, Long>
 {
     List<Division> findByName(@Param("name") String name);
+    List<Division> findBySiteCode(@Param("siteCode") String siteCode);
 }

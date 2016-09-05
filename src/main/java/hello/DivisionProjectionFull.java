@@ -18,4 +18,5 @@ public interface DivisionProjectionFull
 
     @Value("#{target.getName()}")
     public String getName();
+
 }

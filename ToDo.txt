@@ -10,6 +10,7 @@
 -- point expiration
 
 - figure out how the entity-table mapping is happening for PointTransaction (for instance)
+- find out why divisions URL doesn't return a proper HTTP response when referring to a division id that doesn't exist
 - assign unique key to points (or use another method) so that they can be redeemed in order by the expiration date
 - Modify held and available calulcations to exclude expired points (and make calculation fully correct)
 - return a better HTTP response than 204 to DELETE requests
