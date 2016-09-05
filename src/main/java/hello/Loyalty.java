@@ -15,9 +15,11 @@ import java.util.Set;
  * Created by Tom on 6/23/2016.
  */
 @Entity
-public class Loyalty {
+public class Loyalty
+{
+    @SequenceGenerator(name = "loyaltyGen", sequenceName = "loyalty_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "loyaltyGen")
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @NotNull
@@ -27,40 +29,54 @@ public class Loyalty {
     @ManyToOne
     private Division division;
 
-    @OneToMany(mappedBy="loyalty")
+    @OneToMany(mappedBy = "loyalty")
     private List<PointTransaction> pointTransactions;
-    public List<PointTransaction> getPointTransactions() {
+
+    public List<PointTransaction> getPointTransactions()
+    {
         return pointTransactions;
     }
 
-    @OneToMany(mappedBy="loyalty")
+    @OneToMany(mappedBy = "loyalty")
     private List<Message> messages;
-    public List<Message> getMessages() {
+
+    public List<Message> getMessages()
+    {
         return messages;
     }
 
     @ManyToMany
-    @JoinTable(name="loyalty_person_map",
-            joinColumns = @JoinColumn(name="loyalty_id"),
-            inverseJoinColumns = @JoinColumn(name="person_id"))
+    @JoinTable(name = "loyalty_person_map",
+            joinColumns = @JoinColumn(name = "loyalty_id"),
+            inverseJoinColumns = @JoinColumn(name = "person_id"))
     private Collection<Person> persons;
 
     private Date dateCreated;
 
     @Transient
     private String companyName;
+
     @Transient
-    public String getCompanyName() { return getDivision().getCompany().getName(); }
+    public String getCompanyName()
+    {
+        return getDivision().getCompany().getName();
+    }
 
     @Transient
     private String divisionName;
+
     @Transient
-    public String getDivisionName() { return getDivision().getName(); }
+    public String getDivisionName()
+    {
+        return getDivision().getName();
+    }
 
     @Transient
     private int availablePoints;
+
     @Transient
-    public int getAvailablePoints() {
+    public int getAvailablePoints()
+    {
         int pointCount = 0;
         if (getPointTransactions() != null)
         {
@@ -74,8 +90,10 @@ public class Loyalty {
 
     @Transient
     private int heldPoints;
+
     @Transient
-    public int getHeldPoints() {
+    public int getHeldPoints()
+    {
         int pointCount = 0;
         if (getPointTransactions() != null)
         {
@@ -85,8 +103,7 @@ public class Loyalty {
                 if (transactionTypeName.equals("held"))
                 {
                     pointCount += pointTransaction.getPoints();
-                }
-                else if (transactionTypeName.equals("redeemed"))
+                } else if (transactionTypeName.equals("redeemed"))
                 {
                     pointCount -= pointTransaction.getPoints();
                 }
@@ -95,32 +112,43 @@ public class Loyalty {
         return pointCount;
     }
 
-    public long getId() {
+    public long getId()
+    {
         return id;
     }
+
     public void setId(long id)
     {
         this.id = id;
     }
 
-    public String getLoyaltyCode() {
+    public String getLoyaltyCode()
+    {
         return loyaltyCode;
     }
-    public void setLoyaltyCode(String loyaltyCode) {
+
+    public void setLoyaltyCode(String loyaltyCode)
+    {
         this.loyaltyCode = loyaltyCode;
     }
 
-    public Division getDivision() {
+    public Division getDivision()
+    {
         return division;
     }
-    public void setDivision(Division division) {
+
+    public void setDivision(Division division)
+    {
         this.division = division;
     }
 
-    public Date getDateCreated() {
+    public Date getDateCreated()
+    {
         return dateCreated;
     }
-    public void setDateCreated(Date dateCreated) {
+
+    public void setDateCreated(Date dateCreated)
+    {
         this.dateCreated = dateCreated;
     }
 

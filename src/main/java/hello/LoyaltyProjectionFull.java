@@ -7,7 +7,8 @@ import org.springframework.data.rest.core.config.Projection;
  * Created by Tom on 6/27/2016.
  */
 @Projection(name = "full", types = {Loyalty.class})
-public interface LoyaltyProjectionFull {
+public interface LoyaltyProjectionFull
+{
     @Value("#{target.getLoyaltyCode()}")
     public String getLoyaltyCode();
 

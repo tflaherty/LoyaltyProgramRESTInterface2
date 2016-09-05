@@ -7,10 +7,11 @@ import javax.validation.constraints.NotNull;
  * Created by Tom on 6/27/2016.
  */
 @Entity
-public class Division {
+public class Division
+{
+    @SequenceGenerator(name = "divisionGen", sequenceName = "division_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "divisionGen")
     @Id
-    @Column(name = "id", columnDefinition = "serial")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NotNull
@@ -18,28 +19,36 @@ public class Division {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name="company_id")
+    @JoinColumn(name = "company_id")
     private Company company;
 
-    public long getId() {
+    public long getId()
+    {
         return id;
     }
+
     public void setId(long id)
     {
         this.id = id;
     }
 
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
-    public void setName(String name) {
+
+    public void setName(String name)
+    {
         this.name = name;
     }
 
-    public Company getCompany() {
+    public Company getCompany()
+    {
         return company;
     }
-    public void setCompany(Company company) {
+
+    public void setCompany(Company company)
+    {
         this.company = company;
     }
 }

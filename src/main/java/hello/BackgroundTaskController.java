@@ -24,11 +24,11 @@ public class BackgroundTaskController
     public String minute()
     {
         //System.out.print("minute task executed\n");
-        Loyalty loyalty = entityManager.find(Loyalty.class, (long)1);
+        Loyalty loyalty = entityManager.find(Loyalty.class, (long) 1);
         Message message = new Message();
         message.setLoyalty(loyalty);
         Date now = new Date();
-        message.setMessage("\'minute\' message auto inserted on " + now.toString());
+        message.setMessage("\'10 minute\' message auto inserted on " + now.toString());
         message.setDateReceived(now);
         entityManager.persist(message);
         return "";
@@ -38,11 +38,11 @@ public class BackgroundTaskController
     public String nightly()
     {
         //System.out.print("nightly task executed\n");
-        Loyalty loyalty = entityManager.find(Loyalty.class, (long)1);
+        Loyalty loyalty = entityManager.find(Loyalty.class, (long) 1);
         Message message = new Message();
         message.setLoyalty(loyalty);
         Date now = new Date();
-        message.setMessage("\'hour\' message auto inserted on " + now.toString());
+        message.setMessage("\'nightly\' message auto inserted on " + now.toString());
         message.setDateReceived(now);
         entityManager.persist(message);
         return "";

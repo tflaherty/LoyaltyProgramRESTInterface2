@@ -1,4 +1,5 @@
 package hello;
+
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -14,8 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/test/*")
 public class TestController
 {
-    @RequestMapping(value="messages", method=RequestMethod.GET, produces="application/json")
-    public String messages() {
+    @RequestMapping(value = "messages", method = RequestMethod.GET, produces = "application/json")
+    public String messages()
+    {
         ObjectMapper mapper = new ObjectMapper();
         ArrayNode arrayNode = mapper.createArrayNode();
 
@@ -60,8 +62,9 @@ public class TestController
         }
     }
 
-    @RequestMapping(value="pointTransactions", method=RequestMethod.GET, produces="application/json")
-    public String pointTransactions() {
+    @RequestMapping(value = "pointTransactions", method = RequestMethod.GET, produces = "application/json")
+    public String pointTransactions()
+    {
         ObjectMapper mapper = new ObjectMapper();
         ArrayNode arrayNode = mapper.createArrayNode();
 

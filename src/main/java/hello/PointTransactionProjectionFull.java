@@ -7,7 +7,8 @@ import org.springframework.data.rest.core.config.Projection;
  * Created by Tom on 6/27/2016.
  */
 @Projection(name = "full", types = {PointTransaction.class})
-public interface PointTransactionProjectionFull {
+public interface PointTransactionProjectionFull
+{
     @Value("#{target.getDateCreated()}")
     public String getDateCreated();
 

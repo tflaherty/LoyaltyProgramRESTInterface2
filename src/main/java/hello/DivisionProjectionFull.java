@@ -11,7 +11,8 @@ import org.springframework.data.rest.core.config.Projection;
  * Created by Tom on 6/27/2016.
  */
 @Projection(name = "full", types = {Division.class})
-public interface DivisionProjectionFull {
+public interface DivisionProjectionFull
+{
     @Value("#{target.getCompany().getName()}")
     public String getCompanyName();
 

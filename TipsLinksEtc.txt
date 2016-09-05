@@ -2,6 +2,9 @@
 Be careful because when you add a field or property to an entity the projection won't pick it up automatically!
 I should probably use @Transient fields (like in Loyalty for DivisionName and CompanyName instead of projections
 
+-- PostgreSQL sequence based entity id problem
+see http://stackoverflow.com/questions/4288740/hibernate-use-of-postgresql-sequence-does-not-affect-sequence-table
+
 -- debugging RDS to environment problem
 http://stackoverflow.com/questions/34344579/change-which-rds-database-an-aws-eb-environment-uses
 http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/troubleshooting.html
@@ -180,7 +183,70 @@ http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.RDSSecurityGroups
       "name":"Test Division",
       "company": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/companies/1"
   }
-  Returns: 102 CREATED
+  Returns: 201 CREATED
+
+------ How to create a new loyalty
+  POST to http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyalties
+  Content-Type:  application/json
+  Request Body:
+  {
+      "loyaltyCode":"TST0001",
+      "dateCreated":"2016-08-26T00:00:00.000+0000",
+      "division": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/divisions/1"
+  }
+  Returns: 201 CREATED
+
+------ How to create a new message
+  POST to http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/messages
+  Content-Type:  application/json
+  Request Body:
+  {
+      "id": 358,
+      "message": "testing sequence id fix",
+      "dateReceived": "2016-08-26T00:23:00.000+0000",
+      "read": false,
+      "metadata": "{ \"metadata\":\"foobar\"}",
+      "_links": {
+          "self": {
+              "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/messages/358"
+          },
+          "message": {
+              "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/messages/358{?projection}",
+              "templated": true
+          },
+          "loyalty": {
+              "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/messages/358/loyalty"
+          }
+      }
+  }
+  Returns: 201 CREATED
+
+------ How to create a new point transaction
+  POST to http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/pointTransactions
+  Content-Type:  application/json
+  Request Body:
+  {
+      "id": 5,
+      "dateCreated": "2016-08-26T00:00:00.000+0000",
+      "points": 13,
+      "expirationDate": "2016-08-26T23:00:00.000+0000",
+      "_links": {
+          "self": {
+              "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/pointTransactions/5"
+          },
+          "pointTransaction": {
+              "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/pointTransactions/5{?projection}",
+              "templated": true
+          },
+          "pointTransactionType": {
+              "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/pointTransactions/5/pointTransactionType"
+          },
+          "loyalty": {
+              "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/pointTransactions/5/loyalty"
+          }
+      }
+  }
+  Returns: 201 CREATED
 
 ------ How to delete division with id 4
   DELETE to http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/divisions/4

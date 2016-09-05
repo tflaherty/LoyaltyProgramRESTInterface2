@@ -10,145 +10,161 @@ import java.util.Date;
 //@EntityListeners({EmailAddressValidator.class})
 public class Person implements EntityWithEmailAddress
 {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+    @SequenceGenerator(name = "personGen", sequenceName = "person_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "personGen")
+    @Id
+    private long id;
 
-	@Column(name = "name_prefix")
-	@Size(max = 255)
-	private String namePrefix;
+    @Column(name = "name_prefix")
+    @Size(max = 255)
+    private String namePrefix;
 
-	@Column(name = "first_name")
-	@Size(max = 255)
-	private String firstName;
+    @Column(name = "first_name")
+    @Size(max = 255)
+    private String firstName;
 
-	@Column(name = "middle_name")
-	@Size(max = 255)
-	private String middleName;
+    @Column(name = "middle_name")
+    @Size(max = 255)
+    private String middleName;
 
-	@Column(name = "last_name")
-	@Size(max = 255)
-	@NotNull
-	private String lastName;
+    @Column(name = "last_name")
+    @Size(max = 255)
+    @NotNull
+    private String lastName;
 
-	@Column(name = "name_suffix")
-	@Size(max = 255)
-	private String nameSuffix;
+    @Column(name = "name_suffix")
+    @Size(max = 255)
+    private String nameSuffix;
 
-	private Date birthdate;
+    private Date birthdate;
 
-	@Column(name = "email_address")
-	@Size(max = 255)
-	private String emailAddress;
+    @Column(name = "email_address")
+    @Size(max = 255)
+    private String emailAddress;
 
-	@ManyToOne
-	@JoinColumn(name = "division_id")
-	private Division division;
+    @ManyToOne
+    @JoinColumn(name = "division_id")
+    private Division division;
 
-	@Column(name = "customer_code")
-	@Size(max = 255)
-	private String customerCode;
+    @Column(name = "customer_code")
+    @Size(max = 255)
+    private String customerCode;
 
-	@ManyToMany(mappedBy = "persons")
-	private Collection<Loyalty> loyalties;
+    @ManyToMany(mappedBy = "persons")
+    private Collection<Loyalty> loyalties;
 
-	// this is really JSON data
-	// figure out how to make this JSON by looking at:
-	//    https://devlearnings.wordpress.com/2014/03/28/using-postgres-json/
-	private String metadata;
+    // this is really JSON data
+    // figure out how to make this JSON by looking at:
+    //    https://devlearnings.wordpress.com/2014/03/28/using-postgres-json/
+    private String metadata;
 
-	public long getId()
-	{
-		return id;
-	}
-	public void setId(long id)
-	{
-		this.id = id;
-	}
+    public long getId()
+    {
+        return id;
+    }
 
-	public String getFirstName() {
-		return firstName;
-	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    public void setId(long id)
+    {
+        this.id = id;
+    }
 
-	public String getLastName() {
-		return lastName;
-	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    public String getFirstName()
+    {
+        return firstName;
+    }
 
-	public Date getBirthdate()
-	{
-		return birthdate;
-	}
-	public void setBirthdate(Date birthdate)
-	{
-		this.birthdate = birthdate;
-	}
+    public void setFirstName(String firstName)
+    {
+        this.firstName = firstName;
+    }
 
-	public Division getDivision()
-	{
-		return division;
-	}
-	public void setDivision(Division division)
-	{
-		this.division = division;
-	}
+    public String getLastName()
+    {
+        return lastName;
+    }
 
-	public String getCustomerCode()
-	{
-		return customerCode;
-	}
-	public void setCustomerCode(String customerCode)
-	{
-		this.customerCode = customerCode;
-	}
+    public void setLastName(String lastName)
+    {
+        this.lastName = lastName;
+    }
 
-	public String getNamePrefix()
-	{
-		return namePrefix;
-	}
-	public void setNamePrefix(String namePrefix)
-	{
-		this.namePrefix = namePrefix;
-	}
+    public Date getBirthdate()
+    {
+        return birthdate;
+    }
 
-	public String getMiddleName()
-	{
-		return middleName;
-	}
-	public void setMiddleName(String middleName)
-	{
-		this.middleName = middleName;
-	}
+    public void setBirthdate(Date birthdate)
+    {
+        this.birthdate = birthdate;
+    }
 
-	public String getNameSuffix()
-	{
-		return nameSuffix;
-	}
-	public void setNameSuffix(String nameSuffix)
-	{
-		this.nameSuffix = nameSuffix;
-	}
+    public Division getDivision()
+    {
+        return division;
+    }
 
-	public String getEmailAddress()
-	{
-		return emailAddress;
-	}
-	public void setEmailAddress(String emailAddress)
-	{
-		this.emailAddress = emailAddress;
-	}
+    public void setDivision(Division division)
+    {
+        this.division = division;
+    }
 
-	public String getMetadata()
-	{
-		return metadata;
-	}
-	public void setMetadata(String metadata)
-	{
-		this.metadata = metadata;
-	}
+    public String getCustomerCode()
+    {
+        return customerCode;
+    }
+
+    public void setCustomerCode(String customerCode)
+    {
+        this.customerCode = customerCode;
+    }
+
+    public String getNamePrefix()
+    {
+        return namePrefix;
+    }
+
+    public void setNamePrefix(String namePrefix)
+    {
+        this.namePrefix = namePrefix;
+    }
+
+    public String getMiddleName()
+    {
+        return middleName;
+    }
+
+    public void setMiddleName(String middleName)
+    {
+        this.middleName = middleName;
+    }
+
+    public String getNameSuffix()
+    {
+        return nameSuffix;
+    }
+
+    public void setNameSuffix(String nameSuffix)
+    {
+        this.nameSuffix = nameSuffix;
+    }
+
+    public String getEmailAddress()
+    {
+        return emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress)
+    {
+        this.emailAddress = emailAddress;
+    }
+
+    public String getMetadata()
+    {
+        return metadata;
+    }
+
+    public void setMetadata(String metadata)
+    {
+        this.metadata = metadata;
+    }
 }

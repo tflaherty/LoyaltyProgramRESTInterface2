@@ -10,10 +10,12 @@ import java.util.Date;
  * Created by Tom on 8/26/2016.
  */
 @Entity
-public class Message {
+public class Message
+{
 
+    @SequenceGenerator(name = "messageGen", sequenceName = "message_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "messageGen")
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @NotNull
@@ -38,6 +40,7 @@ public class Message {
     {
         return id;
     }
+
     public void setId(long id)
     {
         this.id = id;
@@ -47,6 +50,7 @@ public class Message {
     {
         return message;
     }
+
     public void setMessage(String message)
     {
         this.message = message;
@@ -56,6 +60,7 @@ public class Message {
     {
         return loyalty;
     }
+
     public void setLoyalty(Loyalty loyalty)
     {
         this.loyalty = loyalty;
@@ -65,6 +70,7 @@ public class Message {
     {
         return dateReceived;
     }
+
     public void setDateReceived(Date dateReceived)
     {
         this.dateReceived = dateReceived;
@@ -74,6 +80,7 @@ public class Message {
     {
         return read;
     }
+
     public void setRead(boolean read)
     {
         this.read = read;
@@ -83,6 +90,7 @@ public class Message {
     {
         return metadata;
     }
+
     public void setMetadata(String metadata)
     {
         this.metadata = metadata;

@@ -1,6 +1,3 @@
-- fix sequence based id gen!
-    see http://stackoverflow.com/questions/4288740/hibernate-use-of-postgresql-sequence-does-not-affect-sequence-table
-    Company entity now works correctly so fix other entities to work like Company (and test them!)
 - assign unique key to points (or use another method) so that they can be redeemed in order by the expiration date
 - Modify held and available calulcations to exclude expired points (and make calculation fully correct)
 - return a better HTTP response than 204 to DELETE requests

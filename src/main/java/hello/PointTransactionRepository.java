@@ -10,5 +10,6 @@ import java.util.List;
  * Created by Tom on 6/23/2016.
  */
 @RepositoryRestResource(collectionResourceRel = "pointTransactions", path = "pointTransactions")
-public interface PointTransactionRepository extends PagingAndSortingRepository<PointTransaction, Long> {
+public interface PointTransactionRepository extends PagingAndSortingRepository<PointTransaction, Long>
+{
 }

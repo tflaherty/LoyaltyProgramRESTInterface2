@@ -7,6 +7,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.Collection;
 import java.util.List;
+
 import hello.Message;
 
 /**
@@ -24,7 +25,9 @@ public interface MessageRepository extends PagingAndSortingRepository<Message, L
     Collection<Message> findByLoyaltyCode(@Param("loyaltyCode") String loyaltyCode);
 
     @Query("select m from Message m INNER JOIN m.loyalty l INNER JOIN l.division d INNER JOIN d.company c where l.loyaltyCode = :loyaltyCode and d.name = :divisionName and c.name = :companyName order by m.dateReceived")
-    Collection<Message> findByLoyaltyCodeDivisionNameCompanyName(@Param("loyaltyCode") String loyaltyCode, @Param("divisionName") String divisionName, @Param("companyName") String companyName);
+    Collection<Message> findByLoyaltyCodeDivisionNameCompanyName(@Param("loyaltyCode") String loyaltyCode,
+                                                                 @Param("divisionName") String divisionName,
+                                                                 @Param("companyName") String companyName);
 
     /*
 @Query("select s from Schedule s where s.market.marketId = :marketId and s.locale.localeId = :localeId and s.offline >= :offline order by s.placement, s.slot, s.online")

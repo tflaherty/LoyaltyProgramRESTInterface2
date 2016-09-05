@@ -35,18 +35,20 @@ public class Application extends SpringBootServletInitializer
 //public class Application
 {
 
-// comment this out when building a jar file, uncomment this out when building a war file
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(Application.class);
-	}
+    // comment this out when building a jar file, uncomment this out when building a war file
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application)
+    {
+        return application.sources(Application.class);
+    }
 
-	public static void main(String[] args) {
+    public static void main(String[] args)
+    {
 
-		ApplicationContext context = SpringApplication.run(Application.class, args);
-		DefaultFormattingConversionService conversionService = (DefaultFormattingConversionService)context.getBean("defaultConversionService");
-		// put these back in when using jpamappings	of Toolbox database
-		// conversionService.addConverter(new String2CurveEntryPK());
-		// conversionService.addConverter(new CurveEntryPK2String());
-	}
+        ApplicationContext context = SpringApplication.run(Application.class, args);
+        DefaultFormattingConversionService conversionService = (DefaultFormattingConversionService) context.getBean("defaultConversionService");
+        // put these back in when using jpamappings	of Toolbox database
+        // conversionService.addConverter(new String2CurveEntryPK());
+        // conversionService.addConverter(new CurveEntryPK2String());
+    }
 }

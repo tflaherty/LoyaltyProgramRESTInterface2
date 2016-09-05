@@ -8,10 +8,12 @@ import java.util.Date;
  * Created by Tom on 6/23/2016.
  */
 @Entity
-public class PointTransaction {
+public class PointTransaction
+{
 
+    @SequenceGenerator(name = "pointTransactionGen", sequenceName = "point_transaction_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pointTransactionGen")
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @NotNull
@@ -23,12 +25,12 @@ public class PointTransaction {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name="loyalty_id")
+    @JoinColumn(name = "loyalty_id")
     private Loyalty loyalty;
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name="point_transaction_type_id")
+    @JoinColumn(name = "point_transaction_type_id")
     private PointTransactionType pointTransactionType;
 
     @Column(name = "expiration_date")
@@ -38,36 +40,49 @@ public class PointTransaction {
     {
         return id;
     }
+
     public void setId(long id)
     {
         this.id = id;
     }
 
-    public Date getDateCreated() {
+    public Date getDateCreated()
+    {
         return dateCreated;
     }
-    public void setDateCreated(Date dateCreated) {
+
+    public void setDateCreated(Date dateCreated)
+    {
         this.dateCreated = dateCreated;
     }
 
-    public Loyalty getLoyalty() {
+    public Loyalty getLoyalty()
+    {
         return loyalty;
     }
-    public void setLoyalty(Loyalty loyalty) {
+
+    public void setLoyalty(Loyalty loyalty)
+    {
         this.loyalty = loyalty;
     }
 
-    public int getPoints() {
+    public int getPoints()
+    {
         return points;
     }
-    public void setPoints(int points) {
+
+    public void setPoints(int points)
+    {
         this.points = points;
     }
 
-    public PointTransactionType getPointTransactionType() {
+    public PointTransactionType getPointTransactionType()
+    {
         return pointTransactionType;
     }
-    public void setPointTransactionType(PointTransactionType pointTransactionType) {
+
+    public void setPointTransactionType(PointTransactionType pointTransactionType)
+    {
         this.pointTransactionType = pointTransactionType;
     }
 
@@ -75,6 +90,7 @@ public class PointTransaction {
     {
         return expirationDate;
     }
+
     public void setExpirationDate(Date expirationDate)
     {
         this.expirationDate = expirationDate;
