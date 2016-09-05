@@ -201,52 +201,99 @@ http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.RDSSecurityGroups
   Content-Type:  application/json
   Request Body:
   {
-      "id": 358,
-      "message": "testing sequence id fix",
+        "message": "testing sequence id fix 2",
+        "dateReceived": "2016-08-26T00:23:00.000+0000",
+        "read": false,
+        "metadata": "{ \"metadata\":\"foobar\"}",
+        "loyalty":"http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyalties/1"
+  }
+
+  Returns: 201 CREATED
+  Return Body:
+  {
+      "id": 400,
+      "message": "testing sequence id fix 2",
       "dateReceived": "2016-08-26T00:23:00.000+0000",
       "read": false,
       "metadata": "{ \"metadata\":\"foobar\"}",
       "_links": {
           "self": {
-              "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/messages/358"
+              "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/messages/400"
           },
           "message": {
-              "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/messages/358{?projection}",
+              "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/messages/400{?projection}",
               "templated": true
           },
           "loyalty": {
-              "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/messages/358/loyalty"
+              "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/messages/400/loyalty"
           }
       }
   }
-  Returns: 201 CREATED
 
 ------ How to create a new point transaction
   POST to http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/pointTransactions
   Content-Type:  application/json
   Request Body:
   {
-      "id": 5,
+        "dateCreated": "2016-08-26T00:00:00.000+0000",
+        "points": 13,
+        "expirationDate": "2016-08-26T23:00:00.000+0000",
+        "loyalty":"http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyalties/1",
+        "pointTransactionType":"http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/pointTransactionType/2"
+  }
+  Returns: 201 CREATED
+  Return Body:
+  {
+      "id": 6,
       "dateCreated": "2016-08-26T00:00:00.000+0000",
       "points": 13,
       "expirationDate": "2016-08-26T23:00:00.000+0000",
       "_links": {
           "self": {
-              "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/pointTransactions/5"
+              "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/pointTransactions/6"
           },
           "pointTransaction": {
-              "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/pointTransactions/5{?projection}",
+              "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/pointTransactions/6{?projection}",
               "templated": true
           },
-          "pointTransactionType": {
-              "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/pointTransactions/5/pointTransactionType"
-          },
           "loyalty": {
-              "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/pointTransactions/5/loyalty"
+              "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/pointTransactions/6/loyalty"
+          },
+          "pointTransactionType": {
+              "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/pointTransactions/6/pointTransactionType"
           }
       }
   }
+
+------ How to link a person and a loyalty
+  POST to http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyaltyPersonMaps
+  Content-Type:  application/json
+  Request Body:
+  {
+      "person":"http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/persons/4",
+      "loyalty":"http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyalties/1"
+  }
   Returns: 201 CREATED
+  Return Body:
+  {
+      "id": 5,
+      "loyaltyId": 1,
+      "personId": 4,
+      "_links": {
+          "self": {
+              "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyaltyPersonMaps/5"
+          },
+          "loyaltyPersonMap": {
+              "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyaltyPersonMaps/5"
+          },
+          "person": {
+              "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyaltyPersonMaps/5/person"
+          },
+          "loyalty": {
+              "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyaltyPersonMaps/5/loyalty"
+          }
+      }
+  }
 
 ------ How to delete division with id 4
   DELETE to http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/divisions/4

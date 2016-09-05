@@ -1,3 +1,15 @@
+- figure out how to deal with the fact that Circle and Kibo doesn't know division codes
+- layout of flow in detail
+-- account creation
+-- account retrieval
+-- earning points via an order
+-- redeeming points via an order
+-- cancellations
+-- returns
+-- returns or cancellations on returns
+-- point expiration
+
+- figure out how the entity-table mapping is happening for PointTransaction (for instance)
 - assign unique key to points (or use another method) so that they can be redeemed in order by the expiration date
 - Modify held and available calulcations to exclude expired points (and make calculation fully correct)
 - return a better HTTP response than 204 to DELETE requests

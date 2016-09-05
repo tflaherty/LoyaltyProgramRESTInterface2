@@ -29,6 +29,7 @@ public class RepositoryConfiguration extends RepositoryRestConfigurerAdapter
         config.exposeIdsFor(Loyalty.class);
         config.exposeIdsFor(PointTransaction.class);
         config.exposeIdsFor(PointTransactionType.class);
+        config.exposeIdsFor(LoyaltyPersonMap.class);
 
         //config.exposeIdsFor(Color.class);
         //config.exposeIdsFor(CurveEntry.class);
