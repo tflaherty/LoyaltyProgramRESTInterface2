@@ -255,6 +255,39 @@ http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.RDSSecurityGroups
       }
   }
 
+------ How to mark a message as read
+  PATCH to http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/messages/5
+  Content_type:  application/json
+  Request Body:
+  {
+      "read":false
+  }
+  Returns: 200 OK
+  Return Body:
+  {
+      "id": 5,
+      "message": "Test message 1",
+      "dateReceived": "2016-08-26T00:00:00.000+0000",
+      "read": false,
+      "metadata": null,
+      "_links": {
+          "self": {
+              "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/messages/5"
+          },
+          "message": {
+              "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/messages/5{?projection}",
+              "templated": true
+          },
+          "loyalty": {
+              "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/messages/5/loyalty"
+          }
+      }
+  }
+
+------ How to delete a message
+  DELETE to http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/messages/6
+  Returns: 204 NO CONTENT on success, 404 NOT FOUND if failed because there's no message with that id
+
 ------ How to create a new point transaction
   POST to http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/pointTransactions
   Content-Type:  application/json
@@ -348,6 +381,42 @@ http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.RDSSecurityGroups
   If we use PUT instead it will fail because PUT replaces an existing entity. If only a subset of data elements are provided, the rest will be replaced with empty or null.
   PATCH updates only the specified fields of an entity at a URI. A PATCH request is idempotent.
 
+------ How to get a loyalty object by id
+  GET to http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyalties/700
+  Returns: 200 OK if the loyalty exists if not it returns a 404 NOT FOUND
+  Response Body:
+  {
+      "id": 1,
+      "loyaltyCode": "LOY0001",
+      "dateCreated": "2016-08-26T00:00:00.000+0000",
+      "companyName": "DAI",
+      "divisionName": "Chadwicks",
+      "siteCode": "chadwicks",
+      "availablePoints": 26,
+      "heldPoints": 0,
+      "_links": {
+          "self": {
+              "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyalties/1"
+          },
+          "loyalty": {
+              "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyalties/1{?projection}",
+              "templated": true
+          },
+          "persons": {
+              "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyalties/1/persons"
+          },
+          "pointTransactions": {
+              "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyalties/1/pointTransactions"
+          },
+          "messages": {
+              "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyalties/1/messages"
+          },
+          "division": {
+              "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyalties/1/division"
+          }
+      }
+  }
+
 ------ How to get a loyalty object by loyalty code, division name and company name
   GET to http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyalties/search/findByLoyaltyCodeDivisionNameCompanyName?loyaltyCode=LOY0001&divisionName=Chadwicks&companyName=DAI
   Returns: 200 OK
@@ -392,3 +461,64 @@ http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.RDSSecurityGroups
       }
   }
 
+------ How to get a loyalty object by loyalty code and site code
+  GET http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyalties/search/findByLoyaltyCodeSiteCode?loyaltyCode=LOY0001&siteCode=chadwicks
+  Returns: 200 OK
+  Response Body:
+  {
+      "_embedded": {
+          "loyalties": [
+              {
+                  "id": 1,
+                  "loyaltyCode": "LOY0001",
+                  "dateCreated": "2016-08-26T00:00:00.000+0000",
+                  "companyName": "DAI",
+                  "divisionName": "Chadwicks",
+                  "siteCode": "chadwicks",
+                  "availablePoints": 26,
+                  "heldPoints": 0,
+                  "_links": {
+                      "self": {
+                          "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyalties/1"
+                      },
+                      "loyalty": {
+                          "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyalties/1{?projection}",
+                          "templated": true
+                      },
+                      "persons": {
+                          "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyalties/1/persons"
+                      },
+                      "pointTransactions": {
+                          "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyalties/1/pointTransactions"
+                      },
+                      "messages": {
+                          "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyalties/1/messages"
+                      },
+                      "division": {
+                          "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyalties/1/division"
+                      }
+                  }
+              }
+          ]
+      },
+      "_links": {
+          "self": {
+              "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyalties/search/findByLoyaltyCodeSiteCode?loyaltyCode=LOY0001&siteCode=chadwicks"
+          }
+      }
+  }
+
+------ What happens when you request a loyalty object by an incorrect combination of loyalty code and site code
+  GET http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyalties/search/findByLoyaltyCodeSiteCode?loyaltyCode=LOY0001&siteCode=chadwicks
+  Returns: 200 OK (i.e. there was no client error)
+  Response Body:
+  {
+      "_embedded": {
+          "loyalties": []
+      },
+      "_links": {
+          "self": {
+              "href": "http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyalties/search/findByLoyaltyCodeSiteCode?loyaltyCode=LOY0001&siteCode=chadwicksx"
+          }
+      }
+  }

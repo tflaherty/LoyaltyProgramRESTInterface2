@@ -25,6 +25,14 @@ public class Division
     @Column(name = "site_code", unique = true)
     private String siteCode;
 
+    @Transient
+    private String companyName;
+    @Transient
+    public String getCompanyName()
+    {
+        return getCompany().getName();
+    }
+
     public long getId()
     {
         return id;
