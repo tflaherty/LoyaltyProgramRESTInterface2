@@ -8,6 +8,8 @@
 -- returns or cancellations on returns
 -- point expiration
 
+- find out why the nightly background 'task' is not being run
+
 - make sure I'm using the right datetime type (i.e. timestamp without time zone) in Postgres.  Should I use timezone?
 -- read this
 -- http://stackoverflow.com/questions/29685017/crazy-ms-sql-server-jdbc-driver-at-datetime-field-or-time-zone-issue/
