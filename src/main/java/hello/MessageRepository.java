@@ -1,5 +1,6 @@
 package hello;
 
+import net.sourceforge.jtds.jdbc.DateTime;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
@@ -28,6 +29,9 @@ public interface MessageRepository extends PagingAndSortingRepository<Message, L
     Collection<Message> findByLoyaltyCodeDivisionNameCompanyName(@Param("loyaltyCode") String loyaltyCode,
                                                                  @Param("divisionName") String divisionName,
                                                                  @Param("companyName") String companyName);
+
+    @Query("select count(*) from Message m INNER JOIN m.loyalty l where l.id = :loyaltyId and m.dateReceived > to_timestamp(:sinceDate, 'MM/DD/YYYY')")
+    long findNewMessageCountByLoyaltyIdAndSinceDate(@Param("loyaltyId") long loyaltyId, @Param("sinceDate") String sinceDate);
 
     /*
 @Query("select s from Schedule s where s.market.marketId = :marketId and s.locale.localeId = :localeId and s.offline >= :offline order by s.placement, s.slot, s.online")

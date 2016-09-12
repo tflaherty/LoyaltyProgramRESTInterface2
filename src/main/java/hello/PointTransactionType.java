@@ -1,6 +1,7 @@
 package hello;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by Tom on 6/23/2016.
@@ -14,24 +15,24 @@ public class PointTransactionType
     @Id
     private long id;
 
+    @NotNull
+    private String name;
+
+    private String description;
+
     public long getId()
     {
         return id;
     }
-
     public void setId(long id)
     {
         this.id = id;
     }
 
-    private String name;
-    private String description;
-
     public String getName()
     {
         return name;
     }
-
     public void setName(String name)
     {
         this.name = name;
@@ -41,7 +42,6 @@ public class PointTransactionType
     {
         return description;
     }
-
     public void setDescription(String description)
     {
         this.description = description;

@@ -36,11 +36,18 @@ public class PointTransaction
     @Column(name = "expiration_date")
     private Date expirationDate;
 
+    @Transient
+    private String pointTransactionTypeName;
+    @Transient
+    public String getPointTransactionTypeName()
+    {
+        return getPointTransactionType().getName();
+    }
+
     public long getId()
     {
         return id;
     }
-
     public void setId(long id)
     {
         this.id = id;
@@ -50,7 +57,6 @@ public class PointTransaction
     {
         return dateCreated;
     }
-
     public void setDateCreated(Date dateCreated)
     {
         this.dateCreated = dateCreated;
@@ -60,7 +66,6 @@ public class PointTransaction
     {
         return loyalty;
     }
-
     public void setLoyalty(Loyalty loyalty)
     {
         this.loyalty = loyalty;
@@ -70,7 +75,6 @@ public class PointTransaction
     {
         return points;
     }
-
     public void setPoints(int points)
     {
         this.points = points;
@@ -80,7 +84,6 @@ public class PointTransaction
     {
         return pointTransactionType;
     }
-
     public void setPointTransactionType(PointTransactionType pointTransactionType)
     {
         this.pointTransactionType = pointTransactionType;
@@ -90,11 +93,9 @@ public class PointTransaction
     {
         return expirationDate;
     }
-
     public void setExpirationDate(Date expirationDate)
     {
         this.expirationDate = expirationDate;
     }
-
 
 }
