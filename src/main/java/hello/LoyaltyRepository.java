@@ -42,7 +42,7 @@ public interface LoyaltyRepository extends PagingAndSortingRepository<Loyalty, L
                                                            @Param("companyName") String companyName);
 
     @Query(value = "select l.* from Loyalty l inner join Division d on d.id = l.division_id where d.site_code = :siteCode and exists (select p.* from Person p inner join loyalty_person_map lpm on lpm.loyalty_id = l.id and p.customer_code = :customerCode)", nativeQuery = true)
-    List<Loyalty> findByCustomerCodeSiteCode(@Param("customerCode") String loyaltyCode,
+    List<Loyalty> findByCustomerCodeSiteCode(@Param("customerCode") String customerCode,
                                             @Param("siteCode") String siteCode);
 
 }
