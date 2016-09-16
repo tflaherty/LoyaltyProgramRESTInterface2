@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.List;
 
 import hello.Message;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 /**
  * Created by Tom on 8/26/2016.

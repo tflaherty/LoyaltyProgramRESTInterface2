@@ -1,3 +1,27 @@
+-- figure out how to return validation errors in things like the RPCController which uses @Valid annotation
+
+
+-------------------------------------------------------------------------------------------------------------
+change point transactions to look like:
+pointTypes = { Normal, Held }
+PointTransactionTypes = { Hold, Release, Redeem, Earn, Gift, Expire, Transfer, Other }
+PointTransactionSourceTypes = { Order, Expiration, Marketing, Support, Event, Other }
+PointTransactionSourceId = { order_transaction_id, point_transaction_id, event_id, ... }
+
+(src)loyaltyId
+(src)pointType
+(src)points
+dstLoyaltyId
+dstPointType
+dstPoints
+pointTransactionType
+pointTransactionSourceType
+pointTransactionSourceId
+expirationDate
+createdDate
+
+-------------------------------------------------------------------------------------------------------------
+
 - layout of flow in detail
 -- account creation
 -- account retrieval

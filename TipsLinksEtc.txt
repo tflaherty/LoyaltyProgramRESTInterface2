@@ -1,3 +1,9 @@
+-- Spring validation examples
+http://www.journaldev.com/2668/spring-validation-example-mvc-validator
+
+-- REST principles and pragmatic design principles
+http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api#restful
+
 -- projections
 Be careful because when you add a field or property to an entity the projection won't pick it up automatically!
 I should probably use @Transient fields (like in Loyalty for DivisionName and CompanyName instead of projections
@@ -104,6 +110,8 @@ http://proliferay.com/create-json-by-jackson-api/
 
 -- JSON-RPC
 https://www.insaneprogramming.be/blog/2015/10/08/rpc-in-the-rest-age/
+
+https://apihandyman.io/do-you-really-know-why-you-prefer-rest-over-rpc/
 
 http://thenextweb.com/dd/2013/12/17/future-api-design-orchestration-layer/
 http://www.programmableweb.com/news/rest-losing-its-flair-rest-api-alternatives/analysis/2013/12/19
