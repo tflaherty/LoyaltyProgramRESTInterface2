@@ -20,6 +20,12 @@ pointTransactionSourceId
 expirationDate
 createdDate
 
+I need a table that breaks down point transactions into pieces
+(e.g.  If I have 75 available points, broken down into 25 from one
+order and 50 from another, and I have a hold of 60 points, I have
+to record that 50 of those held points came from one point transaction
+and 10 from another)
+
 -------------------------------------------------------------------------------------------------------------
 
 - layout of flow in detail
