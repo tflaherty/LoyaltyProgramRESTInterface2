@@ -26,6 +26,21 @@ order and 50 from another, and I have a hold of 60 points, I have
 to record that 50 of those held points came from one point transaction
 and 10 from another)
 
+More thoughts:
+Have a subtransaction table.  This will be useful in several cases:
+    - a redemption of 100 points occurs which ends up redeeming points earned on more than one point transaction (earned, etc.)
+    - a transfer of points (e.g held or released, points moved from one account to another)
+    - points earned can be broken down by order/line/sku(?)
+Use a trigger (somewhere) to keep a running total of points/point types (will probably have to go on the subtransaction table)
+Use join table inheritance (See JPA2, page 300)
+
+-------------------------------------------------------------------------------------------------------------
+Order Schema
+
+Order, OrderDetail, OrderTransaction/subtransaction(?) tables
+
+Use join table inheritance
+
 -------------------------------------------------------------------------------------------------------------
 
 - layout of flow in detail
@@ -39,6 +54,7 @@ and 10 from another)
 -- point expiration
 
 - find out why the nightly background 'task' is not being run
+-- ran on 9/12 - 9/15, NOT 9/16, then again on 9/17, NOT 9/18
 
 - make sure I'm using the right datetime type (i.e. timestamp without time zone) in Postgres.  Should I use timezone?
 -- read this

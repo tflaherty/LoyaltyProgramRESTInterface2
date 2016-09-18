@@ -1,3 +1,6 @@
+-- Modeling Specializations and Generalizations
+http://stackoverflow.com/questions/4361381/how-do-we-implement-an-is-a-relationship
+
 -- Spring validation examples
 http://www.journaldev.com/2668/spring-validation-example-mvc-validator
 
