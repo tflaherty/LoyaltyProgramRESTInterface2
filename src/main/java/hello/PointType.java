@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 public class PointType
 {
     public static String availablePointType = "Available";
+    public static String heldPointType = "Held";
 
     @SequenceGenerator(name = "pointTypeGen", sequenceName = "point_type_id_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pointTypeGen")

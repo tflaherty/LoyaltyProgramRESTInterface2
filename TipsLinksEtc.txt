@@ -1,3 +1,6 @@
+-- @JSONView looks very interesting
+https://spring.io/blog/2014/12/02/latest-jackson-integration-improvements-in-spring
+
 -- Spring REST sorting, filtering, paging examples
 http://localhost:8080/people/?limit=50
 http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/messages?size=7
@@ -20,7 +23,7 @@ I should probably use @Transient fields (like in Loyalty for DivisionName and Co
 -- PostgreSQL sequence based entity id problem
 see http://stackoverflow.com/questions/4288740/hibernate-use-of-postgresql-sequence-does-not-affect-sequence-table
 
--- PostgreSQL namine conventions
+-- PostgreSQL naming conventions
  http://stackoverflow.com/questions/4107915/postgresql-default-constraint-names
 
 The standard names for indexes in PostgreSQL are:
@@ -112,7 +115,12 @@ http://proliferay.com/create-json-by-jackson-api/
 
 -------------------------------------------------------------------------------------------------------
 -- JSON-RPC
+http://www.jsonrpc.org/specification
+
 https://www.insaneprogramming.be/blog/2015/10/08/rpc-in-the-rest-age/
+
+---- java implementation
+https://github.com/briandilley/jsonrpc4j
 
 https://apihandyman.io/do-you-really-know-why-you-prefer-rest-over-rpc/
 
@@ -123,6 +131,7 @@ http://joost.vunderink.net/blog/2016/01/03/why-we-chose-json-rpc-over-rest/
 https://www.infoq.com/news/2012/02/websockets-rest
 http://mmikowski.github.io/json-pure/
 
+-------------------------------------------------------------------------------------------------------
 - composite primary keys
 https://en.wikibooks.org/wiki/Java_Persistence/Identity_and_Sequencing
 http://www.thejavageek.com/2014/05/01/jpa-embeddedid-example/

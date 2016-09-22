@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 public class PointTransactionType
 {
     public static String giftedPointTransactionType = "Gifted";
+    public static String heldPointTransactionType = "Held";
 
     @SequenceGenerator(name = "pointTransactionTypeGen", sequenceName = "point_transaction_type_id_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pointTransactionTypeGen")
