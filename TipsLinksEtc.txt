@@ -1,3 +1,9 @@
+-- Spring REST sorting, filtering, paging examples
+http://localhost:8080/people/?limit=50
+http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/messages?size=7
+http://localhost:8080/people?page=2&limit=20
+http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/messages?sort=id,desc
+
 -- Modeling Specializations and Generalizations
 http://stackoverflow.com/questions/4361381/how-do-we-implement-an-is-a-relationship
 

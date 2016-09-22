@@ -4,7 +4,7 @@
 /** angular.module("exampleApp", ["increment", "ngResource"]) */
 angular.module("loyaltyProgram.companies", ["ngResource"])
 //.constant("baseUrl", "http://localhost:8080/persons/")
-    .constant("baseUrl", "http://www.loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/messages?projection=full/")
+    .constant("baseUrl", "http://www.loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/messages/")
     .config(function($httpProvider) {
         $httpProvider.defaults.withCredentials = true;
         $httpProvider.defaults.useXDomain = true;
@@ -21,15 +21,16 @@ angular.module("loyaltyProgram.companies", ["ngResource"])
 
         $scope.listMessages = function () {
             $scope.foo = $scope.messagesResource.get();
-            //$scope.messages = $scope.messagesResource.get();
-            //$scope.messages.$promise.then(function (data) {
+            //$scope.personMessages = $scope.personMessagesResource.get();
+            //$scope.personMessages.$promise.then(function (data) {
             $scope.foo.$promise.then(function (data) {
-                //alert(JSON.stringify($scope.foo._embedded.messages));
+                //alert(JSON.stringify($scope.foo._embedded.personMessages));
                 $scope.messages = [];
                 for(var i = 0; i < $scope.foo._embedded.messages.length; i++) {
-                    //var obj = $scope.foo._embedded.messages[i];
-                    var obj = new $scope.messagesResource($scope.foo._embedded.messages[i]);
-                    $scope.messages.push(obj);
+                    var obj = $scope.foo._embedded.messages[i];
+                    var newMessage = new $scope.messagesResource(obj)
+                    $scope.messages.push(newMessage);
+                    // $scope.messages.push(obj);
                 }
             });
         }
