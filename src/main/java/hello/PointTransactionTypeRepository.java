@@ -12,4 +12,5 @@ import java.util.List;
 @RepositoryRestResource(collectionResourceRel = "pointTransactionTypes", path = "pointTransactionTypes")
 public interface PointTransactionTypeRepository extends PagingAndSortingRepository<PointTransactionType, Long>
 {
+    List<PointTransactionType> findByName(@Param("name") String name);
 }

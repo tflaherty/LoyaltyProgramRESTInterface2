@@ -21,7 +21,7 @@ public class HoldPointsRequestValidator implements Validator
     @Override
     public void validate(Object target, Errors errors)
     {
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "loyaltyId", "id.required");
+        //ValidationUtils.rejectIfEmptyOrWhitespace(errors, "loyaltyId", "id.required");
 
         HoldPointsRequest holdPointsRequest = (HoldPointsRequest) target;
 

@@ -1,5 +1,14 @@
 -- figure out how to return validation errors in things like the RPCController which uses @Valid annotation
-
+-- implement JSON RPC standards in my RPC interface
+-- implement transactions in my RPC interface
+-- implement point transaction source tables
+- make sure I'm using the right datetime type (i.e. timestamp without time zone) in Postgres.  Should I use timezone?
+-- read this
+-- http://stackoverflow.com/questions/29685017/crazy-ms-sql-server-jdbc-driver-at-datetime-field-or-time-zone-issue/
+-- Use this?
+-- @Column(name = "run_from", columnDefinition= "TIMESTAMP WITH TIME ZONE")
+-- @NotNull
+-- @Temporal(TemporalType.TIMESTAMP)
 
 -------------------------------------------------------------------------------------------------------------
 change point transactions to look like:
@@ -55,14 +64,6 @@ Use join table inheritance
 
 - find out why the nightly background 'task' is not being run
 -- ran on 9/12 - 9/15, NOT 9/16, then again on 9/17, NOT 9/18
-
-- make sure I'm using the right datetime type (i.e. timestamp without time zone) in Postgres.  Should I use timezone?
--- read this
--- http://stackoverflow.com/questions/29685017/crazy-ms-sql-server-jdbc-driver-at-datetime-field-or-time-zone-issue/
--- Use this?
--- @Column(name = "run_from", columnDefinition= "TIMESTAMP WITH TIME ZONE")
--- @NotNull
--- @Temporal(TemporalType.TIMESTAMP)
 
 - figure out how the entity-table mapping is happening for PointTransaction (for instance)
 - find out why divisions URL doesn't return a proper HTTP response when referring to a division id that doesn't exist

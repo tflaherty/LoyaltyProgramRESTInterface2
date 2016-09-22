@@ -39,4 +39,66 @@ public class PointTransactionDetail
     @Column(name = "points")
     private int points;
 
+    public long getId()
+    {
+        return id;
+    }
+    public void setId(long id)
+    {
+        this.id = id;
+    }
+
+    public Loyalty getLoyalty()
+    {
+        return loyalty;
+    }
+    public void setLoyalty(Loyalty loyalty)
+    {
+        this.loyalty = loyalty;
+    }
+
+    public PointType getPointType()
+    {
+        return pointType;
+    }
+    public void setPointType(PointType pointType)
+    {
+        this.pointType = pointType;
+    }
+
+    public PointTransactionMaster getPointTransactionMaster()
+    {
+        return pointTransactionMaster;
+    }
+    public void setPointTransactionMaster(PointTransactionMaster pointTransactionMaster)
+    {
+        this.pointTransactionMaster = pointTransactionMaster;
+    }
+
+    public Date getAvailabilityExpirationDate()
+    {
+        return availabilityExpirationDate;
+    }
+    public void setAvailabilityExpirationDate(Date availabilityExpirationDate)
+    {
+        this.availabilityExpirationDate = availabilityExpirationDate;
+    }
+
+    public Date getHoldExpirationDate()
+    {
+        return holdExpirationDate;
+    }
+    public void setHoldExpirationDate(Date holdExpirationDate)
+    {
+        this.holdExpirationDate = holdExpirationDate;
+    }
+
+    public int getPoints()
+    {
+        return points;
+    }
+    public void setPoints(int points)
+    {
+        this.points = points;
+    }
 }

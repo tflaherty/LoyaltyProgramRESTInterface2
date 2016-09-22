@@ -2,7 +2,9 @@ package hello;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Tom on 9/21/2016.
@@ -25,7 +27,10 @@ public class PointTransactionMaster
     private PointTransactionType pointTransactionType;
 
     @Column(name = "dollar_value")
-    private Date dollarValue;
+    private BigDecimal dollarValue;
+
+    @OneToMany(mappedBy = "pointTransactionMaster")
+    private List<PointTransactionDetail> pointTransactionDetails;
 
     @Transient
     private String pointTransactionTypeName;
@@ -62,11 +67,11 @@ public class PointTransactionMaster
         this.pointTransactionType = pointTransactionType;
     }
 
-    public Date getDollarValue()
+    public BigDecimal getDollarValue()
     {
         return dollarValue;
     }
-    public void setDollarValue(Date dollarValue)
+    public void setDollarValue(BigDecimal dollarValue)
     {
         this.dollarValue = dollarValue;
     }

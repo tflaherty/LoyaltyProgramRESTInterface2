@@ -70,53 +70,47 @@ POST using this body:
 }
 
 -------------------------------------------------------------------------------------------------------
-
 -- Common application properties
 http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 
 -------------------------------------------------------------------------------------------------------
-
 -- Mapping a Postgres JSON column using JPA
 https://devlearnings.wordpress.com/2014/03/28/using-postgres-json/
 http://www.thoughts-on-java.org/persist-postgresqls-jsonb-data-type-hibernate/
 
 -------------------------------------------------------------------------------------------------------
-
 -- JPA Repository Reference
 http://docs.spring.io/spring-data/jpa/docs/1.4.3.RELEASE/reference/html/jpa.repositories.html
 
 -------------------------------------------------------------------------------------------------------
-
 -- JSON column in a relational database vs. table of name/value pairs
 http://stackoverflow.com/questions/15367696/storing-json-in-database-vs-having-a-new-column-for-each-key
 
 -------------------------------------------------------------------------------------------------------
-
 -- how to make a search method call
 http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/loyalties/search/findByLoyaltyCode?code=314
 
 -------------------------------------------------------------------------------------------------------
-
 -- modularizing angularjs
 https://www.safaribooksonline.com/blog/2014/03/27/13-step-guide-angularjs-modularization/
 
 -------------------------------------------------------------------------------------------------------
+-- Java 8 Date API
+http://www.journaldev.com/2800/java-8-date-localdate-localdatetime-instant
 
+-------------------------------------------------------------------------------------------------------
 -- problem with JPA @Column annotation not working
 http://stackoverflow.com/questions/25283198/spring-boot-jpa-column-name-annotation-ignored
 
 -------------------------------------------------------------------------------------------------------
-
 -- Java Persistence Query Language
 http://docs.oracle.com/javaee/6/tutorial/doc/bnbtl.html
 
 -------------------------------------------------------------------------------------------------------
-
 -- Jackson JSON library good examples
 http://proliferay.com/create-json-by-jackson-api/
 
 -------------------------------------------------------------------------------------------------------
-
 -- JSON-RPC
 https://www.insaneprogramming.be/blog/2015/10/08/rpc-in-the-rest-age/
 
@@ -144,14 +138,12 @@ Could be very useful: http://docs.jboss.org/hibernate/annotations/3.5/reference/
 Good MapsId example: http://www.thejavageek.com/2014/09/26/jpa-mapsid-example/
 
 -------------------------------------------------------------------------------------------------------
-
 -- scheduling on AWS
 https://medium.com/@joelennon/running-cron-jobs-on-amazon-web-services-aws-elastic-beanstalk-a41d91d1c571#.8xy0lvwk4
 http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features-managing-env-tiers.html#using-features-managing-env-tiers-worker-settings
 https://aws.amazon.com/blogs/aws/background-task-handling-for-aws-elastic-beanstalk/
 
 -------------------------------------------------------------------------------------------------------
-
 -- securing a web application
 http://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html
 (not sure this is applicable but it was quoted somewhere
@@ -166,12 +158,10 @@ https://raibledesigns.com/rd/entry/java_web_application_security_part3
 https://www.owasp.org/index.php/REST_Security_Cheat_Sheet#Whitelist_allowable_methods
 
 -------------------------------------------------------------------------------------------------------
-
 -- Spring endpoint documentation (e.g. beans, health, mappings)
 http://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-endpoints.html
 
 -------------------------------------------------------------------------------------------------------
-
 -- Controller vs RestController
 https://www.genuitec.com/spring-frameworkrestcontroller-vs-controller/
 

@@ -1,6 +1,7 @@
 package hello;
 
 import javax.validation.Constraint;
+import java.math.BigDecimal;
 
 /**
  * Created by Tom on 9/15/2016.
@@ -15,7 +16,8 @@ public class HoldPointsRequest
     private String loyaltyCode;
     private String loyaltyDivisionName;
     private String loyaltyCompanyName;
-    private Long points;
+    private Integer points;
+    private BigDecimal dollarValue;
 
     public Long getOrderId()
     {
@@ -89,12 +91,21 @@ public class HoldPointsRequest
         this.loyaltyCompanyName = loyaltyCompanyName;
     }
 
-    public Long getPoints()
+    public Integer getPoints()
     {
         return points;
     }
-    public void setPoints(Long points)
+    public void setPoints(Integer points)
     {
         this.points = points;
+    }
+
+    public BigDecimal getDollarValue()
+    {
+        return dollarValue;
+    }
+    public void setDollarValue(BigDecimal dollarValue)
+    {
+        this.dollarValue = dollarValue;
     }
 }
