@@ -1,6 +1,5 @@
 package hello;
 
-import javax.validation.Constraint;
 import java.math.BigDecimal;
 
 /**

@@ -27,27 +27,6 @@ public class JSONRPCResponseObject
             data = objectMapper.createObjectNode();
         }
 
-        public void addKeyValuePairToData(String key, int value)
-        {
-            data.put(key, value);
-        }
-        public void addKeyValuePairToData(String key, long value)
-        {
-            data.put(key, value);
-        }
-        public void addKeyValuePairToData(String key, double value)
-        {
-            data.put(key, value);
-        }
-        public void addKeyValuePairToData(String key, String value)
-        {
-            data.put(key, value);
-        }
-        public void addKeyValuePairToData(String key, boolean value)
-        {
-            data.put(key, value);
-        }
-
         public int getCode()
         {
             return code;
@@ -90,7 +69,7 @@ public class JSONRPCResponseObject
     }
 
     private String jsonrpc;
-    private long id;
+    private String id;
     private boolean success;
     private ObjectMapper objectMapper = new ObjectMapper();
     private ObjectNode result = objectMapper.createObjectNode();
@@ -151,27 +130,6 @@ public class JSONRPCResponseObject
         }
     }
 
-    public void addKeyValuePairToResult(String key, int value)
-    {
-        result.put(key, value);
-    }
-    public void addKeyValuePairToResult(String key, long value)
-    {
-        result.put(key, value);
-    }
-    public void addKeyValuePairToResult(String key, double value)
-    {
-        result.put(key, value);
-    }
-    public void addKeyValuePairToResult(String key, String value)
-    {
-        result.put(key, value);
-    }
-    public void addKeyValuePairToResult(String key, boolean value)
-    {
-        result.put(key, value);
-    }
-
     public String getJsonrpc()
     {
         return "2.0";
@@ -195,11 +153,11 @@ public class JSONRPCResponseObject
         this.error = error;
     }
 
-    public long getId()
+    public String getId()
     {
         return id;
     }
-    public void setId(long id)
+    public void setId(String id)
     {
         this.id = id;
     }

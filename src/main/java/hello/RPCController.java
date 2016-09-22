@@ -24,6 +24,7 @@ import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Tom on 9/15/2016.
@@ -38,6 +39,9 @@ public class RPCController
 
     @Autowired
     private HoldPointsRequestValidator holdPointsRequestValidator;
+
+    @Autowired
+    private JSONRPCRequestValidator jsonrpcRequestValidator;
 
     @Autowired
     private LoyaltyRepository loyaltyRepository;
@@ -114,7 +118,7 @@ public class RPCController
     }
 
     @RequestMapping(value = "v00001/giftPoints", method = RequestMethod.POST, produces = "application/json")
-    public String giftPointsForOrderByOrderCodeLoyaltyCodeDivisionNameCompanyName(@Valid @RequestBody HoldPointsRequest hpr, BindingResult errors)
+    public String giftPointsForOrderByOrderCodeLoyaltyCodeDivisionNameCompanyName(@Valid @RequestBody JSONRPCRequestObject requestObject, BindingResult errors)
 // This is how you do query parameters instead of request body JSON
 //                                    @Param("orderCode") String orderCode,
 //                                    @Param("orderDivisionName") String orderDivisionName,
@@ -124,49 +128,95 @@ public class RPCController
 //                                    @Param("loyaltyCompanyName") String loyaltyCompanyName,
 //                                    @Param("points") Long points)
     {
-        holdPointsRequestValidator.validate(hpr, errors);
+        jsonrpcRequestValidator.validate(requestObject, errors);
         if (errors.hasErrors())
         {
-            JSONRPCResponseObject ro = new JSONRPCResponseObject();
-            ro.setSuccess(false);
-            ro.setId(3145L);
-            ro.getError().setCode(-32600);
-            ro.getError().setMessage("Invalid request.");
-            return ro.toJSONString();
+            JSONRPCResponseObject responseObject = new JSONRPCResponseObject();
+            responseObject.setSuccess(false);
+            responseObject.setId("3145");
+            responseObject.getError().setCode(-32600);
+            responseObject.getError().setMessage("Invalid request.");
+            return responseObject.toJSONString();
         }
         else
         {
-            return addPointsForOrderByOrderCodeLoyaltyCodeDivisionNameCompanyName(hpr, errors, PointType.availablePointType, PointTransactionType.giftedPointTransactionType).toJSONString();
+            return addPointsForOrderByOrderCodeLoyaltyCodeDivisionNameCompanyName(requestObject, errors, PointType.availablePointType, PointTransactionType.giftedPointTransactionType).toJSONString();
         }
     }
 
-    private JSONRPCResponseObject addPointsForOrderByOrderCodeLoyaltyCodeDivisionNameCompanyName(@Valid @RequestBody HoldPointsRequest hpr, BindingResult errors, String pointType, String pointTransactionType)
+    private JSONRPCResponseObject addPointsForOrderByOrderCodeLoyaltyCodeDivisionNameCompanyName(@Valid @RequestBody JSONRPCRequestObject requestObject, BindingResult errors, String pointType, String pointTransactionType)
     {
-        List<Loyalty> loyaltyList = loyaltyRepository.findByLoyaltyCodeDivisionNameCompanyName(hpr.getLoyaltyCode(), hpr.getLoyaltyDivisionName(), hpr.getLoyaltyCompanyName());
+        String loyaltyCode = requestObject.getParams().get("loyaltyCode");
+        String loyaltyDivisionName = requestObject.getParams().get("loyaltyDivisionName");
+        String loyaltyCompanyName = requestObject.getParams().get("loyaltyCompanyName");
+
+        if (loyaltyCode == null || loyaltyDivisionName == null || loyaltyCompanyName == null)
+        {
+            JSONRPCResponseObject responseObject = new JSONRPCResponseObject();
+            responseObject.setSuccess(false);
+            responseObject.setId(requestObject.getId());
+            responseObject.getError().setCode(-32600);
+            responseObject.getError().setMessage("loyaltyCode/loyaltyDivisionName/loyaltyCompanyName param(s) are missing.");
+            return responseObject;
+        }
+
+        List<Loyalty> loyaltyList = loyaltyRepository.findByLoyaltyCodeDivisionNameCompanyName(loyaltyCode, loyaltyDivisionName, loyaltyCompanyName);
         if (loyaltyList.isEmpty() || loyaltyList.size() > 1)
         {
-            JSONRPCResponseObject ro = new JSONRPCResponseObject();
-            ro.setSuccess(false);
-            ro.setId(3145L);
-            ro.getError().setCode(-32602);
-            ro.getError().setMessage("Could not find loyalty account.");
-            return ro;
+            JSONRPCResponseObject responseObject = new JSONRPCResponseObject();
+            responseObject.setSuccess(false);
+            responseObject.setId(requestObject.getId());
+            responseObject.getError().setCode(-32602);
+            responseObject.getError().setMessage("Could not find loyalty account.");
+            return responseObject;
         }
 
         //entityManager.getTransaction().begin();
 
+        BigDecimal dollarValue;
+        try
+        {
+            String dollarValueString = requestObject.getParams().get("dollarValue");
+            dollarValue = new BigDecimal(dollarValueString);
+        }
+        catch(Exception ex)
+        {
+            JSONRPCResponseObject responseObject = new JSONRPCResponseObject();
+            responseObject.setSuccess(false);
+            responseObject.setId(requestObject.getId());
+            responseObject.getError().setCode(-32600);
+            responseObject.getError().setMessage("dollarValue param is bad or missing.");
+            return responseObject;
+        }
+
         PointTransactionMaster ptm = new PointTransactionMaster();
         ptm.setCreatedDate(new Date());
-        ptm.setDollarValue(hpr.getDollarValue());
+        ptm.setDollarValue(dollarValue);
         List<PointTransactionType> pttl = pointTransactionTypeRepository.findByName(pointTransactionType);
         ptm.setPointTransactionType(pttl.get(0));
         entityManager.persist(ptm);
         //entityManager.flush();
 
+        Integer points;
+        try
+        {
+            String pointsString = requestObject.getParams().get("points");
+            points = new Integer(pointsString);
+        }
+        catch(Exception ex)
+        {
+            JSONRPCResponseObject responseObject = new JSONRPCResponseObject();
+            responseObject.setSuccess(false);
+            responseObject.setId(requestObject.getId());
+            responseObject.getError().setCode(-32600);
+            responseObject.getError().setMessage("points param is bad or missing.");
+            return responseObject;
+        }
+
         PointTransactionDetail ptd = new PointTransactionDetail();
         ptd.setLoyalty(loyaltyList.get(0));
         ptd.setPointTransactionMaster(ptm);
-        ptd.setPoints(hpr.getPoints());
+        ptd.setPoints(points);
         List<PointType> ptl = pointTypeRepository.findByName(pointType);
         ptd.setPointType(ptl.get(0));
         Calendar calendar = Calendar.getInstance();
@@ -197,7 +247,7 @@ public class RPCController
 
             JSONRPCResponseObject ro = new JSONRPCResponseObject();
             ro.setSuccess(true);
-            ro.setId(3145L);
+            ro.setId(requestObject.getId());
             ro.getResult().put("point transaction id", ptm.getId());
             ro.getResult().put("loyalty id", ptd.getLoyalty().getId());
             return ro;

@@ -538,3 +538,34 @@ http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.RDSSecurityGroups
           }
       }
   }
+
+
+
+ -------------------------------------------------------------------------------------------------------
+ -- How to add gift points
+
+ POST http://loyaltyprogramrestinterface2.8evdhp67pp.us-west-2.elasticbeanstalk.com/rpc/v00001/giftPoints
+ Request Body:
+ {
+    "jsonrpc":"2.0",
+    "method":"dai.loyalty.giftPoints",
+    "params":
+    {
+    "loyaltyCode":"LOY0001",
+    "loyaltyDivisionName":"Chadwicks",
+    "loyaltyCompanyName":"DAI",
+    "points":150,
+    "dollarValue":37.59
+    },
+   "id":375
+ }
+ Returns: 200 OK
+ Response Body:
+ {
+    "jsonrpc": "2.0",
+    "result": {
+        "point transaction id": 14,
+        "loyalty id": 1
+    },
+    "id": "375"
+ }
