@@ -4,13 +4,13 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
- * Created by Tom on 6/23/2016.
+ * Created by Tom on 9/21/2016.
  */
 @Entity
-public class PointTransactionType
+public class PointType
 {
-    @SequenceGenerator(name = "pointTransactionTypeGen", sequenceName = "point_transaction_type_id_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pointTransactionTypeGen")
+    @SequenceGenerator(name = "pointTypeGen", sequenceName = "point_type_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pointTypeGen")
     @Id
     private long id;
 
@@ -45,4 +45,5 @@ public class PointTransactionType
     {
         this.description = description;
     }
+
 }

@@ -5,7 +5,7 @@
 change point transactions to look like:
 pointTypes = { Normal, Held }
 PointTransactionTypes = { Hold, Release, Redeem, Earn, Gift, Expire, Transfer, Other }
-PointTransactionSourceTypes = { Order, Expiration, Marketing, Support, Event, Other }
+PointTransactionSourceTypes = { Order, Expiration (System would be better), Marketing, Support, Event, Other }
 PointTransactionSourceId = { order_transaction_id, point_transaction_id, event_id, ... }
 
 (src)loyaltyId
