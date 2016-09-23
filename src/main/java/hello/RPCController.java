@@ -30,7 +30,7 @@ import java.util.concurrent.ExecutionException;
  * Created by Tom on 9/15/2016.
  */
 @RestController
-@RequestMapping("/rpc/*")
+//@RequestMapping("/rpc/*")
 @Transactional
 public class RPCController
 {
@@ -52,7 +52,31 @@ public class RPCController
     @Autowired
     private PointTypeRepository pointTypeRepository;
 
-    @RequestMapping(value = "v00001/holdPoints", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(value = "/rpc", method = RequestMethod.POST, produces = "application/json")
+    public String jsonRPCMethod(@Valid @RequestBody JSONRPCRequestObject requestObject, BindingResult errors)
+    {
+        jsonrpcRequestValidator.validate(requestObject, errors);
+        if (errors.hasErrors())
+        {
+            JSONRPCResponseObject responseObject = new JSONRPCResponseObject();
+            responseObject.setSuccess(false);
+            responseObject.setId(requestObject.getId());
+            responseObject.getError().setCode(-32600);
+            responseObject.getError().setMessage("Invalid request.");
+            return responseObject.toJSONString();
+        }
+        else
+        {
+            JSONRPCResponseObject responseObject = new JSONRPCResponseObject();
+            responseObject.setSuccess(false);
+            responseObject.setId(requestObject.getId());
+            responseObject.getError().setCode(-32601);
+            responseObject.getError().setMessage("Method no found.");
+            return responseObject.toJSONString();
+        }
+    }
+
+    @RequestMapping(value = "/rpc/v00001/holdPoints", method = RequestMethod.POST, produces = "application/json")
     public long holdPointsForOrderByOrderCodeLoyaltyCodeDivisionNameCompanyName(@Valid @RequestBody HoldPointsRequest hpr, BindingResult errors)
 // This is how you do query parameters instead of request body JSON
 //                                    @Param("orderCode") String orderCode,
@@ -117,7 +141,7 @@ public class RPCController
         return ptm.getId();
     }
 
-    @RequestMapping(value = "v00001/giftPoints", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(value = "/rpc/v00001/giftPoints", method = RequestMethod.POST, produces = "application/json")
     public String giftPointsForOrderByOrderCodeLoyaltyCodeDivisionNameCompanyName(@Valid @RequestBody JSONRPCRequestObject requestObject, BindingResult errors)
 // This is how you do query parameters instead of request body JSON
 //                                    @Param("orderCode") String orderCode,
