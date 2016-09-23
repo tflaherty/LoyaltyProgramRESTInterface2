@@ -1,0 +1,1454 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.5.2
+-- Dumped by pg_dump version 9.5.4
+
+-- Started on 2016-09-23 16:49:32
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+DROP DATABASE ebdb;
+--
+-- TOC entry 3218 (class 1262 OID 16394)
+-- Name: ebdb; Type: DATABASE; Schema: -; Owner: DAIAdmin
+--
+
+CREATE DATABASE ebdb WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'en_US.UTF-8' LC_CTYPE = 'en_US.UTF-8';
+
+
+ALTER DATABASE ebdb OWNER TO "DAIAdmin";
+
+\connect ebdb
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 1 (class 3079 OID 13276)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 3221 (class 0 OID 0)
+-- Dependencies: 1
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 183 (class 1259 OID 17662)
+-- Name: company; Type: TABLE; Schema: public; Owner: DAIAdmin
+--
+
+CREATE TABLE company (
+    id bigint NOT NULL,
+    name character varying(255) NOT NULL
+);
+
+
+ALTER TABLE company OWNER TO "DAIAdmin";
+
+--
+-- TOC entry 182 (class 1259 OID 17660)
+-- Name: company_id_seq; Type: SEQUENCE; Schema: public; Owner: DAIAdmin
+--
+
+CREATE SEQUENCE company_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE company_id_seq OWNER TO "DAIAdmin";
+
+--
+-- TOC entry 3222 (class 0 OID 0)
+-- Dependencies: 182
+-- Name: company_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: DAIAdmin
+--
+
+ALTER SEQUENCE company_id_seq OWNED BY company.id;
+
+
+--
+-- TOC entry 181 (class 1259 OID 16635)
+-- Name: company_seq; Type: SEQUENCE; Schema: public; Owner: DAIAdmin
+--
+
+CREATE SEQUENCE company_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE company_seq OWNER TO "DAIAdmin";
+
+--
+-- TOC entry 185 (class 1259 OID 17670)
+-- Name: customer_to_loyalty; Type: TABLE; Schema: public; Owner: DAIAdmin
+--
+
+CREATE TABLE customer_to_loyalty (
+    id bigint NOT NULL,
+    birthdate timestamp without time zone,
+    customer_code character varying(255),
+    date_created timestamp without time zone,
+    division_id integer NOT NULL,
+    loyalty_id bigint
+);
+
+
+ALTER TABLE customer_to_loyalty OWNER TO "DAIAdmin";
+
+--
+-- TOC entry 184 (class 1259 OID 17668)
+-- Name: customer_to_loyalty_division_id_seq; Type: SEQUENCE; Schema: public; Owner: DAIAdmin
+--
+
+CREATE SEQUENCE customer_to_loyalty_division_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE customer_to_loyalty_division_id_seq OWNER TO "DAIAdmin";
+
+--
+-- TOC entry 3223 (class 0 OID 0)
+-- Dependencies: 184
+-- Name: customer_to_loyalty_division_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: DAIAdmin
+--
+
+ALTER SEQUENCE customer_to_loyalty_division_id_seq OWNED BY customer_to_loyalty.division_id;
+
+
+--
+-- TOC entry 188 (class 1259 OID 17680)
+-- Name: division; Type: TABLE; Schema: public; Owner: DAIAdmin
+--
+
+CREATE TABLE division (
+    id bigint NOT NULL,
+    name character varying(255) NOT NULL,
+    company_id integer NOT NULL,
+    site_code character varying
+);
+
+
+ALTER TABLE division OWNER TO "DAIAdmin";
+
+--
+-- TOC entry 187 (class 1259 OID 17678)
+-- Name: division_company_id_seq; Type: SEQUENCE; Schema: public; Owner: DAIAdmin
+--
+
+CREATE SEQUENCE division_company_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE division_company_id_seq OWNER TO "DAIAdmin";
+
+--
+-- TOC entry 3224 (class 0 OID 0)
+-- Dependencies: 187
+-- Name: division_company_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: DAIAdmin
+--
+
+ALTER SEQUENCE division_company_id_seq OWNED BY division.company_id;
+
+
+--
+-- TOC entry 186 (class 1259 OID 17676)
+-- Name: division_id_seq; Type: SEQUENCE; Schema: public; Owner: DAIAdmin
+--
+
+CREATE SEQUENCE division_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE division_id_seq OWNER TO "DAIAdmin";
+
+--
+-- TOC entry 3225 (class 0 OID 0)
+-- Dependencies: 186
+-- Name: division_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: DAIAdmin
+--
+
+ALTER SEQUENCE division_id_seq OWNED BY division.id;
+
+
+--
+-- TOC entry 194 (class 1259 OID 17751)
+-- Name: hibernate_sequence; Type: SEQUENCE; Schema: public; Owner: DAIAdmin
+--
+
+CREATE SEQUENCE hibernate_sequence
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE hibernate_sequence OWNER TO "DAIAdmin";
+
+--
+-- TOC entry 198 (class 1259 OID 17786)
+-- Name: loyalty_id_seq; Type: SEQUENCE; Schema: public; Owner: DAIAdmin
+--
+
+CREATE SEQUENCE loyalty_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE loyalty_id_seq OWNER TO "DAIAdmin";
+
+--
+-- TOC entry 190 (class 1259 OID 17689)
+-- Name: loyalty; Type: TABLE; Schema: public; Owner: DAIAdmin
+--
+
+CREATE TABLE loyalty (
+    id bigint DEFAULT nextval('loyalty_id_seq'::regclass) NOT NULL,
+    date_created timestamp without time zone,
+    loyalty_code character varying(255) NOT NULL,
+    division_id integer NOT NULL
+);
+
+
+ALTER TABLE loyalty OWNER TO "DAIAdmin";
+
+--
+-- TOC entry 189 (class 1259 OID 17687)
+-- Name: loyalty_division_id_seq; Type: SEQUENCE; Schema: public; Owner: DAIAdmin
+--
+
+CREATE SEQUENCE loyalty_division_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE loyalty_division_id_seq OWNER TO "DAIAdmin";
+
+--
+-- TOC entry 3226 (class 0 OID 0)
+-- Dependencies: 189
+-- Name: loyalty_division_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: DAIAdmin
+--
+
+ALTER SEQUENCE loyalty_division_id_seq OWNED BY loyalty.division_id;
+
+
+--
+-- TOC entry 201 (class 1259 OID 17797)
+-- Name: loyalty_person_map_id_seq; Type: SEQUENCE; Schema: public; Owner: DAIAdmin
+--
+
+CREATE SEQUENCE loyalty_person_map_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE loyalty_person_map_id_seq OWNER TO "DAIAdmin";
+
+--
+-- TOC entry 202 (class 1259 OID 17802)
+-- Name: loyalty_person_map; Type: TABLE; Schema: public; Owner: DAIAdmin
+--
+
+CREATE TABLE loyalty_person_map (
+    id bigint DEFAULT nextval('loyalty_person_map_id_seq'::regclass) NOT NULL,
+    loyalty_id bigint NOT NULL,
+    person_id bigint NOT NULL
+);
+
+
+ALTER TABLE loyalty_person_map OWNER TO "DAIAdmin";
+
+--
+-- TOC entry 196 (class 1259 OID 17763)
+-- Name: message_id_seq; Type: SEQUENCE; Schema: public; Owner: DAIAdmin
+--
+
+CREATE SEQUENCE message_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE message_id_seq OWNER TO "DAIAdmin";
+
+--
+-- TOC entry 197 (class 1259 OID 17765)
+-- Name: message; Type: TABLE; Schema: public; Owner: DAIAdmin
+--
+
+CREATE TABLE message (
+    id bigint DEFAULT nextval('message_id_seq'::regclass) NOT NULL,
+    loyalty_id bigint NOT NULL,
+    date_received timestamp without time zone NOT NULL,
+    read boolean DEFAULT false,
+    metadata character varying,
+    message character varying NOT NULL
+);
+
+
+ALTER TABLE message OWNER TO "DAIAdmin";
+
+--
+-- TOC entry 195 (class 1259 OID 17760)
+-- Name: person_id_seq; Type: SEQUENCE; Schema: public; Owner: DAIAdmin
+--
+
+CREATE SEQUENCE person_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE person_id_seq OWNER TO "DAIAdmin";
+
+--
+-- TOC entry 191 (class 1259 OID 17695)
+-- Name: person; Type: TABLE; Schema: public; Owner: DAIAdmin
+--
+
+CREATE TABLE person (
+    id bigint DEFAULT nextval('person_id_seq'::regclass) NOT NULL,
+    first_name character varying(255),
+    last_name character varying(255) NOT NULL,
+    name_prefix character varying(255),
+    middle_name character varying(255),
+    name_suffix character varying(255),
+    birthdate date,
+    division_id bigint,
+    customer_code character varying(255),
+    email_address character varying(255),
+    metadata character varying
+);
+
+
+ALTER TABLE person OWNER TO "DAIAdmin";
+
+--
+-- TOC entry 200 (class 1259 OID 17793)
+-- Name: point_transaction_id_seq; Type: SEQUENCE; Schema: public; Owner: DAIAdmin
+--
+
+CREATE SEQUENCE point_transaction_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE point_transaction_id_seq OWNER TO "DAIAdmin";
+
+--
+-- TOC entry 192 (class 1259 OID 17703)
+-- Name: point_transaction; Type: TABLE; Schema: public; Owner: DAIAdmin
+--
+
+CREATE TABLE point_transaction (
+    id bigint DEFAULT nextval('point_transaction_id_seq'::regclass) NOT NULL,
+    date_created timestamp without time zone NOT NULL,
+    points integer DEFAULT 0 NOT NULL,
+    loyalty_id bigint NOT NULL,
+    point_transaction_type_id bigint NOT NULL,
+    expiration_date timestamp without time zone
+);
+
+
+ALTER TABLE point_transaction OWNER TO "DAIAdmin";
+
+--
+-- TOC entry 208 (class 1259 OID 17913)
+-- Name: point_transaction_detail; Type: TABLE; Schema: public; Owner: DAIAdmin
+--
+
+CREATE TABLE point_transaction_detail (
+    id bigint NOT NULL,
+    loyalty_id bigint,
+    point_transaction_master_id bigint,
+    point_type_id bigint,
+    availability_expiration_date timestamp with time zone,
+    hold_expiration_date timestamp with time zone,
+    points integer
+);
+
+
+ALTER TABLE point_transaction_detail OWNER TO "DAIAdmin";
+
+--
+-- TOC entry 207 (class 1259 OID 17911)
+-- Name: point_transaction_detail_id_seq; Type: SEQUENCE; Schema: public; Owner: DAIAdmin
+--
+
+CREATE SEQUENCE point_transaction_detail_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE point_transaction_detail_id_seq OWNER TO "DAIAdmin";
+
+--
+-- TOC entry 3227 (class 0 OID 0)
+-- Dependencies: 207
+-- Name: point_transaction_detail_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: DAIAdmin
+--
+
+ALTER SEQUENCE point_transaction_detail_id_seq OWNED BY point_transaction_detail.id;
+
+
+--
+-- TOC entry 206 (class 1259 OID 17899)
+-- Name: point_transaction_master; Type: TABLE; Schema: public; Owner: DAIAdmin
+--
+
+CREATE TABLE point_transaction_master (
+    id bigint NOT NULL,
+    created_date timestamp with time zone NOT NULL,
+    point_transaction_type_id bigint NOT NULL,
+    dollar_value money
+);
+
+
+ALTER TABLE point_transaction_master OWNER TO "DAIAdmin";
+
+--
+-- TOC entry 205 (class 1259 OID 17897)
+-- Name: point_transaction_master_id_seq; Type: SEQUENCE; Schema: public; Owner: DAIAdmin
+--
+
+CREATE SEQUENCE point_transaction_master_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE point_transaction_master_id_seq OWNER TO "DAIAdmin";
+
+--
+-- TOC entry 3228 (class 0 OID 0)
+-- Dependencies: 205
+-- Name: point_transaction_master_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: DAIAdmin
+--
+
+ALTER SEQUENCE point_transaction_master_id_seq OWNED BY point_transaction_master.id;
+
+
+--
+-- TOC entry 199 (class 1259 OID 17790)
+-- Name: point_transaction_type_id_seq; Type: SEQUENCE; Schema: public; Owner: DAIAdmin
+--
+
+CREATE SEQUENCE point_transaction_type_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE point_transaction_type_id_seq OWNER TO "DAIAdmin";
+
+--
+-- TOC entry 193 (class 1259 OID 17708)
+-- Name: point_transaction_type; Type: TABLE; Schema: public; Owner: DAIAdmin
+--
+
+CREATE TABLE point_transaction_type (
+    id bigint DEFAULT nextval('point_transaction_type_id_seq'::regclass) NOT NULL,
+    description character varying(255),
+    name character varying(255)
+);
+
+
+ALTER TABLE point_transaction_type OWNER TO "DAIAdmin";
+
+--
+-- TOC entry 204 (class 1259 OID 17868)
+-- Name: point_type; Type: TABLE; Schema: public; Owner: DAIAdmin
+--
+
+CREATE TABLE point_type (
+    id bigint NOT NULL,
+    description character varying(255),
+    name character varying(255) NOT NULL
+);
+
+
+ALTER TABLE point_type OWNER TO "DAIAdmin";
+
+--
+-- TOC entry 203 (class 1259 OID 17866)
+-- Name: point_type_id_seq; Type: SEQUENCE; Schema: public; Owner: DAIAdmin
+--
+
+CREATE SEQUENCE point_type_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE point_type_id_seq OWNER TO "DAIAdmin";
+
+--
+-- TOC entry 3229 (class 0 OID 0)
+-- Dependencies: 203
+-- Name: point_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: DAIAdmin
+--
+
+ALTER SEQUENCE point_type_id_seq OWNED BY point_type.id;
+
+
+--
+-- TOC entry 210 (class 1259 OID 17940)
+-- Name: points; Type: TABLE; Schema: public; Owner: DAIAdmin
+--
+
+CREATE TABLE points (
+    id bigint NOT NULL,
+    loyalty_id bigint,
+    point_type_id bigint,
+    availability_expiration_date timestamp with time zone,
+    hold_expiration_date timestamp with time zone,
+    points integer
+);
+
+
+ALTER TABLE points OWNER TO "DAIAdmin";
+
+--
+-- TOC entry 209 (class 1259 OID 17938)
+-- Name: points_id_seq; Type: SEQUENCE; Schema: public; Owner: DAIAdmin
+--
+
+CREATE SEQUENCE points_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE points_id_seq OWNER TO "DAIAdmin";
+
+--
+-- TOC entry 3230 (class 0 OID 0)
+-- Dependencies: 209
+-- Name: points_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: DAIAdmin
+--
+
+ALTER SEQUENCE points_id_seq OWNED BY points.id;
+
+
+--
+-- TOC entry 2985 (class 2604 OID 17665)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY company ALTER COLUMN id SET DEFAULT nextval('company_id_seq'::regclass);
+
+
+--
+-- TOC entry 2986 (class 2604 OID 17673)
+-- Name: division_id; Type: DEFAULT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY customer_to_loyalty ALTER COLUMN division_id SET DEFAULT nextval('customer_to_loyalty_division_id_seq'::regclass);
+
+
+--
+-- TOC entry 2987 (class 2604 OID 17683)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY division ALTER COLUMN id SET DEFAULT nextval('division_id_seq'::regclass);
+
+
+--
+-- TOC entry 2988 (class 2604 OID 17684)
+-- Name: company_id; Type: DEFAULT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY division ALTER COLUMN company_id SET DEFAULT nextval('division_company_id_seq'::regclass);
+
+
+--
+-- TOC entry 2989 (class 2604 OID 17692)
+-- Name: division_id; Type: DEFAULT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY loyalty ALTER COLUMN division_id SET DEFAULT nextval('loyalty_division_id_seq'::regclass);
+
+
+--
+-- TOC entry 3000 (class 2604 OID 17916)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY point_transaction_detail ALTER COLUMN id SET DEFAULT nextval('point_transaction_detail_id_seq'::regclass);
+
+
+--
+-- TOC entry 2999 (class 2604 OID 17902)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY point_transaction_master ALTER COLUMN id SET DEFAULT nextval('point_transaction_master_id_seq'::regclass);
+
+
+--
+-- TOC entry 2998 (class 2604 OID 17871)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY point_type ALTER COLUMN id SET DEFAULT nextval('point_type_id_seq'::regclass);
+
+
+--
+-- TOC entry 3001 (class 2604 OID 17943)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY points ALTER COLUMN id SET DEFAULT nextval('points_id_seq'::regclass);
+
+
+--
+-- TOC entry 3186 (class 0 OID 17662)
+-- Dependencies: 183
+-- Data for Name: company; Type: TABLE DATA; Schema: public; Owner: DAIAdmin
+--
+
+INSERT INTO company (id, name) VALUES (1, 'DAI');
+INSERT INTO company (id, name) VALUES (2, 'BAG');
+INSERT INTO company (id, name) VALUES (3, 'BAG2');
+INSERT INTO company (id, name) VALUES (4, 'Testing Company');
+INSERT INTO company (id, name) VALUES (250, 'Testing Company 2');
+INSERT INTO company (id, name) VALUES (251, 'Test Company 3');
+INSERT INTO company (id, name) VALUES (6, 'Test Company 4');
+INSERT INTO company (id, name) VALUES (7, 'Test Company 5');
+
+
+--
+-- TOC entry 3231 (class 0 OID 0)
+-- Dependencies: 182
+-- Name: company_id_seq; Type: SEQUENCE SET; Schema: public; Owner: DAIAdmin
+--
+
+SELECT pg_catalog.setval('company_id_seq', 7, true);
+
+
+--
+-- TOC entry 3232 (class 0 OID 0)
+-- Dependencies: 181
+-- Name: company_seq; Type: SEQUENCE SET; Schema: public; Owner: DAIAdmin
+--
+
+SELECT pg_catalog.setval('company_seq', 1, false);
+
+
+--
+-- TOC entry 3188 (class 0 OID 17670)
+-- Dependencies: 185
+-- Data for Name: customer_to_loyalty; Type: TABLE DATA; Schema: public; Owner: DAIAdmin
+--
+
+
+
+--
+-- TOC entry 3233 (class 0 OID 0)
+-- Dependencies: 184
+-- Name: customer_to_loyalty_division_id_seq; Type: SEQUENCE SET; Schema: public; Owner: DAIAdmin
+--
+
+SELECT pg_catalog.setval('customer_to_loyalty_division_id_seq', 1, false);
+
+
+--
+-- TOC entry 3191 (class 0 OID 17680)
+-- Dependencies: 188
+-- Data for Name: division; Type: TABLE DATA; Schema: public; Owner: DAIAdmin
+--
+
+INSERT INTO division (id, name, company_id, site_code) VALUES (5, 'Test Division Mod4', 4, NULL);
+INSERT INTO division (id, name, company_id, site_code) VALUES (6, 'Test Divisionxxx', 1, NULL);
+INSERT INTO division (id, name, company_id, site_code) VALUES (1, 'Chadwicks', 1, 'chadwicks');
+INSERT INTO division (id, name, company_id, site_code) VALUES (2, 'MetroStyle', 1, 'metrostyle');
+INSERT INTO division (id, name, company_id, site_code) VALUES (3, 'TerritoryAhead', 1, 'territoryahead');
+
+
+--
+-- TOC entry 3234 (class 0 OID 0)
+-- Dependencies: 187
+-- Name: division_company_id_seq; Type: SEQUENCE SET; Schema: public; Owner: DAIAdmin
+--
+
+SELECT pg_catalog.setval('division_company_id_seq', 1, false);
+
+
+--
+-- TOC entry 3235 (class 0 OID 0)
+-- Dependencies: 186
+-- Name: division_id_seq; Type: SEQUENCE SET; Schema: public; Owner: DAIAdmin
+--
+
+SELECT pg_catalog.setval('division_id_seq', 6, true);
+
+
+--
+-- TOC entry 3236 (class 0 OID 0)
+-- Dependencies: 194
+-- Name: hibernate_sequence; Type: SEQUENCE SET; Schema: public; Owner: DAIAdmin
+--
+
+SELECT pg_catalog.setval('hibernate_sequence', 359, true);
+
+
+--
+-- TOC entry 3193 (class 0 OID 17689)
+-- Dependencies: 190
+-- Data for Name: loyalty; Type: TABLE DATA; Schema: public; Owner: DAIAdmin
+--
+
+INSERT INTO loyalty (id, date_created, loyalty_code, division_id) VALUES (1, '2016-08-26 00:00:00', 'LOY0001', 1);
+INSERT INTO loyalty (id, date_created, loyalty_code, division_id) VALUES (2, '2016-08-26 00:00:00', 'LOY0002', 1);
+INSERT INTO loyalty (id, date_created, loyalty_code, division_id) VALUES (3, '2016-08-28 00:00:00', 'TALOY0001', 3);
+INSERT INTO loyalty (id, date_created, loyalty_code, division_id) VALUES (4, '2016-08-26 00:00:00', 'TST0001', 1);
+INSERT INTO loyalty (id, date_created, loyalty_code, division_id) VALUES (5, '2016-09-07 23:00:00', 'TST0002', 1);
+
+
+--
+-- TOC entry 3237 (class 0 OID 0)
+-- Dependencies: 189
+-- Name: loyalty_division_id_seq; Type: SEQUENCE SET; Schema: public; Owner: DAIAdmin
+--
+
+SELECT pg_catalog.setval('loyalty_division_id_seq', 1, false);
+
+
+--
+-- TOC entry 3238 (class 0 OID 0)
+-- Dependencies: 198
+-- Name: loyalty_id_seq; Type: SEQUENCE SET; Schema: public; Owner: DAIAdmin
+--
+
+SELECT pg_catalog.setval('loyalty_id_seq', 5, true);
+
+
+--
+-- TOC entry 3205 (class 0 OID 17802)
+-- Dependencies: 202
+-- Data for Name: loyalty_person_map; Type: TABLE DATA; Schema: public; Owner: DAIAdmin
+--
+
+INSERT INTO loyalty_person_map (id, loyalty_id, person_id) VALUES (2, 1, 1);
+
+
+--
+-- TOC entry 3239 (class 0 OID 0)
+-- Dependencies: 201
+-- Name: loyalty_person_map_id_seq; Type: SEQUENCE SET; Schema: public; Owner: DAIAdmin
+--
+
+SELECT pg_catalog.setval('loyalty_person_map_id_seq', 5, true);
+
+
+--
+-- TOC entry 3200 (class 0 OID 17765)
+-- Dependencies: 197
+-- Data for Name: message; Type: TABLE DATA; Schema: public; Owner: DAIAdmin
+--
+
+INSERT INTO message (id, loyalty_id, date_received, read, metadata, message) VALUES (12, 3, '2016-08-28 00:00:00', false, NULL, 'The double points weekend expires tonight at midnight EST.');
+INSERT INTO message (id, loyalty_id, date_received, read, metadata, message) VALUES (13, 3, '2016-08-28 00:00:00', false, '{ "points":32 }', 'You have redeemed 32 points.');
+INSERT INTO message (id, loyalty_id, date_received, read, metadata, message) VALUES (5, 1, '2016-08-26 00:00:00', false, NULL, 'Test message 1');
+INSERT INTO message (id, loyalty_id, date_received, read, metadata, message) VALUES (9, 1, '2016-08-05 00:00:00', false, '{ "points":100 }', 'Some of your points will be expiring soon...');
+INSERT INTO message (id, loyalty_id, date_received, read, metadata, message) VALUES (10, 1, '2016-08-12 00:00:00', false, '{ "points":100 }', 'Your points received on 3/1/2016 have expired...');
+INSERT INTO message (id, loyalty_id, date_received, read, metadata, message) VALUES (11, 1, '2016-08-15 00:00:00', false, NULL, 'This weekend is a double point event!!!');
+INSERT INTO message (id, loyalty_id, date_received, read, metadata, message) VALUES (358, 1, '2016-08-26 00:23:00', false, '{ "metadata":"foobar"}', 'testing sequence id fix');
+INSERT INTO message (id, loyalty_id, date_received, read, metadata, message) VALUES (400, 1, '2016-08-26 00:23:00', false, '{ "metadata":"foobar"}', 'testing sequence id fix 2');
+
+
+--
+-- TOC entry 3240 (class 0 OID 0)
+-- Dependencies: 196
+-- Name: message_id_seq; Type: SEQUENCE SET; Schema: public; Owner: DAIAdmin
+--
+
+SELECT pg_catalog.setval('message_id_seq', 2683, true);
+
+
+--
+-- TOC entry 3194 (class 0 OID 17695)
+-- Dependencies: 191
+-- Data for Name: person; Type: TABLE DATA; Schema: public; Owner: DAIAdmin
+--
+
+INSERT INTO person (id, first_name, last_name, name_prefix, middle_name, name_suffix, birthdate, division_id, customer_code, email_address, metadata) VALUES (3, 'Murray', 'Slaughter', 'Mr.', NULL, NULL, NULL, 1, 'MTM003', 'ms@mtm.com', NULL);
+INSERT INTO person (id, first_name, last_name, name_prefix, middle_name, name_suffix, birthdate, division_id, customer_code, email_address, metadata) VALUES (4, 'Ted', 'Baxter', NULL, NULL, NULL, NULL, 1, 'MTM004', 'tb@mtm.com', NULL);
+INSERT INTO person (id, first_name, last_name, name_prefix, middle_name, name_suffix, birthdate, division_id, customer_code, email_address, metadata) VALUES (8, 'Sue', 'Nivens', NULL, 'Ann', NULL, NULL, 1, 'MTM008', 'san@mtm.com', NULL);
+INSERT INTO person (id, first_name, last_name, name_prefix, middle_name, name_suffix, birthdate, division_id, customer_code, email_address, metadata) VALUES (7, 'Georgette', 'Franklin', 'Miss', NULL, NULL, NULL, 1, 'MTM007', 'gf@mtm.com', NULL);
+INSERT INTO person (id, first_name, last_name, name_prefix, middle_name, name_suffix, birthdate, division_id, customer_code, email_address, metadata) VALUES (6, 'Phyllis', 'Lindstrom', NULL, NULL, NULL, NULL, 1, 'MTM006', 'pl@mtm.com', NULL);
+INSERT INTO person (id, first_name, last_name, name_prefix, middle_name, name_suffix, birthdate, division_id, customer_code, email_address, metadata) VALUES (5, 'Rhoda', 'Morgenstern', 'Ms.', NULL, NULL, NULL, 1, 'MTM005', 'rm@mtm.com', NULL);
+INSERT INTO person (id, first_name, last_name, name_prefix, middle_name, name_suffix, birthdate, division_id, customer_code, email_address, metadata) VALUES (1, 'Mary', 'Richards', NULL, NULL, NULL, '1936-12-29', 1, 'MTM001', 'mr@mtm.com', NULL);
+INSERT INTO person (id, first_name, last_name, name_prefix, middle_name, name_suffix, birthdate, division_id, customer_code, email_address, metadata) VALUES (2, 'Lou', 'Grant', 'Mr.', NULL, NULL, NULL, 1, 'MTM002', 'lg@mtm.com', NULL);
+INSERT INTO person (id, first_name, last_name, name_prefix, middle_name, name_suffix, birthdate, division_id, customer_code, email_address, metadata) VALUES (9, 'Tom', 'Flaherty', NULL, NULL, NULL, NULL, 1, NULL, 'twf@apidev.com', NULL);
+
+
+--
+-- TOC entry 3241 (class 0 OID 0)
+-- Dependencies: 195
+-- Name: person_id_seq; Type: SEQUENCE SET; Schema: public; Owner: DAIAdmin
+--
+
+SELECT pg_catalog.setval('person_id_seq', 9, true);
+
+
+--
+-- TOC entry 3195 (class 0 OID 17703)
+-- Dependencies: 192
+-- Data for Name: point_transaction; Type: TABLE DATA; Schema: public; Owner: DAIAdmin
+--
+
+INSERT INTO point_transaction (id, date_created, points, loyalty_id, point_transaction_type_id, expiration_date) VALUES (2, '2016-08-01 00:00:00', 100, 1, 5, '2017-12-31 00:00:00');
+INSERT INTO point_transaction (id, date_created, points, loyalty_id, point_transaction_type_id, expiration_date) VALUES (4, '2016-08-28 00:00:00', -32, 3, 4, '2017-12-31 00:00:00');
+INSERT INTO point_transaction (id, date_created, points, loyalty_id, point_transaction_type_id, expiration_date) VALUES (3, '2016-08-12 00:00:00', -100, 1, 6, NULL);
+INSERT INTO point_transaction (id, date_created, points, loyalty_id, point_transaction_type_id, expiration_date) VALUES (5, '2016-08-26 00:00:00', 13, 1, 1, '2016-08-26 23:00:00');
+INSERT INTO point_transaction (id, date_created, points, loyalty_id, point_transaction_type_id, expiration_date) VALUES (6, '2016-08-26 00:00:00', 13, 1, 2, '2016-08-26 23:00:00');
+
+
+--
+-- TOC entry 3211 (class 0 OID 17913)
+-- Dependencies: 208
+-- Data for Name: point_transaction_detail; Type: TABLE DATA; Schema: public; Owner: DAIAdmin
+--
+
+INSERT INTO point_transaction_detail (id, loyalty_id, point_transaction_master_id, point_type_id, availability_expiration_date, hold_expiration_date, points) VALUES (1, 1, 1, 1, '2016-09-29 17:00:55.208+00', NULL, 100);
+INSERT INTO point_transaction_detail (id, loyalty_id, point_transaction_master_id, point_type_id, availability_expiration_date, hold_expiration_date, points) VALUES (2, 1, 2, 1, '2016-09-29 18:52:17.904+00', NULL, 150);
+INSERT INTO point_transaction_detail (id, loyalty_id, point_transaction_master_id, point_type_id, availability_expiration_date, hold_expiration_date, points) VALUES (4, 1, 4, 1, '2016-09-29 19:02:58.03+00', NULL, 150);
+INSERT INTO point_transaction_detail (id, loyalty_id, point_transaction_master_id, point_type_id, availability_expiration_date, hold_expiration_date, points) VALUES (3, 1, 3, 1, '2016-09-29 19:02:58.017+00', NULL, 150);
+INSERT INTO point_transaction_detail (id, loyalty_id, point_transaction_master_id, point_type_id, availability_expiration_date, hold_expiration_date, points) VALUES (5, 1, 5, 1, '2016-09-29 19:15:56.619+00', NULL, 150);
+INSERT INTO point_transaction_detail (id, loyalty_id, point_transaction_master_id, point_type_id, availability_expiration_date, hold_expiration_date, points) VALUES (6, 1, 6, 1, '2016-09-29 19:25:04.061+00', NULL, 150);
+INSERT INTO point_transaction_detail (id, loyalty_id, point_transaction_master_id, point_type_id, availability_expiration_date, hold_expiration_date, points) VALUES (8, 1, 8, 1, '2016-09-29 21:16:56.47+00', NULL, 150);
+INSERT INTO point_transaction_detail (id, loyalty_id, point_transaction_master_id, point_type_id, availability_expiration_date, hold_expiration_date, points) VALUES (7, 1, 7, 1, '2016-09-29 21:16:56.469+00', NULL, 150);
+INSERT INTO point_transaction_detail (id, loyalty_id, point_transaction_master_id, point_type_id, availability_expiration_date, hold_expiration_date, points) VALUES (9, 1, 9, 1, '2016-09-29 21:34:04.035+00', NULL, 150);
+INSERT INTO point_transaction_detail (id, loyalty_id, point_transaction_master_id, point_type_id, availability_expiration_date, hold_expiration_date, points) VALUES (10, 1, 10, 1, '2016-09-29 21:49:23.682+00', NULL, 150);
+INSERT INTO point_transaction_detail (id, loyalty_id, point_transaction_master_id, point_type_id, availability_expiration_date, hold_expiration_date, points) VALUES (11, 1, 11, 1, '2016-09-29 21:49:38.602+00', NULL, 150);
+INSERT INTO point_transaction_detail (id, loyalty_id, point_transaction_master_id, point_type_id, availability_expiration_date, hold_expiration_date, points) VALUES (12, 1, 12, 1, '2016-09-29 21:50:27.533+00', NULL, 150);
+INSERT INTO point_transaction_detail (id, loyalty_id, point_transaction_master_id, point_type_id, availability_expiration_date, hold_expiration_date, points) VALUES (13, 1, 13, 1, '2016-09-29 23:34:58.708+00', NULL, 150);
+INSERT INTO point_transaction_detail (id, loyalty_id, point_transaction_master_id, point_type_id, availability_expiration_date, hold_expiration_date, points) VALUES (14, 1, 14, 1, '2016-09-29 23:37:55.239+00', NULL, 150);
+INSERT INTO point_transaction_detail (id, loyalty_id, point_transaction_master_id, point_type_id, availability_expiration_date, hold_expiration_date, points) VALUES (15, 1, 17, 1, '2016-09-30 00:11:38.768+00', NULL, 150);
+
+
+--
+-- TOC entry 3242 (class 0 OID 0)
+-- Dependencies: 207
+-- Name: point_transaction_detail_id_seq; Type: SEQUENCE SET; Schema: public; Owner: DAIAdmin
+--
+
+SELECT pg_catalog.setval('point_transaction_detail_id_seq', 15, true);
+
+
+--
+-- TOC entry 3243 (class 0 OID 0)
+-- Dependencies: 200
+-- Name: point_transaction_id_seq; Type: SEQUENCE SET; Schema: public; Owner: DAIAdmin
+--
+
+SELECT pg_catalog.setval('point_transaction_id_seq', 6, true);
+
+
+--
+-- TOC entry 3209 (class 0 OID 17899)
+-- Dependencies: 206
+-- Data for Name: point_transaction_master; Type: TABLE DATA; Schema: public; Owner: DAIAdmin
+--
+
+INSERT INTO point_transaction_master (id, created_date, point_transaction_type_id, dollar_value) VALUES (1, '2016-09-22 17:00:53.291+00', 8, '$25.00');
+INSERT INTO point_transaction_master (id, created_date, point_transaction_type_id, dollar_value) VALUES (2, '2016-09-22 18:52:17.768+00', 8, '$37.50');
+INSERT INTO point_transaction_master (id, created_date, point_transaction_type_id, dollar_value) VALUES (3, '2016-09-22 19:02:57.864+00', 8, '$37.50');
+INSERT INTO point_transaction_master (id, created_date, point_transaction_type_id, dollar_value) VALUES (4, '2016-09-22 19:02:57.862+00', 8, '$37.50');
+INSERT INTO point_transaction_master (id, created_date, point_transaction_type_id, dollar_value) VALUES (5, '2016-09-22 19:15:56.498+00', 8, '$37.50');
+INSERT INTO point_transaction_master (id, created_date, point_transaction_type_id, dollar_value) VALUES (6, '2016-09-22 19:25:03.869+00', 8, '$37.51');
+INSERT INTO point_transaction_master (id, created_date, point_transaction_type_id, dollar_value) VALUES (8, '2016-09-22 21:16:53.837+00', 8, '$37.52');
+INSERT INTO point_transaction_master (id, created_date, point_transaction_type_id, dollar_value) VALUES (7, '2016-09-22 21:16:53.835+00', 8, '$37.52');
+INSERT INTO point_transaction_master (id, created_date, point_transaction_type_id, dollar_value) VALUES (9, '2016-09-22 21:34:03.933+00', 8, '$37.54');
+INSERT INTO point_transaction_master (id, created_date, point_transaction_type_id, dollar_value) VALUES (10, '2016-09-22 21:49:23.506+00', 8, '$37.55');
+INSERT INTO point_transaction_master (id, created_date, point_transaction_type_id, dollar_value) VALUES (11, '2016-09-22 21:49:38.588+00', 8, '$37.56');
+INSERT INTO point_transaction_master (id, created_date, point_transaction_type_id, dollar_value) VALUES (12, '2016-09-22 21:50:27.524+00', 8, '$37.57');
+INSERT INTO point_transaction_master (id, created_date, point_transaction_type_id, dollar_value) VALUES (13, '2016-09-22 23:34:58.622+00', 8, '$37.58');
+INSERT INTO point_transaction_master (id, created_date, point_transaction_type_id, dollar_value) VALUES (14, '2016-09-22 23:37:55.225+00', 8, '$37.59');
+INSERT INTO point_transaction_master (id, created_date, point_transaction_type_id, dollar_value) VALUES (15, '2016-09-22 23:38:58.953+00', 8, '$37.59');
+INSERT INTO point_transaction_master (id, created_date, point_transaction_type_id, dollar_value) VALUES (16, '2016-09-22 23:39:22.302+00', 8, '$37.59');
+INSERT INTO point_transaction_master (id, created_date, point_transaction_type_id, dollar_value) VALUES (17, '2016-09-23 00:11:38.657+00', 8, '$37.60');
+
+
+--
+-- TOC entry 3244 (class 0 OID 0)
+-- Dependencies: 205
+-- Name: point_transaction_master_id_seq; Type: SEQUENCE SET; Schema: public; Owner: DAIAdmin
+--
+
+SELECT pg_catalog.setval('point_transaction_master_id_seq', 17, true);
+
+
+--
+-- TOC entry 3196 (class 0 OID 17708)
+-- Dependencies: 193
+-- Data for Name: point_transaction_type; Type: TABLE DATA; Schema: public; Owner: DAIAdmin
+--
+
+INSERT INTO point_transaction_type (id, description, name) VALUES (1, NULL, 'EarnedViaOrder');
+INSERT INTO point_transaction_type (id, description, name) VALUES (2, NULL, 'Held');
+INSERT INTO point_transaction_type (id, description, name) VALUES (3, NULL, 'Released');
+INSERT INTO point_transaction_type (id, description, name) VALUES (4, NULL, 'Redeemed');
+INSERT INTO point_transaction_type (id, description, name) VALUES (6, NULL, 'Availability Expired');
+INSERT INTO point_transaction_type (id, description, name) VALUES (7, NULL, 'Hold Expired');
+INSERT INTO point_transaction_type (id, description, name) VALUES (8, NULL, 'Gifted');
+INSERT INTO point_transaction_type (id, description, name) VALUES (9, NULL, 'Support');
+INSERT INTO point_transaction_type (id, description, name) VALUES (5, NULL, 'Other');
+INSERT INTO point_transaction_type (id, description, name) VALUES (11, NULL, 'Marketing');
+INSERT INTO point_transaction_type (id, description, name) VALUES (10, NULL, 'Test');
+INSERT INTO point_transaction_type (id, description, name) VALUES (12, NULL, 'Transfered');
+
+
+--
+-- TOC entry 3245 (class 0 OID 0)
+-- Dependencies: 199
+-- Name: point_transaction_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: DAIAdmin
+--
+
+SELECT pg_catalog.setval('point_transaction_type_id_seq', 12, true);
+
+
+--
+-- TOC entry 3207 (class 0 OID 17868)
+-- Dependencies: 204
+-- Data for Name: point_type; Type: TABLE DATA; Schema: public; Owner: DAIAdmin
+--
+
+INSERT INTO point_type (id, description, name) VALUES (1, NULL, 'Available');
+INSERT INTO point_type (id, description, name) VALUES (2, NULL, 'Held');
+INSERT INTO point_type (id, description, name) VALUES (3, NULL, 'Expired');
+INSERT INTO point_type (id, description, name) VALUES (4, NULL, 'Redeemed');
+
+
+--
+-- TOC entry 3246 (class 0 OID 0)
+-- Dependencies: 203
+-- Name: point_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: DAIAdmin
+--
+
+SELECT pg_catalog.setval('point_type_id_seq', 4, true);
+
+
+--
+-- TOC entry 3213 (class 0 OID 17940)
+-- Dependencies: 210
+-- Data for Name: points; Type: TABLE DATA; Schema: public; Owner: DAIAdmin
+--
+
+
+
+--
+-- TOC entry 3247 (class 0 OID 0)
+-- Dependencies: 209
+-- Name: points_id_seq; Type: SEQUENCE SET; Schema: public; Owner: DAIAdmin
+--
+
+SELECT pg_catalog.setval('points_id_seq', 1, false);
+
+
+--
+-- TOC entry 3003 (class 2606 OID 17826)
+-- Name: company_name_key; Type: CONSTRAINT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY company
+    ADD CONSTRAINT company_name_key UNIQUE (name);
+
+
+--
+-- TOC entry 3005 (class 2606 OID 17667)
+-- Name: company_pkey; Type: CONSTRAINT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY company
+    ADD CONSTRAINT company_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3007 (class 2606 OID 17675)
+-- Name: customer_to_loyalty_pkey; Type: CONSTRAINT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY customer_to_loyalty
+    ADD CONSTRAINT customer_to_loyalty_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3009 (class 2606 OID 17830)
+-- Name: division_name_company_id_key; Type: CONSTRAINT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY division
+    ADD CONSTRAINT division_name_company_id_key UNIQUE (name, company_id);
+
+
+--
+-- TOC entry 3011 (class 2606 OID 17686)
+-- Name: division_pkey; Type: CONSTRAINT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY division
+    ADD CONSTRAINT division_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3013 (class 2606 OID 17824)
+-- Name: division_site_code_key; Type: CONSTRAINT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY division
+    ADD CONSTRAINT division_site_code_key UNIQUE (site_code);
+
+
+--
+-- TOC entry 3015 (class 2606 OID 17834)
+-- Name: loyalty_loyalty_code_division_id_key; Type: CONSTRAINT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY loyalty
+    ADD CONSTRAINT loyalty_loyalty_code_division_id_key UNIQUE (loyalty_code, division_id);
+
+
+--
+-- TOC entry 3037 (class 2606 OID 17836)
+-- Name: loyalty_person_map_loyalty_id_person_id_key; Type: CONSTRAINT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY loyalty_person_map
+    ADD CONSTRAINT loyalty_person_map_loyalty_id_person_id_key UNIQUE (loyalty_id, person_id);
+
+
+--
+-- TOC entry 3039 (class 2606 OID 17807)
+-- Name: loyalty_person_map_pkey; Type: CONSTRAINT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY loyalty_person_map
+    ADD CONSTRAINT loyalty_person_map_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3017 (class 2606 OID 17694)
+-- Name: loyalty_pkey; Type: CONSTRAINT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY loyalty
+    ADD CONSTRAINT loyalty_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3033 (class 2606 OID 17769)
+-- Name: message_pkey; Type: CONSTRAINT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY message
+    ADD CONSTRAINT message_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3020 (class 2606 OID 17832)
+-- Name: person_customer_code_division_id_key; Type: CONSTRAINT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY person
+    ADD CONSTRAINT person_customer_code_division_id_key UNIQUE (customer_code, division_id);
+
+
+--
+-- TOC entry 3022 (class 2606 OID 17702)
+-- Name: person_pkey; Type: CONSTRAINT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY person
+    ADD CONSTRAINT person_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3049 (class 2606 OID 17918)
+-- Name: point_transaction_detail_pkey; Type: CONSTRAINT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY point_transaction_detail
+    ADD CONSTRAINT point_transaction_detail_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3044 (class 2606 OID 17904)
+-- Name: point_transaction_master_pkey; Type: CONSTRAINT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY point_transaction_master
+    ADD CONSTRAINT point_transaction_master_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3024 (class 2606 OID 17707)
+-- Name: point_transaction_pkey; Type: CONSTRAINT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY point_transaction
+    ADD CONSTRAINT point_transaction_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3026 (class 2606 OID 17840)
+-- Name: point_transaction_type_description_key; Type: CONSTRAINT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY point_transaction_type
+    ADD CONSTRAINT point_transaction_type_description_key UNIQUE (description);
+
+
+--
+-- TOC entry 3028 (class 2606 OID 17838)
+-- Name: point_transaction_type_name_key; Type: CONSTRAINT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY point_transaction_type
+    ADD CONSTRAINT point_transaction_type_name_key UNIQUE (name);
+
+
+--
+-- TOC entry 3030 (class 2606 OID 17715)
+-- Name: point_transaction_type_pkey; Type: CONSTRAINT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY point_transaction_type
+    ADD CONSTRAINT point_transaction_type_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3041 (class 2606 OID 17876)
+-- Name: point_type_pkey; Type: CONSTRAINT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY point_type
+    ADD CONSTRAINT point_type_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3053 (class 2606 OID 17945)
+-- Name: points_pkey; Type: CONSTRAINT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY points
+    ADD CONSTRAINT points_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3045 (class 1259 OID 17925)
+-- Name: fki_fkey_point_transaction_detail_to_loyalty; Type: INDEX; Schema: public; Owner: DAIAdmin
+--
+
+CREATE INDEX fki_fkey_point_transaction_detail_to_loyalty ON point_transaction_detail USING btree (loyalty_id);
+
+
+--
+-- TOC entry 3046 (class 1259 OID 17931)
+-- Name: fki_fkey_point_transaction_detail_to_point_transaction_master; Type: INDEX; Schema: public; Owner: DAIAdmin
+--
+
+CREATE INDEX fki_fkey_point_transaction_detail_to_point_transaction_master ON point_transaction_detail USING btree (point_transaction_master_id);
+
+
+--
+-- TOC entry 3047 (class 1259 OID 17937)
+-- Name: fki_fkey_point_transaction_detail_to_point_type; Type: INDEX; Schema: public; Owner: DAIAdmin
+--
+
+CREATE INDEX fki_fkey_point_transaction_detail_to_point_type ON point_transaction_detail USING btree (point_type_id);
+
+
+--
+-- TOC entry 3042 (class 1259 OID 17910)
+-- Name: fki_fkey_point_transaction_master_to_point_transaction_type; Type: INDEX; Schema: public; Owner: DAIAdmin
+--
+
+CREATE INDEX fki_fkey_point_transaction_master_to_point_transaction_type ON point_transaction_master USING btree (point_transaction_type_id);
+
+
+--
+-- TOC entry 3050 (class 1259 OID 17951)
+-- Name: fki_fkey_points_to_loyalty; Type: INDEX; Schema: public; Owner: DAIAdmin
+--
+
+CREATE INDEX fki_fkey_points_to_loyalty ON points USING btree (loyalty_id);
+
+
+--
+-- TOC entry 3051 (class 1259 OID 17957)
+-- Name: fki_fkey_points_to_point_type; Type: INDEX; Schema: public; Owner: DAIAdmin
+--
+
+CREATE INDEX fki_fkey_points_to_point_type ON points USING btree (point_type_id);
+
+
+--
+-- TOC entry 3034 (class 1259 OID 17813)
+-- Name: fki_loyalty_person_map_to_loyalty; Type: INDEX; Schema: public; Owner: DAIAdmin
+--
+
+CREATE INDEX fki_loyalty_person_map_to_loyalty ON loyalty_person_map USING btree (loyalty_id);
+
+
+--
+-- TOC entry 3035 (class 1259 OID 17819)
+-- Name: fki_loyalty_person_map_to_person; Type: INDEX; Schema: public; Owner: DAIAdmin
+--
+
+CREATE INDEX fki_loyalty_person_map_to_person ON loyalty_person_map USING btree (person_id);
+
+
+--
+-- TOC entry 3031 (class 1259 OID 17776)
+-- Name: fki_message_to_loyalty; Type: INDEX; Schema: public; Owner: DAIAdmin
+--
+
+CREATE INDEX fki_message_to_loyalty ON message USING btree (loyalty_id);
+
+
+--
+-- TOC entry 3018 (class 1259 OID 17759)
+-- Name: fki_person_to_division; Type: INDEX; Schema: public; Owner: DAIAdmin
+--
+
+CREATE INDEX fki_person_to_division ON person USING btree (division_id);
+
+
+--
+-- TOC entry 3057 (class 2606 OID 17731)
+-- Name: fk_4w9m8ormb1k10xy3d6yls0tv3; Type: FK CONSTRAINT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY loyalty
+    ADD CONSTRAINT fk_4w9m8ormb1k10xy3d6yls0tv3 FOREIGN KEY (division_id) REFERENCES division(id);
+
+
+--
+-- TOC entry 3054 (class 2606 OID 17716)
+-- Name: fk_cd1ces3gjnhxs8xpgj4d6hmvc; Type: FK CONSTRAINT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY customer_to_loyalty
+    ADD CONSTRAINT fk_cd1ces3gjnhxs8xpgj4d6hmvc FOREIGN KEY (division_id) REFERENCES division(id);
+
+
+--
+-- TOC entry 3055 (class 2606 OID 17721)
+-- Name: fk_ipt81205ao1eyuivtr1qxg105; Type: FK CONSTRAINT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY customer_to_loyalty
+    ADD CONSTRAINT fk_ipt81205ao1eyuivtr1qxg105 FOREIGN KEY (loyalty_id) REFERENCES loyalty(id);
+
+
+--
+-- TOC entry 3059 (class 2606 OID 17741)
+-- Name: fk_j3xv557iysbtpcj5hbugaafck; Type: FK CONSTRAINT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY point_transaction
+    ADD CONSTRAINT fk_j3xv557iysbtpcj5hbugaafck FOREIGN KEY (loyalty_id) REFERENCES loyalty(id);
+
+
+--
+-- TOC entry 3062 (class 2606 OID 17808)
+-- Name: fk_loyalty_person_map_to_loyalty; Type: FK CONSTRAINT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY loyalty_person_map
+    ADD CONSTRAINT fk_loyalty_person_map_to_loyalty FOREIGN KEY (loyalty_id) REFERENCES loyalty(id);
+
+
+--
+-- TOC entry 3063 (class 2606 OID 17814)
+-- Name: fk_loyalty_person_map_to_person; Type: FK CONSTRAINT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY loyalty_person_map
+    ADD CONSTRAINT fk_loyalty_person_map_to_person FOREIGN KEY (person_id) REFERENCES person(id);
+
+
+--
+-- TOC entry 3061 (class 2606 OID 17771)
+-- Name: fk_message_to_loyalty; Type: FK CONSTRAINT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY message
+    ADD CONSTRAINT fk_message_to_loyalty FOREIGN KEY (loyalty_id) REFERENCES loyalty(id);
+
+
+--
+-- TOC entry 3056 (class 2606 OID 17726)
+-- Name: fk_ncg3sbl7w05pevxvpcnl0mry6; Type: FK CONSTRAINT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY division
+    ADD CONSTRAINT fk_ncg3sbl7w05pevxvpcnl0mry6 FOREIGN KEY (company_id) REFERENCES company(id);
+
+
+--
+-- TOC entry 3058 (class 2606 OID 17754)
+-- Name: fk_person_to_division; Type: FK CONSTRAINT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY person
+    ADD CONSTRAINT fk_person_to_division FOREIGN KEY (division_id) REFERENCES division(id);
+
+
+--
+-- TOC entry 3060 (class 2606 OID 17746)
+-- Name: fk_pkoqyssbx3b22ue21r7hhdgs8; Type: FK CONSTRAINT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY point_transaction
+    ADD CONSTRAINT fk_pkoqyssbx3b22ue21r7hhdgs8 FOREIGN KEY (point_transaction_type_id) REFERENCES point_transaction_type(id);
+
+
+--
+-- TOC entry 3065 (class 2606 OID 17920)
+-- Name: fkey_point_transaction_detail_to_loyalty; Type: FK CONSTRAINT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY point_transaction_detail
+    ADD CONSTRAINT fkey_point_transaction_detail_to_loyalty FOREIGN KEY (loyalty_id) REFERENCES loyalty(id);
+
+
+--
+-- TOC entry 3066 (class 2606 OID 17926)
+-- Name: fkey_point_transaction_detail_to_point_transaction_master; Type: FK CONSTRAINT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY point_transaction_detail
+    ADD CONSTRAINT fkey_point_transaction_detail_to_point_transaction_master FOREIGN KEY (point_transaction_master_id) REFERENCES point_transaction_master(id);
+
+
+--
+-- TOC entry 3067 (class 2606 OID 17932)
+-- Name: fkey_point_transaction_detail_to_point_type; Type: FK CONSTRAINT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY point_transaction_detail
+    ADD CONSTRAINT fkey_point_transaction_detail_to_point_type FOREIGN KEY (point_type_id) REFERENCES point_type(id);
+
+
+--
+-- TOC entry 3064 (class 2606 OID 17905)
+-- Name: fkey_point_transaction_master_to_point_transaction_type; Type: FK CONSTRAINT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY point_transaction_master
+    ADD CONSTRAINT fkey_point_transaction_master_to_point_transaction_type FOREIGN KEY (point_transaction_type_id) REFERENCES point_transaction_type(id);
+
+
+--
+-- TOC entry 3068 (class 2606 OID 17946)
+-- Name: fkey_points_to_loyalty; Type: FK CONSTRAINT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY points
+    ADD CONSTRAINT fkey_points_to_loyalty FOREIGN KEY (loyalty_id) REFERENCES loyalty(id);
+
+
+--
+-- TOC entry 3069 (class 2606 OID 17952)
+-- Name: fkey_points_to_point_type; Type: FK CONSTRAINT; Schema: public; Owner: DAIAdmin
+--
+
+ALTER TABLE ONLY points
+    ADD CONSTRAINT fkey_points_to_point_type FOREIGN KEY (point_type_id) REFERENCES point_type(id);
+
+
+--
+-- TOC entry 3220 (class 0 OID 0)
+-- Dependencies: 7
+-- Name: public; Type: ACL; Schema: -; Owner: DAIAdmin
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM "DAIAdmin";
+GRANT ALL ON SCHEMA public TO "DAIAdmin";
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2016-09-23 16:50:18
+
+--
+-- PostgreSQL database dump complete
+--
+
