@@ -1,8 +1,6 @@
 -- revisit point transaction types
 -- add order number to holdPoints call
 
--- dump database schema and look up tables
-
 -- figure out how to return validation errors in things like the RPCController which uses @Valid annotation
 -- implement JSON RPC standards in my RPC interface
 -- implement transactions in my RPC interface
