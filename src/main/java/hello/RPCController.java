@@ -9,18 +9,17 @@ import jdk.nashorn.internal.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.validation.Valid;
 import java.io.*;
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -34,6 +33,11 @@ import java.util.concurrent.ExecutionException;
 @Transactional
 public class RPCController
 {
+    private String rpcMethodNamePrefix = "dai.loyalty.";
+    private List<String> rpcMethodNames = Arrays.asList(
+            rpcMethodNamePrefix + "giftPoints",
+            rpcMethodNamePrefix + "holdPoints");
+
     @PersistenceContext
     EntityManager entityManager;
 
@@ -58,15 +62,15 @@ public class RPCController
         jsonrpcRequestValidator.validate(requestObject, errors);
         if (errors.hasErrors())
         {
-            JSONRPCResponseObject responseObject = new JSONRPCResponseObject();
-            responseObject.setSuccess(false);
-            responseObject.setId(requestObject.getId());
-            responseObject.getError().setCode(-32600);
-            responseObject.getError().setMessage("Invalid request.");
-            return responseObject.toJSONString();
+            throw new InvalidJSONRPCRequestException(requestObject.getId());
         }
         else
         {
+            if (!rpcMethodNames.contains(requestObject.getMethod()))
+            {
+                throw new JSONRPCMethodNotFoundException(requestObject.getMethod(), requestObject.getId());
+            }
+
             JSONRPCResponseObject responseObject = new JSONRPCResponseObject();
             responseObject.setSuccess(false);
             responseObject.setId(requestObject.getId());
@@ -134,6 +138,7 @@ public class RPCController
         destPointTransactionDetail.setAvailabilityExpirationDate(nextWeek);
         entityManager.persist(destPointTransactionDetail);
 
+
         //entityManager.flush();
 
         //entityManager.getTransaction().commit();
@@ -142,7 +147,7 @@ public class RPCController
     }
 
     @RequestMapping(value = "/rpc/v00001/giftPoints", method = RequestMethod.POST, produces = "application/json")
-    public String giftPointsForOrderByOrderCodeLoyaltyCodeDivisionNameCompanyName(@Valid @RequestBody JSONRPCRequestObject requestObject, BindingResult errors)
+    public JSONRPCResponseObject giftPointsForOrderByOrderCodeLoyaltyCodeDivisionNameCompanyName(@Valid @RequestBody JSONRPCRequestObject requestObject, BindingResult errors)
 // This is how you do query parameters instead of request body JSON
 //                                    @Param("orderCode") String orderCode,
 //                                    @Param("orderDivisionName") String orderDivisionName,
@@ -155,16 +160,11 @@ public class RPCController
         jsonrpcRequestValidator.validate(requestObject, errors);
         if (errors.hasErrors())
         {
-            JSONRPCResponseObject responseObject = new JSONRPCResponseObject();
-            responseObject.setSuccess(false);
-            responseObject.setId("3145");
-            responseObject.getError().setCode(-32600);
-            responseObject.getError().setMessage("Invalid request.");
-            return responseObject.toJSONString();
+            throw new InvalidJSONRPCRequestException(requestObject.getId());
         }
         else
         {
-            return addPointsForOrderByOrderCodeLoyaltyCodeDivisionNameCompanyName(requestObject, errors, PointType.availablePointType, PointTransactionType.giftedPointTransactionType).toJSONString();
+            return addPointsForOrderByOrderCodeLoyaltyCodeDivisionNameCompanyName(requestObject, errors, PointType.availablePointType, PointTransactionType.giftedPointTransactionType);
         }
     }
 
@@ -187,12 +187,7 @@ public class RPCController
         List<Loyalty> loyaltyList = loyaltyRepository.findByLoyaltyCodeDivisionNameCompanyName(loyaltyCode, loyaltyDivisionName, loyaltyCompanyName);
         if (loyaltyList.isEmpty() || loyaltyList.size() > 1)
         {
-            JSONRPCResponseObject responseObject = new JSONRPCResponseObject();
-            responseObject.setSuccess(false);
-            responseObject.setId(requestObject.getId());
-            responseObject.getError().setCode(-32602);
-            responseObject.getError().setMessage("Could not find loyalty account.");
-            return responseObject;
+            throw new LoyaltyNotFoundException(loyaltyCode, loyaltyDivisionName, loyaltyCompanyName, requestObject.getId());
         }
 
         //entityManager.getTransaction().begin();
@@ -292,4 +287,26 @@ public class RPCController
         }
 */
     }
+
+    @ExceptionHandler(LoyaltyNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public JSONRPCResponseObject loyaltyNotFound(LoyaltyNotFoundException ex)
+    {
+        return ex.toJSONRPCResponseObject();
+    }
+
+    @ExceptionHandler(InvalidJSONRPCRequestException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public JSONRPCResponseObject invalidJSONRPCRequest(InvalidJSONRPCRequestException ex)
+    {
+        return ex.toJSONRPCResponseObject();
+    }
+
+    @ExceptionHandler(JSONRPCMethodNotFoundException.class)
+    @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
+    public JSONRPCResponseObject jsonRPCMethodNotFound(JSONRPCMethodNotFoundException ex)
+    {
+        return ex.toJSONRPCResponseObject();
+    }
+
 }

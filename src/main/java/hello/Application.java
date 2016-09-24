@@ -30,17 +30,17 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 // @EnableWebMvc
 @ComponentScan
 // comment this out when building a jar file, uncomment this out when building a war file
-public class Application extends SpringBootServletInitializer
+// public class Application extends SpringBootServletInitializer
 // uncomment this when building a jar file, comment this out when building a war file
-//public class Application
+public class Application
 {
 
     // comment this out when building a jar file, uncomment this out when building a war file
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application)
-    {
-        return application.sources(Application.class);
-    }
+    //@Override
+    //protected SpringApplicationBuilder configure(SpringApplicationBuilder application)
+    //{
+    //    return application.sources(Application.class);
+    //}
 
     public static void main(String[] args)
     {

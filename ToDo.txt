@@ -1,5 +1,7 @@
 -- revisit point transaction types
 -- add order number to holdPoints call
+-- use techniques described here to handle errors in rpc interface better
+   -- Spring In Action, 4Th Edition, pg. 432, 16.3 Serving more than resources
 
 -- figure out how to return validation errors in things like the RPCController which uses @Valid annotation
 -- implement JSON RPC standards in my RPC interface

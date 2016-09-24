@@ -12,26 +12,26 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
 
-/**/
+/* war
 apply plugin: 'war'
 
 war {
     baseName = 'LoyaltyProgramRESTInterface'
     version = '1.43.126'
-    /*from 'cron.yaml'*/
+    from 'cron.yaml'
 }
-/**/
+ war */
 
 configurations {
     providedRuntime
 }
 
-/*
+/* jar */
 jar {
     baseName = 'gs-accessing-data-rest'
     version = '0.1.1'
 }
-*/
+/* jar */
 
 repositories {
     mavenCentral()
