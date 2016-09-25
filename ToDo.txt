@@ -1,3 +1,6 @@
+-- generate my own HATEOAS for my non-entity endpoints (like /v1/giftPoints)
+   -- here's how:  http://keaplogik.blogspot.com/2015/01/spring-hateoas-embedded-resources-with.html
+   -- http://docs.spring.io/spring-hateoas/docs/current/reference/html/
 -- revisit point transaction types
 -- add order number to holdPoints call
 -- use techniques described here to handle errors in rpc interface better

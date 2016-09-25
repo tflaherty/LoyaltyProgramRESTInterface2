@@ -21,6 +21,8 @@ public class HoldPointsRequestValidator implements Validator
     @Override
     public void validate(Object target, Errors errors)
     {
+        errors.reject("invalid.points", "points must exist");
+
         //ValidationUtils.rejectIfEmptyOrWhitespace(errors, "loyaltyId", "id.required");
 
         HoldPointsRequest holdPointsRequest = (HoldPointsRequest) target;

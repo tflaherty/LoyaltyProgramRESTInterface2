@@ -1,5 +1,12 @@
+-- How to generate your own HATEOAS
+http://keaplogik.blogspot.com/2015/01/spring-hateoas-embedded-resources-with.html
+http://docs.spring.io/spring-hateoas/docs/current/reference/html/
+
 -- @JSONView looks very interesting
 https://spring.io/blog/2014/12/02/latest-jackson-integration-improvements-in-spring
+
+-- Good article on a more modern way of versioning REST APIs
+https://www.narwhl.com/2015/03/the-ultimate-solution-to-versioning-rest-apis-content-negotiation/
 
 -- Spring REST sorting, filtering, paging examples
 http://localhost:8080/people/?limit=50

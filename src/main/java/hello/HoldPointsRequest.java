@@ -8,14 +8,23 @@ import java.math.BigDecimal;
 public class HoldPointsRequest
 {
     private Long orderId;
+
     private String orderCode;
     private String orderDivisionName;
     private String orderCompanyName;
+
+    private String customerCode;
+    private String customerDivisionName;
+    private String customerCompanyName;
+
     private Long loyaltyId;
+
     private String loyaltyCode;
     private String loyaltyDivisionName;
     private String loyaltyCompanyName;
+
     private Integer points;
+
     private BigDecimal dollarValue;
 
     public Long getOrderId()
@@ -106,5 +115,32 @@ public class HoldPointsRequest
     public void setDollarValue(BigDecimal dollarValue)
     {
         this.dollarValue = dollarValue;
+    }
+
+    public String getCustomerCode()
+    {
+        return customerCode;
+    }
+    public void setCustomerCode(String customerCode)
+    {
+        this.customerCode = customerCode;
+    }
+
+    public String getCustomerDivisionName()
+    {
+        return customerDivisionName;
+    }
+    public void setCustomerDivisionName(String customerDivisionName)
+    {
+        this.customerDivisionName = customerDivisionName;
+    }
+
+    public String getCustomerCompanyName()
+    {
+        return customerCompanyName;
+    }
+    public void setCustomerCompanyName(String customerCompanyName)
+    {
+        this.customerCompanyName = customerCompanyName;
     }
 }
