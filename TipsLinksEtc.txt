@@ -1,4 +1,8 @@
 -- How to generate your own HATEOAS
+  -- Spring HATEOAS reference:  https://spring.io/understanding/HATEOAS
+  -- THIS IS A VERY GOOD LINK:  http://stackoverflow.com/questions/25858698/spring-hateoas-embedded-resource-support
+http://stackoverflow.com/questions/27405637/meaning-and-usage-of-embedded-in-hateoas
+http://stateless.co/hal_specification.html
 http://keaplogik.blogspot.com/2015/01/spring-hateoas-embedded-resources-with.html
 http://docs.spring.io/spring-hateoas/docs/current/reference/html/
 
