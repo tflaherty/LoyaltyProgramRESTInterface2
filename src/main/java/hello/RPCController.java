@@ -106,7 +106,7 @@ public class RPCController
         List<Loyalty> loyaltyList = loyaltyRepository.findByLoyaltyCodeDivisionNameCompanyName(requestObject.getLoyaltyCode(), requestObject.getLoyaltyDivisionName(), requestObject.getLoyaltyCompanyName());
         if (loyaltyList.isEmpty() || loyaltyList.size() > 1)
         {
-            throw new InvalidHoldPointsRequestException(requestObject);
+            throw new LoyaltyNotFoundException(requestObject);
         }
 
         //entityManager.getTransaction().begin();
@@ -214,49 +214,18 @@ public class RPCController
 
         //entityManager.getTransaction().begin();
 
-        BigDecimal dollarValue = null;
-        try
-        {
-            //String dollarValueString = requestObject.getParams().get("dollarValue");
-            //dollarValue = new BigDecimal(dollarValueString);
-        }
-        catch(Exception ex)
-        {
-            //JSONRPCResponseObject responseObject = new JSONRPCResponseObject();
-            //responseObject.setSuccess(false);
-            //responseObject.setId(requestObject.getId());
-            //responseObject.getError().setCode(-32600);
-            //responseObject.getError().setMessage("dollarValue param is bad or missing.");
-            //return responseObject;
-        }
-
         PointTransactionMaster ptm = new PointTransactionMaster();
         ptm.setCreatedDate(new Date());
-        ptm.setDollarValue(dollarValue == null ? BigDecimal.valueOf(0.0) : dollarValue);
+        ptm.setDollarValue(requestObject.getDollarValue() == null ? BigDecimal.valueOf(0.0) : requestObject.getDollarValue());
         List<PointTransactionType> pttl = pointTransactionTypeRepository.findByName(pointTransactionType);
         ptm.setPointTransactionType(pttl.get(0));
         entityManager.persist(ptm);
         //entityManager.flush();
 
-        Integer points = null;
-        try
-        {
-            points = requestObject.getPoints();
-        }
-        catch(Exception ex)
-        {
-            //JSONRPCResponseObject responseObject = new JSONRPCResponseObject();
-            //responseObject.setSuccess(false);
-            //responseObject.setId(requestObject.getId());
-            //responseObject.getError().setCode(-32600);
-            //responseObject.getError().setMessage("points param is bad or missing.");
-            //return responseObject;
-        }
-
         PointTransactionDetail ptd = new PointTransactionDetail();
         ptd.setLoyalty(loyaltyList.get(0));
         ptd.setPointTransactionMaster(ptm);
-        ptd.setPoints(points == null ? 0 : points);
+        ptd.setPoints(requestObject.getPoints() == null ? 0 : requestObject.getPoints());
         List<PointType> ptl = pointTypeRepository.findByName(pointType);
         ptd.setPointType(ptl.get(0));
         Calendar calendar = Calendar.getInstance();
@@ -300,7 +269,32 @@ public class RPCController
         //}
     }
 
-/* RPC Version
+    @ExceptionHandler(LoyaltyNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public RESTAPIError loyaltyNotFound(LoyaltyNotFoundException ex)
+    {
+        return ex.toRESTAPIError();
+    }
+
+    @ExceptionHandler(InvalidRequestException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public RESTAPIError invalidRequestException(InvalidRequestException ex)
+    {
+        List<String> errors = new ArrayList<String>();
+        for (FieldError error : ex.getErrors().getFieldErrors()) {
+            errors.add(error.getField() + ": " + error.getDefaultMessage());
+        }
+        for (ObjectError error : ex.getErrors().getGlobalErrors()) {
+            errors.add(error.getObjectName() + ": " + error.getDefaultMessage());
+        }
+
+        RESTAPIError restAPIError =
+                new RESTAPIError(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), errors);
+
+        return restAPIError;
+    }
+
+/* RPC Versions
     @RequestMapping(value = "/rpc/v1/giftPoints", method = RequestMethod.POST, produces = "application/json")
     public JSONRPCResponseObject rpcGiftPointsForOrderByOrderCodeLoyaltyCodeDivisionNameCompanyName(@Valid @RequestBody JSONRPCRequestObject requestObject, BindingResult errors)
 // This is how you do query parameters instead of request body JSON
@@ -438,7 +432,7 @@ public class RPCController
             ///return "-2000";
         //}
     }
-*/
+
     @ExceptionHandler(LoyaltyNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public JSONRPCResponseObject loyaltyNotFound(LoyaltyNotFoundException ex)
@@ -466,23 +460,5 @@ public class RPCController
     {
         return ex.toJSONRPCResponseObject();
     }
-
-    @ExceptionHandler(InvalidRequestException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public RESTAPIError invalidRequestException(InvalidRequestException ex)
-    {
-        List<String> errors = new ArrayList<String>();
-        for (FieldError error : ex.getErrors().getFieldErrors()) {
-            errors.add(error.getField() + ": " + error.getDefaultMessage());
-        }
-        for (ObjectError error : ex.getErrors().getGlobalErrors()) {
-            errors.add(error.getObjectName() + ": " + error.getDefaultMessage());
-        }
-
-        RESTAPIError restAPIError =
-                new RESTAPIError(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), errors);
-
-        return restAPIError;
-    }
-
+ end of RPC versions */
 }

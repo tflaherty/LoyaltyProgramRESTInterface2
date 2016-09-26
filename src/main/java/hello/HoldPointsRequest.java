@@ -12,6 +12,7 @@ public class HoldPointsRequest extends PointsRequest
     private String orderCode;
     private String orderDivisionName;
     private String orderCompanyName;
+    private String orderSiteCode;
 
     private BigDecimal dollarValue;
 
@@ -60,4 +61,12 @@ public class HoldPointsRequest extends PointsRequest
         this.dollarValue = dollarValue;
     }
 
+    public String getOrderSiteCode()
+    {
+        return orderSiteCode;
+    }
+    public void setOrderSiteCode(String orderSiteCode)
+    {
+        this.orderSiteCode = orderSiteCode;
+    }
 }

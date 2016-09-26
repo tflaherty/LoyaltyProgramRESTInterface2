@@ -3,6 +3,7 @@ package hello;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 /**
@@ -20,15 +21,24 @@ public class HoldPointsRequestValidator extends PointsRequestValidator
     @Override
     public void validate(Object target, Errors errors)
     {
+        HoldPointsRequest holdPointsRequest = (HoldPointsRequest) target;
+
+        boolean orderIdExists = holdPointsRequest.getOrderId() != null;
+        boolean orderCodeExists = holdPointsRequest.getOrderCode() != null && !holdPointsRequest.getOrderCode().trim().isEmpty();
+        boolean orderDivisionNameExists = holdPointsRequest.getOrderDivisionName() != null && !holdPointsRequest.getOrderDivisionName().trim().isEmpty();
+        boolean orderCompanyNameExists = holdPointsRequest.getOrderCompanyName() != null && !holdPointsRequest.getOrderCompanyName().trim().isEmpty();
+        boolean orderSiteCodeExists = holdPointsRequest.getOrderSiteCode() != null && !holdPointsRequest.getOrderSiteCode().trim().isEmpty();
+        boolean sufficientOrderInfoExists = orderIdExists || (orderCodeExists && (orderSiteCodeExists || (orderCompanyNameExists && orderDivisionNameExists)));
+
         super.validate(target, errors);
 
-        //errors.reject("invalid.points", "points must exist");
+        // make sure we have enough information to get to the order
+        if (!sufficientOrderInfoExists)
+        {
+            errors.reject("hold point request", "Insufficient order information.");
+        }
 
-        //ValidationUtils.rejectIfEmptyOrWhitespace(errors, "loyaltyId", "id.required");
-
-        //HoldPointsRequest holdPointsRequest = (HoldPointsRequest) target;
-
-        //ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "name.required");
-        //ValidationUtils.rejectIfEmptyOrWhitespace(errors, "role", "role.required");
+        // now make sure that we have a dollar value
+        ValidationUtils.rejectIfEmpty(errors, "dollarValue", "dollarValue.required");
     }
 }

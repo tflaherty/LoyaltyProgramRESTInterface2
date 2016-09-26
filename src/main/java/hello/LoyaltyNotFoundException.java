@@ -1,17 +1,28 @@
 package hello;
 
+import org.springframework.http.HttpStatus;
+
 /**
  * Created by Tom on 9/24/2016.
  */
 public class LoyaltyNotFoundException extends RuntimeException
 {
-    private Long loyaltyId = null;
-    private String loyaltyCode = null;
-    private String divisionName = null;
-    private String siteCode = null;
-    private String companyName = null;
-    private String jsonRPCMessageId = null;
+    private Long loyaltyId;
+    private String loyaltyCode;
+    private String divisionName;
+    private String siteCode;
+    private String companyName;
+    private String jsonRPCMessageId;
     private String jsonRPCResponseObjectErrorMessage = "";
+
+    public LoyaltyNotFoundException(PointsRequest pointsRequest)
+    {
+        loyaltyId = pointsRequest.getLoyaltyId();
+        loyaltyCode = pointsRequest.getLoyaltyCode();
+        divisionName = pointsRequest.getLoyaltyDivisionName();
+        companyName = pointsRequest.getLoyaltyCompanyName();
+        siteCode = pointsRequest.getLoyaltySiteCode();
+    }
 
     public LoyaltyNotFoundException(long loyaltyId, String jsonRPCMessageId)
     {
@@ -128,6 +139,26 @@ public class LoyaltyNotFoundException extends RuntimeException
         responseObject.getError().setCode(getJsonRPCResponseObjectErrorCode());
         responseObject.getError().setMessage(getJsonRPCResponseObjectErrorMessage());
         return responseObject;
+    }
+
+    public RESTAPIError toRESTAPIError()
+    {
+        String errorString = "Loyalty account not found for " +
+                (getLoyaltyId() != null ? ("loyaltyId = " + getLoyaltyId() + ", ") : "") +
+                (getLoyaltyCode() != null ? ("loyaltyCode = " + getLoyaltyCode() + ", ") : "") +
+                (getCompanyName() != null ? ("loyaltyCompanyName = " + getCompanyName() + ", ") : "") +
+                (getDivisionName() != null ? ("loyaltyDivisionName = " + getDivisionName() + ", ") : "") +
+                (getSiteCode() != null ? ("loyaltySiteCode = " + getSiteCode()) : "");
+
+        if (errorString.endsWith(", "))
+        {
+            errorString = errorString.substring(0, errorString.length() - 2);
+        }
+
+        RESTAPIError restAPIError =
+                new RESTAPIError(HttpStatus.NOT_FOUND, getLocalizedMessage(), errorString);
+
+        return restAPIError;
     }
 
 }
