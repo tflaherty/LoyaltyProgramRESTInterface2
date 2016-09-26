@@ -28,7 +28,9 @@ public class HoldPointsRequestValidator extends PointsRequestValidator
         boolean orderDivisionNameExists = holdPointsRequest.getOrderDivisionName() != null && !holdPointsRequest.getOrderDivisionName().trim().isEmpty();
         boolean orderCompanyNameExists = holdPointsRequest.getOrderCompanyName() != null && !holdPointsRequest.getOrderCompanyName().trim().isEmpty();
         boolean orderSiteCodeExists = holdPointsRequest.getOrderSiteCode() != null && !holdPointsRequest.getOrderSiteCode().trim().isEmpty();
-        boolean sufficientOrderInfoExists = orderIdExists || (orderCodeExists && (orderSiteCodeExists || (orderCompanyNameExists && orderDivisionNameExists)));
+        boolean newOrderExists = holdPointsRequest.getNewOrder() != null;
+
+        boolean sufficientOrderInfoExists = orderIdExists || (newOrderExists && orderCodeExists && (orderSiteCodeExists || (orderCompanyNameExists && orderDivisionNameExists)));
 
         super.validate(target, errors);
 

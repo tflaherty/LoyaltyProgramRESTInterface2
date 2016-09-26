@@ -42,16 +42,22 @@ public class RPCController
     EntityManager entityManager;
 
     @Autowired
-    private HoldPointsRequestValidator holdPointsRequestValidator;
+    private GiftPointsRequestValidator giftPointsRequestValidator;
 
     @Autowired
-    private GiftPointsRequestValidator giftPointsRequestValidator;
+    private HoldPointsRequestValidator holdPointsRequestValidator;
 
     @Autowired
     private JSONRPCRequestValidator jsonrpcRequestValidator;
 
     @Autowired
+    private DivisionRepository divisionRepository;
+
+    @Autowired
     private LoyaltyRepository loyaltyRepository;
+
+    @Autowired
+    private OrderRepository orderRepository;
 
     @Autowired
     private PointTransactionTypeRepository pointTransactionTypeRepository;
@@ -84,7 +90,8 @@ public class RPCController
     }
 
     @RequestMapping(value = "/v1/holdPoints", method = RequestMethod.POST, produces = "application/json")
-    public PointTransactionMaster holdPointsForOrderByOrderCodeLoyaltyCodeDivisionNameCompanyName(
+    @ResponseStatus(HttpStatus.CREATED)
+    public PointTransactionMaster holdPoints(
             @Valid @RequestBody HoldPointsRequest requestObject,
             BindingResult errors,
             UriComponentsBuilder uriComponentsBuilder)
@@ -97,18 +104,103 @@ public class RPCController
 //                                    @Param("loyaltyCompanyName") String loyaltyCompanyName,
 //                                    @Param("points") Long points)
     {
+        // validate the syntax of the request object
         holdPointsRequestValidator.validate(requestObject, errors);
         if (errors.hasErrors())
         {
             throw new InvalidRequestException(errors);
         }
 
-        List<Loyalty> loyaltyList = loyaltyRepository.findByLoyaltyCodeDivisionNameCompanyName(requestObject.getLoyaltyCode(), requestObject.getLoyaltyDivisionName(), requestObject.getLoyaltyCompanyName());
+        // find the loyalty account
+        // todo: put this code in a method so that other can use it
+        Loyalty loyalty;
+        String loyaltySiteCode = requestObject.getLoyaltySiteCode();
+        List<Loyalty> loyaltyList;
+        if (loyaltySiteCode != null && !loyaltySiteCode.trim().isEmpty())
+        {
+            loyaltyList = loyaltyRepository.findByLoyaltyCodeSiteCode(requestObject.getLoyaltyCode(), loyaltySiteCode);
+
+        }
+        else
+        {
+            loyaltyList = loyaltyRepository.findByLoyaltyCodeDivisionNameCompanyName(requestObject.getLoyaltyCode(), requestObject.getLoyaltyDivisionName(), requestObject.getLoyaltyCompanyName());
+        }
+
         if (loyaltyList.isEmpty() || loyaltyList.size() > 1)
         {
             throw new LoyaltyNotFoundException(requestObject);
         }
+        loyalty = loyaltyList.get(0);
 
+        // find or create the order
+        // todo: put this code in a method so that other can use it
+        Order order;
+        Long orderId = requestObject.getOrderId();
+        Boolean isANewOrder = requestObject.getNewOrder();
+        // if this is a request to access an existing order, make sure it's there
+        if (orderId != null || (isANewOrder != null && !isANewOrder))
+        {
+            if (orderId != null)
+            {
+                if (!orderRepository.exists(orderId))
+                {
+                    throw new OrderNotFoundException(requestObject);
+                }
+                order = orderRepository.findOne(orderId);
+            }
+            else
+            {
+                List<Order> orderList;
+                if (requestObject.getOrderSiteCode() != null && !requestObject.getOrderSiteCode().trim().isEmpty())
+                {
+                    // we have a site code so use it instead of the division/company combination to find the order
+                    orderList = orderRepository.findByOrderCodeSiteCode(requestObject.getOrderCode(), requestObject.getLoyaltySiteCode());
+                }
+                else
+                {
+                    orderList = orderRepository.findByOrderCodeDivisionNameCompanyName(requestObject.getOrderCode(), requestObject.getOrderDivisionName(), requestObject.getOrderCompanyName());
+                }
+                if (orderList.isEmpty() || orderList.size() > 1)
+                {
+                    throw new OrderNotFoundException(requestObject);
+                }
+                order = orderList.get(0);
+            }
+        }
+        else
+        {
+            // this is a request to create a new order simultaneously
+            // with the request to hold points
+            order = new Order();
+            order.setOrderCode(requestObject.getOrderCode());
+            order.setLoyalty(loyalty);
+            order.setCreatedDate(new Date());
+
+            List<Division> divisionList;
+            if (requestObject.getOrderSiteCode() != null && !requestObject.getOrderSiteCode().trim().isEmpty())
+            {
+                // get division by site code
+                divisionList = divisionRepository.findBySiteCode(requestObject.getOrderSiteCode());
+            }
+            else
+            {
+                // get division by division name and company name
+                divisionList = divisionRepository.findByNameAndCompanyName(requestObject.getOrderDivisionName(), requestObject.getOrderCompanyName());
+            }
+            if (divisionList.isEmpty() || divisionList.size() > 1)
+            {
+                throw new OrderDivisionNotFoundException(requestObject);
+            }
+            else
+            {
+                order.setDivision(divisionList.get(0));
+            }
+
+            entityManager.persist(order);
+            entityManager.flush();
+        }
+
+        // now create the point transaction master and 2 point transaction details
         //entityManager.getTransaction().begin();
 
         PointTransactionMaster ptm = new PointTransactionMaster();
@@ -153,7 +245,8 @@ public class RPCController
     }
 
     @RequestMapping(value = "/v1/giftPoints", method = RequestMethod.POST, produces = "application/json")
-    public ResponseEntity<Resources<Resource>> giftPointsForOrderByOrderCodeLoyaltyCodeDivisionNameCompanyName(
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Resources<Resource>> giftPoints(
             @Valid @RequestBody GiftPointsRequest requestObject,
             BindingResult errors,
             UriComponentsBuilder uriComponentsBuilder)
@@ -267,6 +360,20 @@ public class RPCController
         ///e.printStackTrace();
         ///return "-2000";
         //}
+    }
+
+    @ExceptionHandler(OrderDivisionNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public RESTAPIError orderDivisionNotFound(OrderDivisionNotFoundException ex)
+    {
+        return ex.toRESTAPIError();
+    }
+
+    @ExceptionHandler(OrderNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public RESTAPIError orderNotFound(OrderNotFoundException ex)
+    {
+        return ex.toRESTAPIError();
     }
 
     @ExceptionHandler(LoyaltyNotFoundException.class)

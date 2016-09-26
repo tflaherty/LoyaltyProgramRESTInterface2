@@ -7,6 +7,8 @@ import java.math.BigDecimal;
  */
 public class HoldPointsRequest extends PointsRequest
 {
+    private Boolean newOrder;
+
     private Long orderId;
 
     private String orderCode;
@@ -68,5 +70,14 @@ public class HoldPointsRequest extends PointsRequest
     public void setOrderSiteCode(String orderSiteCode)
     {
         this.orderSiteCode = orderSiteCode;
+    }
+
+    public Boolean getNewOrder()
+    {
+        return newOrder;
+    }
+    public void setNewOrder(Boolean newOrder)
+    {
+        this.newOrder = newOrder;
     }
 }
