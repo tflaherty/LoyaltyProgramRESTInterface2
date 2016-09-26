@@ -1,15 +1,8 @@
 package hello;
 
-import com.fasterxml.jackson.core.JsonEncoding;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.node.JsonNodeFactory;
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import jdk.nashorn.internal.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.data.geo.Point;
-import org.springframework.data.repository.query.Param;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
@@ -18,17 +11,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.validation.Valid;
-import java.io.*;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.util.*;
-import java.util.concurrent.ExecutionException;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
@@ -50,6 +43,9 @@ public class RPCController
 
     @Autowired
     private HoldPointsRequestValidator holdPointsRequestValidator;
+
+    @Autowired
+    private GiftPointsRequestValidator giftPointsRequestValidator;
 
     @Autowired
     private JSONRPCRequestValidator jsonrpcRequestValidator;
@@ -88,7 +84,10 @@ public class RPCController
     }
 
     @RequestMapping(value = "/v1/holdPoints", method = RequestMethod.POST, produces = "application/json")
-    public PointTransactionMaster holdPointsForOrderByOrderCodeLoyaltyCodeDivisionNameCompanyName(@Valid @RequestBody HoldPointsRequest hpr, BindingResult errors)
+    public PointTransactionMaster holdPointsForOrderByOrderCodeLoyaltyCodeDivisionNameCompanyName(
+            @Valid @RequestBody HoldPointsRequest requestObject,
+            BindingResult errors,
+            UriComponentsBuilder uriComponentsBuilder)
 // This is how you do query parameters instead of request body JSON
 //                                    @Param("orderCode") String orderCode,
 //                                    @Param("orderDivisionName") String orderDivisionName,
@@ -98,23 +97,23 @@ public class RPCController
 //                                    @Param("loyaltyCompanyName") String loyaltyCompanyName,
 //                                    @Param("points") Long points)
     {
-        holdPointsRequestValidator.validate(hpr, errors);
+        holdPointsRequestValidator.validate(requestObject, errors);
         if (errors.hasErrors())
         {
-            throw new InvalidHoldPointsRequestException(hpr);
+            throw new InvalidRequestException(errors);
         }
 
-        List<Loyalty> loyaltyList = loyaltyRepository.findByLoyaltyCodeDivisionNameCompanyName(hpr.getLoyaltyCode(), hpr.getLoyaltyDivisionName(), hpr.getLoyaltyCompanyName());
+        List<Loyalty> loyaltyList = loyaltyRepository.findByLoyaltyCodeDivisionNameCompanyName(requestObject.getLoyaltyCode(), requestObject.getLoyaltyDivisionName(), requestObject.getLoyaltyCompanyName());
         if (loyaltyList.isEmpty() || loyaltyList.size() > 1)
         {
-            throw new InvalidHoldPointsRequestException(hpr);
+            throw new InvalidHoldPointsRequestException(requestObject);
         }
 
         //entityManager.getTransaction().begin();
 
         PointTransactionMaster ptm = new PointTransactionMaster();
         ptm.setCreatedDate(new Date());
-        ptm.setDollarValue(hpr.getDollarValue());
+        ptm.setDollarValue(requestObject.getDollarValue());
         List<PointTransactionType> pttl = pointTransactionTypeRepository.findByName(PointTransactionType.heldPointTransactionType);
         ptm.setPointTransactionType(pttl.get(0));
         entityManager.persist(ptm);
@@ -123,7 +122,7 @@ public class RPCController
         PointTransactionDetail sourcePointTransactionDetail = new PointTransactionDetail();
         sourcePointTransactionDetail.setLoyalty(loyaltyList.get(0));
         sourcePointTransactionDetail.setPointTransactionMaster(ptm);
-        sourcePointTransactionDetail.setPoints(-1 * hpr.getPoints());
+        sourcePointTransactionDetail.setPoints(-1 * requestObject.getPoints());
         List<PointType> ptl = pointTypeRepository.findByName(PointType.availablePointType);
         sourcePointTransactionDetail.setPointType(ptl.get(0));
         Calendar calendar = Calendar.getInstance();
@@ -136,7 +135,7 @@ public class RPCController
         PointTransactionDetail destPointTransactionDetail = new PointTransactionDetail();
         destPointTransactionDetail.setLoyalty(loyaltyList.get(0));
         destPointTransactionDetail.setPointTransactionMaster(ptm);
-        destPointTransactionDetail.setPoints(-1 * hpr.getPoints());
+        destPointTransactionDetail.setPoints(-1 * requestObject.getPoints());
         ptl = pointTypeRepository.findByName(PointType.heldPointType);
         destPointTransactionDetail.setPointType(ptl.get(0));
         calendar.setTime(calendar.getTime());
@@ -155,7 +154,7 @@ public class RPCController
 
     @RequestMapping(value = "/v1/giftPoints", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<Resources<Resource>> giftPointsForOrderByOrderCodeLoyaltyCodeDivisionNameCompanyName(
-            @Valid @RequestBody JSONRPCRequestObject requestObject,
+            @Valid @RequestBody GiftPointsRequest requestObject,
             BindingResult errors,
             UriComponentsBuilder uriComponentsBuilder)
 // This is how you do query parameters instead of request body JSON
@@ -167,10 +166,10 @@ public class RPCController
 //                                    @Param("loyaltyCompanyName") String loyaltyCompanyName,
 //                                    @Param("points") Long points)
     {
-        jsonrpcRequestValidator.validate(requestObject, errors);
+        giftPointsRequestValidator.validate(requestObject, errors);
         if (errors.hasErrors())
         {
-            throw new InvalidJSONRPCRequestException(requestObject.getId());
+            throw new InvalidRequestException(errors);
         }
         else
         {
@@ -188,17 +187,14 @@ public class RPCController
             List<Resource> resources = new ArrayList<>();
             Resources<Resource> resourceList = new Resources<Resource>(resources, ptmLink);
             return new ResponseEntity<Resources<Resource>>(resourceList, HttpStatus.CREATED);
-
-
-
         }
     }
 
-    private PointTransactionMaster addPointsForOrderByOrderCodeLoyaltyCodeDivisionNameCompanyName(@Valid @RequestBody JSONRPCRequestObject requestObject, BindingResult errors, String pointType, String pointTransactionType)
+    private PointTransactionMaster addPointsForOrderByOrderCodeLoyaltyCodeDivisionNameCompanyName(@Valid @RequestBody GiftPointsRequest requestObject, BindingResult errors, String pointType, String pointTransactionType)
     {
-        String loyaltyCode = requestObject.getParams().get("loyaltyCode");
-        String loyaltyDivisionName = requestObject.getParams().get("loyaltyDivisionName");
-        String loyaltyCompanyName = requestObject.getParams().get("loyaltyCompanyName");
+        String loyaltyCode = requestObject.getLoyaltyCode();
+        String loyaltyDivisionName = requestObject.getLoyaltyDivisionName();
+        String loyaltyCompanyName = requestObject.getLoyaltyCompanyName();
 
         if (loyaltyCode == null || loyaltyDivisionName == null || loyaltyCompanyName == null)
         {
@@ -213,7 +209,7 @@ public class RPCController
         List<Loyalty> loyaltyList = loyaltyRepository.findByLoyaltyCodeDivisionNameCompanyName(loyaltyCode, loyaltyDivisionName, loyaltyCompanyName);
         if (loyaltyList.isEmpty() || loyaltyList.size() > 1)
         {
-            throw new LoyaltyNotFoundException(loyaltyCode, loyaltyDivisionName, loyaltyCompanyName, requestObject.getId());
+            throw new LoyaltyNotFoundException(loyaltyCode, loyaltyDivisionName, loyaltyCompanyName, null);
         }
 
         //entityManager.getTransaction().begin();
@@ -221,8 +217,8 @@ public class RPCController
         BigDecimal dollarValue = null;
         try
         {
-            String dollarValueString = requestObject.getParams().get("dollarValue");
-            dollarValue = new BigDecimal(dollarValueString);
+            //String dollarValueString = requestObject.getParams().get("dollarValue");
+            //dollarValue = new BigDecimal(dollarValueString);
         }
         catch(Exception ex)
         {
@@ -245,8 +241,7 @@ public class RPCController
         Integer points = null;
         try
         {
-            String pointsString = requestObject.getParams().get("points");
-            points = new Integer(pointsString);
+            points = requestObject.getPoints();
         }
         catch(Exception ex)
         {
@@ -287,12 +282,6 @@ public class RPCController
 //            jsonGenerator.writeEndObject();
 //            jsonGenerator.close();
 //            return stringWriter.toString();
-
-        JSONRPCResponseObject ro = new JSONRPCResponseObject();
-        ro.setSuccess(true);
-        ro.setId(requestObject.getId());
-        ro.getResult().put("point transaction id", ptm.getId());
-        ro.getResult().put("loyalty id", ptd.getLoyalty().getId());
 
         return ptm;
 //        }
@@ -476,6 +465,24 @@ public class RPCController
     public JSONRPCResponseObject invalidHoldPointsRequestException(InvalidHoldPointsRequestException ex)
     {
         return ex.toJSONRPCResponseObject();
+    }
+
+    @ExceptionHandler(InvalidRequestException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public RESTAPIError invalidRequestException(InvalidRequestException ex)
+    {
+        List<String> errors = new ArrayList<String>();
+        for (FieldError error : ex.getErrors().getFieldErrors()) {
+            errors.add(error.getField() + ": " + error.getDefaultMessage());
+        }
+        for (ObjectError error : ex.getErrors().getGlobalErrors()) {
+            errors.add(error.getObjectName() + ": " + error.getDefaultMessage());
+        }
+
+        RESTAPIError restAPIError =
+                new RESTAPIError(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), errors);
+
+        return restAPIError;
     }
 
 }

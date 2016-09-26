@@ -1,3 +1,6 @@
+-- Returning errors from a Spring REST interface
+  -- http://www.baeldung.com/global-error-handler-in-a-spring-rest-api
+
 -- How to generate your own HATEOAS
   -- Spring HATEOAS reference:  https://spring.io/understanding/HATEOAS
   -- THIS IS A VERY GOOD LINK:  http://stackoverflow.com/questions/25858698/spring-hateoas-embedded-resource-support
