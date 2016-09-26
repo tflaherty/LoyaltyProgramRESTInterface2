@@ -1,3 +1,7 @@
+-- How to connect to DBHelper to diff local and AWS database schema
+  -- local connection string is: jdbc:postgresql://localhost:5432/ebdb
+  -- AWS connection string is: jdbc:postgresql://aa1kxmn4ajyuboh.cyzjdrhzieft.us-west-2.rds.amazonaws.com:5432/ebdb
+
 -- Returning errors from a Spring REST interface
   -- http://www.baeldung.com/global-error-handler-in-a-spring-rest-api
 
