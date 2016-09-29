@@ -42,6 +42,9 @@ public class RPCController
     EntityManager entityManager;
 
     @Autowired
+    private PointManagerService pointManagerService;
+
+    @Autowired
     private GiftPointsRequestValidator giftPointsRequestValidator;
 
     @Autowired
@@ -200,48 +203,7 @@ public class RPCController
             entityManager.flush();
         }
 
-        // now create the point transaction master and 2 point transaction details
-        //entityManager.getTransaction().begin();
-
-        PointTransactionMaster ptm = new PointTransactionMaster();
-        ptm.setCreatedDate(new Date());
-        ptm.setDollarValue(requestObject.getDollarValue());
-        List<PointTransactionType> pttl = pointTransactionTypeRepository.findByName(PointTransactionType.heldPointTransactionType);
-        ptm.setPointTransactionType(pttl.get(0));
-        entityManager.persist(ptm);
-        //entityManager.flush();
-
-        PointTransactionDetail sourcePointTransactionDetail = new PointTransactionDetail();
-        sourcePointTransactionDetail.setLoyalty(loyaltyList.get(0));
-        sourcePointTransactionDetail.setPointTransactionMaster(ptm);
-        sourcePointTransactionDetail.setPoints(-1 * requestObject.getPoints());
-        List<PointType> ptl = pointTypeRepository.findByName(PointType.availablePointType);
-        sourcePointTransactionDetail.setPointType(ptl.get(0));
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(calendar.getTime());
-        calendar.add(Calendar.DAY_OF_YEAR, 7);
-        Date nextWeek = calendar.getTime();
-        sourcePointTransactionDetail.setAvailabilityExpirationDate(nextWeek);
-        entityManager.persist(sourcePointTransactionDetail);
-
-        PointTransactionDetail destPointTransactionDetail = new PointTransactionDetail();
-        destPointTransactionDetail.setLoyalty(loyaltyList.get(0));
-        destPointTransactionDetail.setPointTransactionMaster(ptm);
-        destPointTransactionDetail.setPoints(-1 * requestObject.getPoints());
-        ptl = pointTypeRepository.findByName(PointType.heldPointType);
-        destPointTransactionDetail.setPointType(ptl.get(0));
-        calendar.setTime(calendar.getTime());
-        calendar.add(Calendar.DAY_OF_YEAR, 7);
-        nextWeek = calendar.getTime();
-        destPointTransactionDetail.setAvailabilityExpirationDate(nextWeek);
-        entityManager.persist(destPointTransactionDetail);
-
-
-        //entityManager.flush();
-
-        //entityManager.getTransaction().commit();
-
-        return ptm;
+        return pointManagerService.holdPoints(order, loyalty, requestObject.getPoints(), requestObject.getDollarValue(), null, null);
     }
 
     @RequestMapping(value = "/v1/giftPoints", method = RequestMethod.POST, produces = "application/json")
@@ -275,6 +237,8 @@ public class RPCController
             ResponseEntity<PointTransactionMaster> responseEntity = new ResponseEntity<PointTransactionMaster>(ptm, httpHeaders, HttpStatus.CREATED);
             return responseEntity;
             */
+
+            pointManagerService.modifyPoints(1, 1, 1, null, null);
 
             Link ptmLink = linkTo(RPCController.class).slash("/pointTransactionMasters/" + ptm.getId()).withSelfRel();
             List<Resource> resources = new ArrayList<>();

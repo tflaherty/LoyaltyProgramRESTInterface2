@@ -1,3 +1,6 @@
+-- implement missing or invalid point value in holdPoints (and other similar) endpoints
+-- implement missing or invalid dollar value in holdPoints (and other similar) endpoints
+
 -- generate my own HATEOAS for my non-entity endpoints (like /v1/giftPoints)
    -- here's how:  http://keaplogik.blogspot.com/2015/01/spring-hateoas-embedded-resources-with.html
    -- (best yet) http://azagorneanu.blogspot.com/2013/06/hateoas-using-spring-framework.html
